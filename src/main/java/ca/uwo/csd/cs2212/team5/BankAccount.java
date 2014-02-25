@@ -1,4 +1,4 @@
-package ca.uwo.csd.cs2212.jwang724;
+package ca.uwo.csd.cs2212.team5;
  
 public class BankAccount {
  
