@@ -84,7 +84,7 @@ public void setTerm(String t)
 /**
 * Sets the active course label
 * @param act the active label for the course*/
-public void isActive(boolean act)
+public void setIsActive(boolean act)
 {
 	this.isActive=act;
 }

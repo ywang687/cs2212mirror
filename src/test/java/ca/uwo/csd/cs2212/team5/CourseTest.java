@@ -39,7 +39,7 @@ public class CourseTest {
 	@Test
 	public void testSetActiveCourse() {
 		course.setIsActive(false);
-		Boolean b=(course.getIsActive()==false);
+		Boolean b=(course.isActive()==false);
 		Assert.assertEquals(true, b);
 	}
 
