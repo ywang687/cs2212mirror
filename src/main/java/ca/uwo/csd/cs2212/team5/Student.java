@@ -6,10 +6,10 @@ package cs2212;
  *
  */
 public class Student {
-	private char firstName;
-	private char lastName;
-	private char number;
-	private char emailAddress;
+	private String firstName;
+	private String lastName;
+	private String number;
+	private String emailAddress;
 	
 	public static void main (String[] args) {
 		
@@ -23,7 +23,7 @@ public class Student {
 	 * @param number
 	 * @param emailAddress
 	 */
-	public Student(char firstName, char lastName, char number, char emailAddress){
+	public Student(String firstName, String lastName, String number, String emailAddress){
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.number = number;
@@ -34,7 +34,7 @@ public class Student {
 	 * gets first name
 	 * @return
 	 */
-	public char getFirstName(){
+	public String getFirstName(){
 		return firstName;
 	}
 	
@@ -42,7 +42,7 @@ public class Student {
 	 * gets last name
 	 * @return
 	 */
-	public char getLastName(){
+	public String getLastName(){
 		return lastName;
 	}
 	
@@ -50,7 +50,7 @@ public class Student {
 	 * gets student number
 	 * @return
 	 */
-	public char getNumber(){
+	public String getNumber(){
 		return number;
 	}
 	
@@ -58,7 +58,7 @@ public class Student {
 	 * gets email address
 	 * @return
 	 */
-	public char getEmailAddress(){
+	public String getEmailAddress(){
 		return emailAddress;
 	}
 	
@@ -66,7 +66,7 @@ public class Student {
 	 * sets first name 
 	 * @param firstName
 	 */
-	public void setFirstName(char firstName){
+	public void setFirstName(String firstName){
 		this.firstName = firstName;
 	}
 	
@@ -74,7 +74,7 @@ public class Student {
 	 * sets last name
 	 * @param lastName
 	 */
-	public void setLastName(char lastName){
+	public void setLastName(String lastName){
 		this.lastName = lastName;
 	}
 	
@@ -82,7 +82,7 @@ public class Student {
 	 * sets student number
 	 * @param number
 	 */
-	public void setNumber(char number){
+	public void setNumber(String number){
 		this.number = number;
 	}
 	
@@ -90,7 +90,7 @@ public class Student {
 	 * sets email address
 	 * @param emailAddress
 	 */
-	public void setEmailAddress(char emailAddress){
+	public void setEmailAddress(String emailAddress){
 		this.emailAddress = emailAddress;
 	}
 }
