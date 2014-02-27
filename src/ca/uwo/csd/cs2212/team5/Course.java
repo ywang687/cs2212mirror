@@ -1,4 +1,4 @@
-package project;
+package ca.uwo.csd.cs2212.team5;
 /**
  * Course is a class that will be used to add a course in a gradebook application
  * @author mgurnett
@@ -32,25 +32,25 @@ public Course(String title, String c, String t, boolean act) {
 
 /************************************************************* * Accessor Methods *************************************************************/
 /**
-* Gets the courses ’s title
+* Gets the course title
 * @return the title of the course */
 public String getTitle()
 {
 	return this.title;
 }
 /**
-* Gets the courses ’s code
+* Gets the course code
 * @return the code of the course */
 public String getCode()
 {
 	return this.code;
 }
 /**
-* Gets the courses ’s term
+* Gets the course term
 * @return the term of the course */
 public String getTerm()
 {
-	return this.code;
+	return this.term;
 }
 /**
 * Returns true if the course is the active course
@@ -61,23 +61,23 @@ public boolean isActive()
 }
 /************************************************************* * Mutator Methods *************************************************************/
 /**
-* Sets the courses ’s title
+* Sets the course title
 * @param tle the new title of the course */
 public void setTitle(String title)
 {
 	this.title=title;
 }
 /**
-* Sets the courses ’s code
+* Sets the course code
 * @param c the code of the course */
-public void getCode(String c)
+public void setCode(String c)
 {
     this.code=c;
 }
 /**
-* Sets the courses ’s term
+* Sets the course term
 * @param t the term of the course */
-public void getTerm(String t)
+public void setTerm(String t)
 {
 	this.term=t;
 }
