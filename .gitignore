@@ -3,4 +3,5 @@
 *.class
 *.html
 *.css
+.project
 /bin
