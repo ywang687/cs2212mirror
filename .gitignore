@@ -4,4 +4,6 @@
 *.html
 *.css
 .project
+.settings
+.classpath
 /bin
