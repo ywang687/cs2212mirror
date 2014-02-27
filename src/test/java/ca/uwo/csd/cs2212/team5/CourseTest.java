@@ -36,5 +36,11 @@ public class CourseTest {
 		Boolean b=(course.getTerm()=="1");
 		Assert.assertEquals(true, b);
 	}
+	@Test
+	public void testSetActiveCourse() {
+		course.setIsActive(false);
+		Boolean b=(course.getIsActive()==false);
+		Assert.assertEquals(true, b);
+	}
 
 }
