@@ -227,7 +227,6 @@ public class MainWindow extends JFrame implements ActionListener{
   	if(!txtCourseName.getText().equals("")&&!txtCourseCode.getText().equals("")&&!txtCourseTerm.getText().equals("")){
 		lblGreeting.setText("Course successfully added!");
 		courses.add(new Course(txtCourseName.getText(),txtCourseCode.getText(),txtCourseTerm.getText(),true));
-
 		//Add this to the combo box
 		String title = (txtCourseName.getText() + " - " + txtCourseCode.getText() + " - " + txtCourseTerm.getText());
 		cboCourseList.addItem(title);
@@ -268,16 +267,19 @@ public class MainWindow extends JFrame implements ActionListener{
       ListIterator<Course> iter=courses.listIterator();
       try{
     	    // Create file 
-    	    FileWriter fw = new FileWriter("info.txt");
-    	    BufferedWriter out = new BufferedWriter(fw);
+    	    File info=new File("info.txt");
+    	    BufferedWriter out=new BufferedWriter(new FileWriter(info));
     	    
     	    while(iter.hasNext()){
     	    	Course c=iter.next();
     	    	out.write(c.getTitle() + " " + c.getCode() + " "+ c.getTerm() + "\n");
+    	    	System.out.println(c.getTitle() + " " + c.getCode() + " "+ c.getTerm() + "\n");
     	    }
     	    //Close the output stream
     	    out.close();
-    	    }catch (Exception e){//Catch exception if any
+    	    }
+            
+            catch (Exception e){//Catch exception if any
     	      System.err.println("Error: " + e.getMessage());
     	    }
    }

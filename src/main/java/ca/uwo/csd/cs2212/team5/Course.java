@@ -1,5 +1,5 @@
 
-package ca.uwo.csd.cs2212.team5;
+package main.java.ca.uwo.csd.cs2212;
 
 import java.util.*;
 /**
