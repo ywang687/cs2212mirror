@@ -6,6 +6,12 @@ public class Deliverable {
 	Double weight;
 	Grade mark;
 
+	public Deliverable(String name, String type, Double weight){
+		this.name=name;
+		this.type=type;
+		this.weight=weight;
+	}
+	
 	private String getName(){
 		return name;
 	}
@@ -31,7 +37,7 @@ public class Deliverable {
 	private void setType(String x){
 		type = x;
 	}
-
+    
 
 	private void delete(){
 		this.name = null;
