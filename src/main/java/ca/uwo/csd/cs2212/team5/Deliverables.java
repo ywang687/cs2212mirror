@@ -1,3 +1,5 @@
+package ca.uwo.csd.cs2212.team5;
+
 public class Deliverables {
 
 	String name, type;
