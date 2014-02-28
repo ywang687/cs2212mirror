@@ -266,21 +266,8 @@ public class MainWindow extends JFrame implements ActionListener{
   
   public void save(){
       ListIterator<Course> iter=courses.listIterator();
-      
-      try{
-    	  PrintWriter writer = new PrintWriter("info.txt");
-      while(iter.hasNext()){
-      	Course c=iter.next();
-      	writer.println(c.getTitle() + " " + c.getCode() + " "+ c.getTerm());
-      }
-      }
-      catch(FileNotFoundException e){
-    	  
-      }
-      catch(UnsupportedEncodingException e2){
-    	  
-      }
-}
+         
+   }
 
   //Create actions
   public void actionPerformed(ActionEvent evt)
