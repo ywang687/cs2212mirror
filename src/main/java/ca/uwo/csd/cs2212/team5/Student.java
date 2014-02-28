@@ -1,7 +1,7 @@
-package cs2212;
+package ca.uwo.csd.cs2212.team5;
 
 /**
- * 
+ *
  * @author yuwei
  *
  */
@@ -10,12 +10,12 @@ public class Student {
 	private String lastName;
 	private String number;
 	private String emailAddress;
-	
+
 	public static void main (String[] args) {
-		
+
 	}
-	
-	
+
+
 	/**
 	 * constructor method for student
 	 * @param firstName
@@ -29,7 +29,7 @@ public class Student {
 		this.number = number;
 		this.emailAddress = emailAddress;
 	}
-	
+
 	/**
 	 * gets first name
 	 * @return
@@ -37,7 +37,7 @@ public class Student {
 	public String getFirstName(){
 		return firstName;
 	}
-	
+
 	/**
 	 * gets last name
 	 * @return
@@ -45,7 +45,7 @@ public class Student {
 	public String getLastName(){
 		return lastName;
 	}
-	
+
 	/**
 	 * gets student number
 	 * @return
@@ -53,7 +53,7 @@ public class Student {
 	public String getNumber(){
 		return number;
 	}
-	
+
 	/**
 	 * gets email address
 	 * @return
@@ -61,15 +61,15 @@ public class Student {
 	public String getEmailAddress(){
 		return emailAddress;
 	}
-	
+
 	/**
-	 * sets first name 
+	 * sets first name
 	 * @param firstName
 	 */
 	public void setFirstName(String firstName){
 		this.firstName = firstName;
 	}
-	
+
 	/**
 	 * sets last name
 	 * @param lastName
@@ -77,7 +77,7 @@ public class Student {
 	public void setLastName(String lastName){
 		this.lastName = lastName;
 	}
-	
+
 	/**
 	 * sets student number
 	 * @param number
@@ -85,7 +85,7 @@ public class Student {
 	public void setNumber(String number){
 		this.number = number;
 	}
-	
+
 	/**
 	 * sets email address
 	 * @param emailAddress
