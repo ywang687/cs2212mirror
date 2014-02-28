@@ -42,5 +42,13 @@ public class CourseTest {
 		Boolean b=(course.isActive()==false);
 		Assert.assertEquals(true, b);
 	}
+	
+	@Test
+	public void testAddStudents(){
+		Student s=new Student(Jane, Doe, 250555555, jdoe@uwo.ca);
+		Student t=new Student(John, Doe, 250555556, jdoe1@uwo.ca);
+		course.addStudent(s);
+		course.addStudent(t);
+	}
 
 }

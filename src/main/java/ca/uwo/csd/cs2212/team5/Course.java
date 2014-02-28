@@ -1,4 +1,7 @@
+
 package ca.uwo.csd.cs2212.team5;
+
+import java.util.*;
 /**
  * Course is a class that will be used to add a course in a gradebook application
  * @author mgurnett
@@ -15,6 +18,8 @@ private String code ;
 private String term;
 // The course isActive label
 private boolean isActive;
+//The course list of students
+private ArrayList<Student> students;
 
 /**
 * Constructor.
@@ -28,6 +33,23 @@ public Course(String title, String c, String t, boolean act) {
 	this.code=c;
 	this.term=t;
 	this.isActive=act;
+	this.students=new ArrayList<Student>();
+}
+
+public void addStudent(Student newStudent){
+	this.students.add(newStudent);
+}
+
+public Student getStudent(String studentNumber){
+	Student found;
+	Iterator<Student> iter=this.students.iterator();
+	while(iter.hasNext()){
+	   Student s=iter.next();
+	   if(s.getNumber().equals(studentNumber)){
+		   found=s;
+	   }   
+	}
+	return found;
 }
 
 /************************************************************* * Accessor Methods *************************************************************/
