@@ -41,7 +41,7 @@ public void addStudent(Student newStudent){
 }
 
 public Student getStudent(String studentNumber){
-	Student found;
+	Student found=NULL;
 	Iterator<Student> iter=this.students.iterator();
 	while(iter.hasNext()){
 	   Student s=iter.next();
