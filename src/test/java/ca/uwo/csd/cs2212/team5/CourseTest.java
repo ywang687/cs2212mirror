@@ -1,8 +1,8 @@
 package ca.uwo.csd.cs2212.team5;
 
 import static org.junit.Assert.*;
-import main.java.ca.uwo.csd.cs2212.team5.Course;
-import main.java.ca.uwo.csd.cs2212.team5.Student;
+import ca.uwo.csd.cs2212.team5.Course;
+import ca.uwo.csd.cs2212.team5.Student;
 
 import org.junit.Test;
 import org.junit.Before;
