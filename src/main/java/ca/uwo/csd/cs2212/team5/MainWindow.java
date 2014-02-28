@@ -266,10 +266,16 @@ public class MainWindow extends JFrame implements ActionListener{
   
   public void save(){
       ListIterator<Course> iter=courses.listIterator();
-      PrintWriter writer = new PrintWriter("info.txt", "UTF-8");
+      
+      try{
+    	  PrintWriter writer = new PrintWriter("info.txt", "UTF-8");
       while(iter.hasNext()){
       	Course c=iter.next();
       	writer.println(c.getTitle() + " " + c.getCode() + " "+ c.getTerm());
+      }
+      }
+      catch(FileNotFoundException e){
+    	  
       }
 }
 
