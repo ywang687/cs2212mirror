@@ -266,7 +266,20 @@ public class MainWindow extends JFrame implements ActionListener{
   
   public void save(){
       ListIterator<Course> iter=courses.listIterator();
-         
+      try{
+    	    // Create file 
+    	    FileWriter fw = new FileWriter("info.txt");
+    	    BufferedWriter out = new BufferedWriter(fw);
+    	    
+    	    while(iter.hasNext()){
+    	    	Course c=iter.next();
+    	    	out.write(c.getTitle() + " " + c.getCode() + " "+ c.getTerm() + "\n");
+    	    }
+    	    //Close the output stream
+    	    out.close();
+    	    }catch (Exception e){//Catch exception if any
+    	      System.err.println("Error: " + e.getMessage());
+    	    }
    }
 
   //Create actions
