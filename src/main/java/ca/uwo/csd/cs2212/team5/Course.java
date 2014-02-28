@@ -26,7 +26,7 @@ private ArrayList<Student> students;
 * @param title Title
 * @param c Code
 * @param t Term
-* @param act isActive  
+* @param act isActive
 */
 public Course(String title, String c, String t, boolean act) {
 	this.title=title;
@@ -34,6 +34,7 @@ public Course(String title, String c, String t, boolean act) {
 	this.term=t;
 	this.isActive=act;
 	this.students=new ArrayList<Student>();
+
 }
 
 public void addStudent(Student newStudent){
@@ -47,7 +48,7 @@ public Student getStudent(String studentNumber){
 	   Student s=iter.next();
 	   if(s.getNumber().equals(studentNumber)){
 		   found=s;
-	   }   
+	   }
 	}
 	return found;
 }

@@ -1,6 +1,5 @@
 package ca.uwo.csd.cs2212.team5;
 
-
 /**
  * MainWindow is the class that manages the graphical user interface of the program
  * @author Bradley Hamelin
@@ -13,22 +12,31 @@ import java.io.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
 import java.util.ArrayList;
-import java.util.*;
+import java.util.ListIterator;
 
 public class MainWindow extends JFrame implements ActionListener{
 
   //Create the arrayList that holds the courses.
   ArrayList<Course> courses = new ArrayList<Course>();
-  
+
+  ArrayList<Student> students = new ArrayList<Student>();
+
+  //ArrayList<Deliverable> deliverables = new ArrayList <Deliverable>();
+
   //Create a pointer to the active course in the arrayList of courses
   Course activeCourse;
+
 
   //Add buttons to the frame
   private JButton cmdAddCourse = new JButton ("Add a course");
   private JButton cmdAddStudent = new JButton ("Add a student");
+  private JButton cmdEditCourse = new JButton ("Edit currently active course");
+  private JButton cmdEditStudent = new JButton ("Edit a student");
 
   //Add a drop down box to select current course
   private JComboBox cboCourseList = new JComboBox();
+  private JComboBox cboStudentList = new JComboBox();
+  private JComboBox cboDeliverableList = new JComboBox();
 
   //Add text fields for naming students or courses
   private JTextField txtCourseName = new JTextField();
@@ -55,6 +63,8 @@ public class MainWindow extends JFrame implements ActionListener{
 
   //Add a label for telling the user to select a course
   private JLabel lblSelect = new JLabel("Select a course:");
+  private JLabel lblStudentSelect = new JLabel("Select a student:");
+  private JLabel lblDeliverableSelect = new JLabel("Select a deliverable:");
 
   private final String ICON_EXIT = "exit.png";
 
@@ -76,8 +86,12 @@ public class MainWindow extends JFrame implements ActionListener{
     //Add the components to the window
     add(cmdAddCourse);
     add(cmdAddStudent);
+    add(cmdEditCourse);
+    add(cmdEditStudent);
 
     add(cboCourseList);
+    add(cboStudentList);
+    add(cboDeliverableList);
 
     add(txtCourseName);
     add(txtCourseCode);
@@ -97,12 +111,18 @@ public class MainWindow extends JFrame implements ActionListener{
 
     add(lblGreeting);
     add(lblSelect);
+	add(lblStudentSelect);
+	add(lblDeliverableSelect);
 
     //Format the components
     cmdAddCourse.setPreferredSize(new Dimension(120,25));
     cmdAddStudent.setPreferredSize(new Dimension(120,25));
+    cmdEditCourse.setPreferredSize(new Dimension(120,25));
+    cmdEditStudent.setPreferredSize(new Dimension(120,25));
 
     cboCourseList.setPreferredSize(new Dimension(160,25));
+    cboStudentList.setPreferredSize(new Dimension(160,25));
+    cboDeliverableList.setPreferredSize(new Dimension(160,25));
 
     txtCourseName.setPreferredSize(new Dimension(200,25));
     txtCourseCode.setPreferredSize(new Dimension(200,25));
@@ -116,12 +136,20 @@ public class MainWindow extends JFrame implements ActionListener{
     //Name the buttons
     cmdAddCourse.setActionCommand("addCourse");
     cmdAddStudent.setActionCommand("addStudent");
+    cmdEditCourse.setActionCommand("editCourse");
+    cmdEditStudent.setActionCommand("editStudent");
     cboCourseList.setActionCommand("courseList");
+    cboStudentList.setActionCommand("studentList");
+    cboDeliverableList.setActionCommand("deliverableList");
 
     //Add the action listener to the active objects
     cmdAddCourse.addActionListener(this);
     cmdAddStudent.addActionListener(this);
+    cmdEditCourse.addActionListener(this);
+
     cboCourseList.addActionListener(this);
+    cboStudentList.addActionListener(this);
+    cboDeliverableList.addActionListener(this);
 
     //Set the layout for the frame
 	this.getContentPane().setLayout(layout);
@@ -133,8 +161,20 @@ public class MainWindow extends JFrame implements ActionListener{
 	layout.putConstraint(SpringLayout.WEST, cmdAddStudent, 170, SpringLayout.WEST, getContentPane());
 	layout.putConstraint(SpringLayout.NORTH, cmdAddStudent, 150, SpringLayout.NORTH, getContentPane());
 
+	layout.putConstraint(SpringLayout.WEST, cmdEditCourse, 290, SpringLayout.WEST, getContentPane());
+	layout.putConstraint(SpringLayout.NORTH, cmdEditCourse, 30, SpringLayout.NORTH, getContentPane());
+
+	layout.putConstraint(SpringLayout.WEST, cmdEditStudent, 290, SpringLayout.WEST, getContentPane());
+	layout.putConstraint(SpringLayout.NORTH, cmdEditStudent, 150, SpringLayout.NORTH, getContentPane());
+
 	layout.putConstraint(SpringLayout.WEST, cboCourseList, 0, SpringLayout.WEST, getContentPane());
 	layout.putConstraint(SpringLayout.NORTH, cboCourseList, 30, SpringLayout.NORTH, getContentPane());
+
+	layout.putConstraint(SpringLayout.WEST, cboStudentList, 0, SpringLayout.WEST, getContentPane());
+	layout.putConstraint(SpringLayout.NORTH, cboStudentList, 90, SpringLayout.NORTH, getContentPane());
+
+	layout.putConstraint(SpringLayout.WEST, cboDeliverableList, 0, SpringLayout.WEST, getContentPane());
+	layout.putConstraint(SpringLayout.NORTH, cboDeliverableList, 150, SpringLayout.NORTH, getContentPane());
 
 	//Position the text boxes
 	layout.putConstraint(SpringLayout.WEST, txtCourseName, 290, SpringLayout.WEST, getContentPane());
@@ -185,6 +225,12 @@ public class MainWindow extends JFrame implements ActionListener{
 
 	layout.putConstraint(SpringLayout.WEST, lblSelect, 0, SpringLayout.WEST, getContentPane());
 	layout.putConstraint(SpringLayout.NORTH, lblSelect, 0, SpringLayout.NORTH, getContentPane());
+
+	layout.putConstraint(SpringLayout.WEST, lblStudentSelect, 0, SpringLayout.WEST, getContentPane());
+	layout.putConstraint(SpringLayout.NORTH, lblStudentSelect, 60, SpringLayout.NORTH, getContentPane());
+
+	layout.putConstraint(SpringLayout.WEST, lblDeliverableSelect, 0, SpringLayout.WEST, getContentPane());
+	layout.putConstraint(SpringLayout.NORTH, lblDeliverableSelect, 120, SpringLayout.NORTH, getContentPane());
   }
 
   //Creates the menu bar through which the user is able to exit the program
@@ -238,13 +284,49 @@ public class MainWindow extends JFrame implements ActionListener{
   	}
   	else
   		lblGreeting.setText("Error. Please enter a proper course name, code and term.");
+  }
 
+  //Method to edit the active course's data
+  private void editCourse(){
+  		if(!txtCourseName.getText().equals("")&&!txtCourseCode.getText().equals("")&&!txtCourseTerm.getText().equals("")){
+  			lblGreeting.setText("Currently active course has been modified");
 
+  			//Remove the old course and replace with the new one
+  			cboCourseList.removeItem(new String(activeCourse.getTitle() + " - " + activeCourse.getCode() + " - " + activeCourse.getTerm()));
+
+  			activeCourse.setTitle(txtCourseName.getText());
+  			activeCourse.setCode(txtCourseCode.getText());
+  			activeCourse.setTerm(txtCourseTerm.getText());
+
+  			cboCourseList.addItem(new String(activeCourse.getTitle() + " - " + activeCourse.getCode() + " - " + activeCourse.getTerm()));
+  		}
   }
 
   //Creates a student object for the currently selected class
   public void addStudent(){
-  	lblGreeting.setText("Student successfully added!");
+  	if(!txtFirstName.getText().equals("")&&!txtLastName.getText().equals("")&&!txtNumber.getText().equals("")&&!txtEmail.getText().equals("")){
+		if (activeCourse!= null){
+
+		activeCourse.addStudent(new Student(txtFirstName.getText(),txtLastName.getText(),txtNumber.getText(),txtEmail.getText()));
+		lblGreeting.setText("Student " + txtFirstName.getText() + " " + txtLastName.getText() + " added successfully to " + activeCourse.getTitle() + ".");
+
+		//Rebuild the combo box
+		rebuildStudents();
+
+		txtFirstName.setText("");
+		txtLastName.setText("");
+		txtNumber.setText("");
+		txtEmail.setText("");
+		}
+		else
+			lblGreeting.setText("Error. Please select a course before adding a student.");
+  	}
+  	else
+  		lblGreeting.setText("Error. Please enter a proper course name, code and term.");
+  }
+
+  public void editStudent(){
+
   }
 
   //Changes the selected course
@@ -262,25 +344,61 @@ public class MainWindow extends JFrame implements ActionListener{
 		}
 	}
 
+	//Update active student list
+	rebuildStudents();
+
+	//Update active deliverable list
+	rebuildDeliverables();
   }
-  
-  public void save(){
-      ListIterator<Course> iter=courses.listIterator();
+
+  //Rebuild the list of students when the course is changeed
+  private void rebuildStudents(){
+  	//Clear the combo box
+  	cboStudentList.removeAllItems();
+
+	//Iterate through the active course's students, adding each one to the combo box
+
+  }
+
+  //Rebuild the list of deliverables when the course is changeed
+  private void rebuildDeliverables(){
+
+  }
+
+  public void deliverableList(){
+
+  }
+
+  public void studentList(){
+
+  }
+
+  //A method to save the course arrayList to a textfile
+  private void save(){
+  	 ListIterator<Course> iter=courses.listIterator();
       try{
-    	    // Create file 
-    	    FileWriter fw = new FileWriter("info.txt");
-    	    BufferedWriter out = new BufferedWriter(fw);
-    	    
+    	    // Create file
+    	    File info=new File("info.txt");
+    	    BufferedWriter out=new BufferedWriter(new FileWriter(info));
+
     	    while(iter.hasNext()){
     	    	Course c=iter.next();
     	    	out.write(c.getTitle() + " " + c.getCode() + " "+ c.getTerm() + "\n");
+    	    	System.out.println(c.getTitle() + " " + c.getCode() + " "+ c.getTerm() + "\n");
     	    }
     	    //Close the output stream
     	    out.close();
-    	    }catch (Exception e){//Catch exception if any
+    	    }
+
+            catch (Exception e){//Catch exception if any
     	      System.err.println("Error: " + e.getMessage());
     	    }
-   }
+  }
+
+  //A method to load the course arrayList from a textfile
+  private void load(){
+
+  }
 
   //Create actions
   public void actionPerformed(ActionEvent evt)
@@ -290,14 +408,31 @@ public class MainWindow extends JFrame implements ActionListener{
 			addCourse();
 			save();
 		}
+
 		else if (evt.getActionCommand().equals("addStudent")){
 			addStudent();
-		    save();
+			save();
+  		}
+		else if (evt.getActionCommand().equals("editCourse")){
+			editCourse();
+			save();
+		}
+		else if (evt.getActionCommand().equals("editStudent")){
+			editStudent();
+			save();
 		}
 		else if (evt.getActionCommand().equals("courseList")){
 			courseList();
-		    save();
-        }
+			save();
+  		}
+		else if (evt.getActionCommand().equals("studentList")){
+			studentList();
+			save();
+		}
+		else if (evt.getActionCommand().equals("deliverableList")){
+			deliverableList();
+			save();
+		}
   }
 
 }
