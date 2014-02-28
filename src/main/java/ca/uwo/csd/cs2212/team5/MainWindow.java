@@ -1,5 +1,6 @@
 package ca.uwo.csd.cs2212.team5;
 
+
 /**
  * MainWindow is the class that manages the graphical user interface of the program
  * @author Bradley Hamelin
@@ -12,13 +13,13 @@ import java.io.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
 import java.util.ArrayList;
-import java.util.ListIterator;
+import java.util.*;
 
 public class MainWindow extends JFrame implements ActionListener{
 
   //Create the arrayList that holds the courses.
   ArrayList<Course> courses = new ArrayList<Course>();
-
+  
   //Create a pointer to the active course in the arrayList of courses
   Course activeCourse;
 
@@ -262,17 +263,32 @@ public class MainWindow extends JFrame implements ActionListener{
 	}
 
   }
+  
+  public void save(){
+      ListIterator<Course> iter=courses.listIterator();
+      PrintWriter writer = new PrintWriter("info.txt", "UTF-8");
+      while(iter.hasNext()){
+      	Course c=iter.next();
+      	writer.println(c.getTitle() + " " + c.getCode() + " "+ c.getTerm());
+      }
+}
 
   //Create actions
   public void actionPerformed(ActionEvent evt)
   {
   	//Make actions for class buttons
-		if (evt.getActionCommand().equals("addCourse"))
+		if (evt.getActionCommand().equals("addCourse")){
 			addCourse();
-		else if (evt.getActionCommand().equals("addStudent"))
+			save();
+		}
+		else if (evt.getActionCommand().equals("addStudent")){
 			addStudent();
-		else if (evt.getActionCommand().equals("courseList"))
+		    save();
+		}
+		else if (evt.getActionCommand().equals("courseList")){
 			courseList();
+		    save();
+        }
   }
 
 }
