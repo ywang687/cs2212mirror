@@ -6,6 +6,12 @@ public class Deliverable {
 	Double weight;
 	Grade mark;
 
+	/**
+	 * Constructs a new Deliverable object
+	 * @param name
+	 * @param type
+	 * @param weight
+	 */
 	public Deliverable(String name, String type, Double weight){
 		this.name=name;
 		this.type=type;
