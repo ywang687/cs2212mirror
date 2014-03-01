@@ -6,20 +6,23 @@ package ca.uwo.csd.cs2212.team5;
  */
 public class Deliverable {
 
-	String name, type;
-	Double weight;
-	Grade mark;
+	String name, type;//the name and type of deliverable
+	Double weight;//the weight of the deliverable
+	Grade mark;//the mark for a deliverable
+	Course course;//the course that a deliverable belongs to
 
 	/**
 	 * Constructs a new Deliverable object
 	 * @param name the name of the deliverable
 	 * @param type the type of deliverable
 	 * @param weight the weight of the deliverable
+	 * @param course the course that the deliverable belongs to
 	 */
-	public Deliverable(String name, String type, Double weight){
+	public Deliverable(String name, String type, Double weight, Course course){
 		this.name=name;
 		this.type=type;
 		this.weight=weight;
+		this.course=course;
 	}
 	
 	/**

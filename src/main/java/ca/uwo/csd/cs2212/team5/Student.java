@@ -1,14 +1,17 @@
 package ca.uwo.csd.cs2212.team5;
 
+import java.util.*;
+
 /**
  *A class that represents a student in a gradebook application
  *
  */
 public class Student {
-	private String firstName;
-	private String lastName;
-	private String number;
-	private String emailAddress;
+	private String firstName;//the students first name
+	private String lastName;//the students last name
+	private String number;//the students id number
+	private String emailAddress;//the students email address
+	private ArrayList<Course> courses;//the courses a student is enrolled in
 
 	public static void main (String[] args) {
 
@@ -26,6 +29,7 @@ public class Student {
 		this.lastName = lastName;
 		this.number = number;
 		this.emailAddress = emailAddress;
+		this.courses=null;
 	}
 
 	/**
@@ -90,5 +94,13 @@ public class Student {
 	 */
 	public void setEmailAddress(String emailAddress){
 		this.emailAddress = emailAddress;
+	}
+	
+	/**
+	 * Adds a course to the list of courses a student is enrolled in
+	 * @param c the course to be added
+	 */
+	public void addToCourse(Course c){
+		this.courses.add(c);
 	}
 }
