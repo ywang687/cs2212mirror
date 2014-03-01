@@ -11,7 +11,6 @@ public class Student {
 	private String lastName;//the students last name
 	private String number;//the students id number
 	private String emailAddress;//the students email address
-	private ArrayList<Course> courses;//the courses a student is enrolled in
 
 	public static void main (String[] args) {
 
@@ -29,7 +28,6 @@ public class Student {
 		this.lastName = lastName;
 		this.number = number;
 		this.emailAddress = emailAddress;
-		this.courses=null;
 	}
 
 	/**
@@ -96,11 +94,5 @@ public class Student {
 		this.emailAddress = emailAddress;
 	}
 	
-	/**
-	 * Adds a course to the list of courses a student is enrolled in
-	 * @param c the course to be added
-	 */
-	public void addToCourse(Course c){
-		this.courses.add(c);
-	}
+
 }

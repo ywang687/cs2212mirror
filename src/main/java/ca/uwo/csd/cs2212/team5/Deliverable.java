@@ -9,7 +9,6 @@ public class Deliverable {
 	String name, type;//the name and type of deliverable
 	Double weight;//the weight of the deliverable
 	Grade mark;//the mark for a deliverable
-	Course course;//the course that a deliverable belongs to
 
 	/**
 	 * Constructs a new Deliverable object
@@ -22,7 +21,6 @@ public class Deliverable {
 		this.name=name;
 		this.type=type;
 		this.weight=weight;
-		this.course=course;
 	}
 	
 	/**
