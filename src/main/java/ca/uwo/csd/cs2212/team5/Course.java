@@ -4,10 +4,15 @@ package ca.uwo.csd.cs2212.team5;
 import java.util.*;
 /**
  * Course is a class that will be used to add a course in a gradebook application
+ * @author mgurnett
  *
  */
-public class Course
+public class Course implements java.io.Serializable
 {
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5938679076671064779L;
 /************************************************************* * Instance Variables *************************************************************/
 // The course title
 private String title;
@@ -23,7 +28,7 @@ private ArrayList<Student> students;
 private ArrayList<Deliverable> deliverables;
 
 /**
-* Constructs a new Course object.
+* Constructor.
 * @param title Title
 * @param c Code
 * @param t Term
@@ -65,7 +70,7 @@ public Student getStudent(String studentNumber){
 }
 
 /**
- * Returns an iterator containing all students
+ * A method that returns an iterator containing all students
  * @return an iterator for the list of students
  */
 public ArrayList<Student> getStudents(){
@@ -73,45 +78,38 @@ public ArrayList<Student> getStudents(){
 }
 
 /**
- * Adds a deliverable to a course
+ * A method that adds a deliverable to a course
  * @param d the deliverable to add
  */
 public void addDeliverable(Deliverable d){
 	this.deliverables.add(d);
 }
 
-/**
- * Returns an ArrayList containing the deliverables for a course
- * @return
- */
 public ArrayList<Deliverable> getDeliverables(){
 	return this.deliverables;
 }
 
 /** 
- * Returns the course title
+ * Gets the course title
  * @return the title of the course */
 public String getTitle()
 {
 	return this.title;
 }
-
 /**
-* Returns the course code
+* Gets the course code
 * @return the code of the course */
 public String getCode()
 {
 	return this.code;
 }
-
 /**
-* Returns the course term
+* Gets the course term
 * @return the term of the course */
 public String getTerm()
 {
 	return this.term;
 }
-
 /**
 * Returns true if the course is the active course
 * @return true if the course is active */
@@ -119,7 +117,7 @@ public boolean isActive()
 {
 	return this.isActive;
 }
-
+/************************************************************* * Mutator Methods *************************************************************/
 /**
 * Sets the course title
 * @param tle the new title of the course */
@@ -141,7 +139,6 @@ public void setTerm(String t)
 {
 	this.term=t;
 }
-
 /**
 * Sets the active course label
 * @param act the active label for the course*/

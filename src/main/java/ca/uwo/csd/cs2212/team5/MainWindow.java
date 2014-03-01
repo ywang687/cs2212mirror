@@ -85,6 +85,9 @@ public class MainWindow extends JFrame implements ActionListener {
     private JLabel lblSelect = new JLabel("Select a course:");
     private JLabel lblStudentSelect = new JLabel("Select a student:");
     private JLabel lblDeliverableSelect = new JLabel("Select a deliverable:");
+    
+    private static final String save_path_course = System.getProperty("user.dir") + System.getProperty("file.separator") + "course.ser";
+    private static final String save_path_student = System.getProperty("user.dir") + System.getProperty("file.separator") + "student.ser";
 
     private final String ICON_EXIT = "exit.png";
 
@@ -94,6 +97,29 @@ public class MainWindow extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setJMenuBar(this.createMenubar());
+        
+        try{
+        	load();
+        	System.out.println(courses.size());
+        }catch (Exception e){
+        	courses.add(new Course("Computer Science", "CS2212","B",true));
+        	System.out.println("New file!");
+        }
+        
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            public void run() {
+             
+             try {
+                save();
+             } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+             }
+             
+                System.out.println("In shutdown hook");            
+                
+            }
+        }, "Shutdown-thread"));
     }
 
     //Create an instance of the layout manager
@@ -544,60 +570,100 @@ public class MainWindow extends JFrame implements ActionListener {
     //A method to save the course arrayList to a textfile
     //A method to save the course arrayList to a textfile
 
-    private void save() {
-        ListIterator < Course > iter = courses.listIterator();
-        try {
-            // Create file
-            File info = new File("info.txt");
-            BufferedWriter out = new BufferedWriter(new FileWriter(info));
+//    private void save() {
+//        ListIterator < Course > iter = courses.listIterator();
+//        try {
+//            // Create file
+//            File info = new File("info.txt");
+//            BufferedWriter out = new BufferedWriter(new FileWriter(info));
+//
+//            while (iter.hasNext()) {
+//                Course c = iter.next();
+//                out.write(c.getTitle() + " " + c.getCode() + " " + c.getTerm() + "\n");
+//                System.out.println(c.getTitle() + " " + c.getCode() + " " + c.getTerm() + "\n");
+//            }
+//            //Close the output stream
+//            out.close();
+//        } catch (Exception e) { //Catch exception if any
+//            System.err.println("Error: " + e.getMessage());
+//        }
+//    }
+    
+    private void save() throws IOException {
+        FileOutputStream file_out_course = new FileOutputStream(save_path_course);
+        FileOutputStream file_out_student = new FileOutputStream(save_path_student);
+        ObjectOutputStream out_course = new ObjectOutputStream(file_out_course);
+        ObjectOutputStream out_student = new ObjectOutputStream(file_out_student);
 
-            while (iter.hasNext()) {
-                Course c = iter.next();
-                out.write(c.getTitle() + " " + c.getCode() + " " + c.getTerm() + "\n");
-                System.out.println(c.getTitle() + " " + c.getCode() + " " + c.getTerm() + "\n");
-            }
-            //Close the output stream
-            out.close();
-        } catch (Exception e) { //Catch exception if any
-            System.err.println("Error: " + e.getMessage());
-        }
-    }
+        out_course.writeObject(courses);
+        out_course.writeObject(students);
+        out_course.close();
+        out_student.close();
+        file_out_course.close();
+        file_out_student.close();
+//        System.out.printf("Serialized data is saved in " + save_pat);
+      }
 
     //A method to load the course arrayList from a textfile
-    private void load() {
-
-    }
-
-    //Create actions
-    public void actionPerformed(ActionEvent evt) {
-        //Make actions for class buttons
-        if (evt.getActionCommand().equals("addCourse")) {
-            addCourse();
-            save();
-        } else if (evt.getActionCommand().equals("addStudent")) {
-            addStudent();
-            save();
-        } else if (evt.getActionCommand().equals("addDeliverable")) {
-            addDeliverable();
-            save();
-        } else if (evt.getActionCommand().equals("editCourse")) {
-            editCourse();
-            save();
-        } else if (evt.getActionCommand().equals("editStudent")) {
-            editStudent();
-            save();
-        } else if (evt.getActionCommand().equals("editDeliverable")) {
-            editDeliverable();
-            save();
-        } else if (evt.getActionCommand().equals("courseList")) {
-            courseList();
-            save();
-        } else if (evt.getActionCommand().equals("studentList")) {
-            studentList();
-            save();
-        } else if (evt.getActionCommand().equals("deliverableList")) {
-            deliverableList();
-            save();
+    private void load() throws IOException{
+  	  try
+        {
+           FileInputStream fileIn = new FileInputStream(save_path_course);
+           FileInputStream fileInStudent = new FileInputStream(save_path_student);
+           ObjectInputStream in = new ObjectInputStream(fileIn);
+           ObjectInputStream inStudent = new ObjectInputStream(fileInStudent);
+           courses = (ArrayList<Course>) in.readObject();
+           students = (ArrayList<Student>) in.readObject();
+           
+           in.close();
+           inStudent.close();
+           fileIn.close();
+           fileInStudent.close();
+        
+        }catch(ClassNotFoundException c)
+        {
+           System.out.println("School class not found.");
+           c.printStackTrace();
+           return;
         }
     }
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+    //Create actions
+//    public void actionPerformed(ActionEvent evt) {
+//        //Make actions for class buttons
+//        if (evt.getActionCommand().equals("addCourse")) {
+//            addCourse();
+//            save();
+//        } else if (evt.getActionCommand().equals("addStudent")) {
+//            addStudent();
+//            save();
+//        } else if (evt.getActionCommand().equals("addDeliverable")) {
+//            addDeliverable();
+//            save();
+//        } else if (evt.getActionCommand().equals("editCourse")) {
+//            editCourse();
+//            save();
+//        } else if (evt.getActionCommand().equals("editStudent")) {
+//            editStudent();
+//            save();
+//        } else if (evt.getActionCommand().equals("editDeliverable")) {
+//            editDeliverable();
+//            save();
+//        } else if (evt.getActionCommand().equals("courseList")) {
+//            courseList();
+//            save();
+//        } else if (evt.getActionCommand().equals("studentList")) {
+//            studentList();
+//            save();
+//        } else if (evt.getActionCommand().equals("deliverableList")) {
+//            deliverableList();
+//            save();
+//        }
+//    }
 }

@@ -1,27 +1,31 @@
 package ca.uwo.csd.cs2212.team5;
 
-import java.util.*;
-
 /**
- *A class that represents a student in a gradebook application
+ *
+ * @author yuwei
  *
  */
-public class Student {
-	private String firstName;//the students first name
-	private String lastName;//the students last name
-	private String number;//the students id number
-	private String emailAddress;//the students email address
+public class Student implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -980046860904744892L;
+	private String firstName;
+	private String lastName;
+	private String number;
+	private String emailAddress;
 
 	public static void main (String[] args) {
 
 	}
 
+
 	/**
-	 * Constructs a new Student object
-	 * @param firstName the first name of the student
-	 * @param lastName the last name of the student
-	 * @param number the student number of the student
-	 * @param emailAddress the email address of the student
+	 * constructor method for student
+	 * @param firstName
+	 * @param lastName
+	 * @param number
+	 * @param emailAddress
 	 */
 	public Student(String firstName, String lastName, String number, String emailAddress){
 		this.firstName = firstName;
@@ -31,68 +35,66 @@ public class Student {
 	}
 
 	/**
-	 * Returns the first name of a student
-	 * @return the first name of the student
+	 * gets first name
+	 * @return
 	 */
 	public String getFirstName(){
 		return firstName;
 	}
 
 	/**
-	 * Returns the last name of a student
-	 * @return the last name of the student
+	 * gets last name
+	 * @return
 	 */
 	public String getLastName(){
 		return lastName;
 	}
 
 	/**
-	 * Returns the student number of a student
-	 * @return the student number of a student
+	 * gets student number
+	 * @return
 	 */
 	public String getNumber(){
 		return number;
 	}
 
 	/**
-	 * Returns the email address of a student
-	 * @return the email address of the student
+	 * gets email address
+	 * @return
 	 */
 	public String getEmailAddress(){
 		return emailAddress;
 	}
 
 	/**
-	 * Sets the first name of a student
-	 * @param firstName the first name of the student
+	 * sets first name
+	 * @param firstName
 	 */
 	public void setFirstName(String firstName){
 		this.firstName = firstName;
 	}
 
 	/**
-	 * Sets the last name of a student
-	 * @param lastName the last name of the student
+	 * sets last name
+	 * @param lastName
 	 */
 	public void setLastName(String lastName){
 		this.lastName = lastName;
 	}
 
 	/**
-	 * Sets the student number of a student
-	 * @param number the student number of the student
+	 * sets student number
+	 * @param number
 	 */
 	public void setNumber(String number){
 		this.number = number;
 	}
 
 	/**
-	 * Sets the email address of a student
-	 * @param emailAddress the email address of the student
+	 * sets email address
+	 * @param emailAddress
 	 */
 	public void setEmailAddress(String emailAddress){
 		this.emailAddress = emailAddress;
 	}
-	
-
 }
