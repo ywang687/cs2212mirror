@@ -4,7 +4,6 @@ package ca.uwo.csd.cs2212.team5;
 import java.util.*;
 /**
  * Course is a class that will be used to add a course in a gradebook application
- * @author mgurnett
  *
  */
 public class Course
@@ -24,7 +23,7 @@ private ArrayList<Student> students;
 private ArrayList<Deliverable> deliverables;
 
 /**
-* Constructor.
+* Constructs a new Course object.
 * @param title Title
 * @param c Code
 * @param t Term
@@ -66,7 +65,7 @@ public Student getStudent(String studentNumber){
 }
 
 /**
- * A method that returns an iterator containing all students
+ * Returns an iterator containing all students
  * @return an iterator for the list of students
  */
 public ArrayList<Student> getStudents(){
@@ -74,38 +73,45 @@ public ArrayList<Student> getStudents(){
 }
 
 /**
- * A method that adds a deliverable to a course
+ * Adds a deliverable to a course
  * @param d the deliverable to add
  */
 public void addDeliverable(Deliverable d){
 	this.deliverables.add(d);
 }
 
+/**
+ * Returns an ArrayList containing the deliverables for a course
+ * @return
+ */
 public ArrayList<Deliverable> getDeliverables(){
 	return this.deliverables;
 }
 
 /** 
- * Gets the course title
+ * Returns the course title
  * @return the title of the course */
 public String getTitle()
 {
 	return this.title;
 }
+
 /**
-* Gets the course code
+* Returns the course code
 * @return the code of the course */
 public String getCode()
 {
 	return this.code;
 }
+
 /**
-* Gets the course term
+* Returns the course term
 * @return the term of the course */
 public String getTerm()
 {
 	return this.term;
 }
+
 /**
 * Returns true if the course is the active course
 * @return true if the course is active */
@@ -113,7 +119,7 @@ public boolean isActive()
 {
 	return this.isActive;
 }
-/************************************************************* * Mutator Methods *************************************************************/
+
 /**
 * Sets the course title
 * @param tle the new title of the course */
@@ -135,6 +141,7 @@ public void setTerm(String t)
 {
 	this.term=t;
 }
+
 /**
 * Sets the active course label
 * @param act the active label for the course*/
