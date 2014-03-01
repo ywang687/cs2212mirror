@@ -2,44 +2,44 @@ package ca.uwo.csd.cs2212.team5;
 
 public class Deliverable {
 
-	String name, type;
-	Double weight;
-	Grade mark;
+	private String name, type;
+	private Double weight;
+	private Grade mark;
 
 	public Deliverable(String name, String type, Double weight){
 		this.name=name;
 		this.type=type;
 		this.weight=weight;
 	}
-	
-	private String getName(){
+
+	String getName(){
 		return name;
 	}
 
-	private double getWeight(){
+	double getWeight(){
 		return weight;
 	}
 
-	private String getType(){
+	String getType(){
 		return type;
 	}
 
-	private void setName(String x){
+	void setName(String x){
 		name = x;
 	}
 
 
-	private void setWeight(double x){
+	void setWeight(double x){
 		weight = x;
 	}
 
 
-	private void setType(String x){
+	void setType(String x){
 		type = x;
 	}
-    
 
-	private void delete(){
+
+	void delete(){
 		this.name = null;
 		this.type = null;
 		this.weight = null;

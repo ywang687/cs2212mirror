@@ -1,13 +1,13 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 team5-gradebook,default,Deliverables,36,0,0,0,14,0,8,0,8,0
 team5-gradebook,default,Grade,7,0,0,0,3,0,2,0,2,0
-team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow,1542,0,42,0,240,0,37,0,16,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow,2393,0,84,0,354,0,60,0,18,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,App,8,0,0,0,3,0,2,0,2,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow.new ActionListener() {...},26,0,0,0,4,0,2,0,2,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,Student,26,18,0,0,12,7,8,2,8,2
 team5-gradebook,ca.uwo.csd.cs2212.team5,App.new Runnable() {...},11,0,0,0,4,0,2,0,2,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow.new ActionListener() {...},9,0,0,0,3,0,2,0,2,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,Grade,7,0,0,0,3,0,2,0,2,0
-team5-gradebook,ca.uwo.csd.cs2212.team5,Deliverable,36,0,0,0,14,0,8,0,8,0
-team5-gradebook,ca.uwo.csd.cs2212.team5,Course,0,77,0,4,0,29,0,13,0,11
+team5-gradebook,ca.uwo.csd.cs2212.team5,Deliverable,45,0,0,0,18,0,8,0,8,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,Course,12,82,0,4,4,30,3,13,3,11
 team5-gradebook,ca.uwo.csd.cs2212.team5,BankAccount,0,22,0,2,0,7,0,3,0,2
