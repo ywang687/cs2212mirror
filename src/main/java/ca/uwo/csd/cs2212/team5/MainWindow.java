@@ -102,12 +102,9 @@ public class MainWindow extends JFrame implements ActionListener {
         	load();
         	for (int i = 0; i < courses.size(); i++) {
         		Course tmp = courses.get(i);
-        		cboCourseList.addItem(tmp.getTitle() + "-"+tmp.getCode()+"-"+tmp.getTerm());
+        		cboCourseList.addItem(tmp.getTitle() + " - "+tmp.getCode()+" - "+tmp.getTerm());
         	}
-        	for (int i = 0; i < students.size(); i++) {
-        		Student tmp = students.get(i);
-        		cboStudentList.addItem(tmp.getFirstName() + "-" + tmp.getLastName() + "-" + tmp.getNumber() + "-" + tmp.getEmailAddress());
-        	}
+        	rebuildStudents();
         	System.out.println(courses.size());
         }catch (Exception e){
         	e.printStackTrace();
