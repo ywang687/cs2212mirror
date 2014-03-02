@@ -486,13 +486,15 @@ public class MainWindow extends JFrame implements ActionListener {
     //Rebuild the list of students when the course is changed
     private void rebuildStudents() {
         //Clear the combo box
-        cboStudentList.removeAllItems();
-
-        //Iterate through the active course's students, adding each one to the combo box
-        for (ListIterator < Student > iterator = activeCourse.getStudents().listIterator(); iterator.hasNext();) {
-            Student x = iterator.next();
-            cboStudentList.addItem(new String(x.getFirstName() + " " + x.getLastName() + " " + x.getNumber() + " " + x.getEmailAddress()));
-        }
+    	if (activeCourse != null){
+	        cboStudentList.removeAllItems();
+	
+	        //Iterate through the active course's students, adding each one to the combo box
+	        for (ListIterator < Student > iterator = activeCourse.getStudents().listIterator(); iterator.hasNext();) {
+	            Student x = iterator.next();
+	            cboStudentList.addItem(new String(x.getFirstName() + " " + x.getLastName() + " " + x.getNumber() + " " + x.getEmailAddress()));
+	        }
+    	}
     }
 
     //Reconstructs the Deliverables combo box when a Course change happens
