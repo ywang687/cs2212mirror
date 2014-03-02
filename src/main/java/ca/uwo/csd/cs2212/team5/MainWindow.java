@@ -100,8 +100,17 @@ public class MainWindow extends JFrame implements ActionListener {
         
         try{
         	load();
+        	for (int i = 0; i < courses.size(); i++) {
+        		Course tmp = courses.get(i);
+        		cboCourseList.addItem(tmp.getTitle() + "-"+tmp.getCode()+"-"+tmp.getTerm());
+        	}
+        	for (int i = 0; i < students.size(); i++) {
+        		Student tmp = students.get(i);
+        		cboStudentList.addItem(tmp.getFirstName() + "-" + tmp.getLastName() + "-" + tmp.getNumber() + "-" + tmp.getEmailAddress());
+        	}
         	System.out.println(courses.size());
         }catch (Exception e){
+        	e.printStackTrace();
         	courses.add(new Course("Computer Science", "CS2212","B",true));
         	System.out.println("New file!");
         }
@@ -596,7 +605,7 @@ public class MainWindow extends JFrame implements ActionListener {
         ObjectOutputStream out_student = new ObjectOutputStream(file_out_student);
 
         out_course.writeObject(courses);
-        out_course.writeObject(students);
+        out_student.writeObject(students);
         out_course.close();
         out_student.close();
         file_out_course.close();
@@ -613,7 +622,7 @@ public class MainWindow extends JFrame implements ActionListener {
            ObjectInputStream in = new ObjectInputStream(fileIn);
            ObjectInputStream inStudent = new ObjectInputStream(fileInStudent);
            courses = (ArrayList<Course>) in.readObject();
-           students = (ArrayList<Student>) in.readObject();
+           students = (ArrayList<Student>) inStudent.readObject();
            
            in.close();
            inStudent.close();
@@ -628,42 +637,36 @@ public class MainWindow extends JFrame implements ActionListener {
         }
     }
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
     //Create actions
-//    public void actionPerformed(ActionEvent evt) {
-//        //Make actions for class buttons
-//        if (evt.getActionCommand().equals("addCourse")) {
-//            addCourse();
+    public void actionPerformed(ActionEvent evt) {
+        //Make actions for class buttons
+        if (evt.getActionCommand().equals("addCourse")) {
+            addCourse();
 //            save();
-//        } else if (evt.getActionCommand().equals("addStudent")) {
-//            addStudent();
+        } else if (evt.getActionCommand().equals("addStudent")) {
+            addStudent();
 //            save();
-//        } else if (evt.getActionCommand().equals("addDeliverable")) {
-//            addDeliverable();
+        } else if (evt.getActionCommand().equals("addDeliverable")) {
+            addDeliverable();
 //            save();
-//        } else if (evt.getActionCommand().equals("editCourse")) {
-//            editCourse();
+        } else if (evt.getActionCommand().equals("editCourse")) {
+            editCourse();
 //            save();
-//        } else if (evt.getActionCommand().equals("editStudent")) {
-//            editStudent();
+        } else if (evt.getActionCommand().equals("editStudent")) {
+            editStudent();
 //            save();
-//        } else if (evt.getActionCommand().equals("editDeliverable")) {
-//            editDeliverable();
+        } else if (evt.getActionCommand().equals("editDeliverable")) {
+            editDeliverable();
 //            save();
-//        } else if (evt.getActionCommand().equals("courseList")) {
-//            courseList();
+        } else if (evt.getActionCommand().equals("courseList")) {
+            courseList();
 //            save();
-//        } else if (evt.getActionCommand().equals("studentList")) {
-//            studentList();
+        } else if (evt.getActionCommand().equals("studentList")) {
+            studentList();
 //            save();
-//        } else if (evt.getActionCommand().equals("deliverableList")) {
-//            deliverableList();
+        } else if (evt.getActionCommand().equals("deliverableList")) {
+            deliverableList();
 //            save();
-//        }
-//    }
+        }
+    }
 }
