@@ -7,8 +7,6 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
-
-import com.sun.tools.internal.ws.processor.model.Model;
  
 public class GradeWindow extends JFrame {
  
