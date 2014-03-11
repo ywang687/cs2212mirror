@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.005" errors="0" skipped="0" tests="5" name="ca.uwo.csd.cs2212.team5.CourseTest">
+<testsuite failures="0" time="0.001" errors="0" skipped="0" tests="8" name="ca.uwo.csd.cs2212.team5.StudentTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/jre/lib"/>
@@ -63,9 +63,12 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.004" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testSetActiveCourse"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testAddStudents"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testModifyCourseCode"/>
-  <testcase time="0.001" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testModifyCourseTerm"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testModifyCourseTitle"/>
+  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testSetFirstName"/>
+  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testSetLasetName"/>
+  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testGetLastName"/>
+  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testGetEmailAddress"/>
+  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testSetNumber"/>
+  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testGetFirstName"/>
+  <testcase time="0.001" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testSetEmailAddress"/>
+  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testGetNumber"/>
 </testsuite>
