@@ -44,11 +44,12 @@ public class MainWindow extends JFrame implements ActionListener {
     private JButton cmdEditStudent = new JButton("Edit active student");
     private JButton cmdAddDeliverable = new JButton("Add deliverable");
     private JButton cmdEditDeliverable = new JButton("Edit active deliverable");
+    private JButton cmdOpenGradeWindow = new JButton("Open grade spreadsheet");
 
     //Add a drop down box to select current course
-    private JComboBox < String > cboCourseList = new JComboBox < String > ();
-    private JComboBox < String > cboStudentList = new JComboBox < String > ();
-    private JComboBox < String > cboDeliverableList = new JComboBox < String > ();
+    private JComboBox cboCourseList = new JComboBox ();
+    private JComboBox cboStudentList = new JComboBox ();
+    private JComboBox cboDeliverableList = new JComboBox ();
 
     //Add text fields for naming students or courses
     private JTextField txtCourseName = new JTextField();
@@ -134,7 +135,6 @@ public class MainWindow extends JFrame implements ActionListener {
     //Construct the frame with its components
     public MainWindow() {
         this.initUI();
-
         //Add the components to the window
         add(cmdAddCourse);
         add(cmdAddStudent);
@@ -142,7 +142,8 @@ public class MainWindow extends JFrame implements ActionListener {
         add(cmdEditStudent);
         add(cmdAddDeliverable);
         add(cmdEditDeliverable);
-
+        add(cmdOpenGradeWindow);
+        
         add(cboCourseList);
         add(cboStudentList);
         add(cboDeliverableList);
@@ -181,6 +182,7 @@ public class MainWindow extends JFrame implements ActionListener {
         cmdEditCourse.setPreferredSize(new Dimension(200, 25));
         cmdEditStudent.setPreferredSize(new Dimension(200, 25));
         cmdEditDeliverable.setPreferredSize(new Dimension(200, 25));
+        cmdOpenGradeWindow.setPreferredSize(new Dimension(200, 25));
 
         cboCourseList.setPreferredSize(new Dimension(160, 25));
         cboStudentList.setPreferredSize(new Dimension(160, 25));
@@ -206,6 +208,8 @@ public class MainWindow extends JFrame implements ActionListener {
         cmdEditCourse.setActionCommand("editCourse");
         cmdEditStudent.setActionCommand("editStudent");
         cmdEditDeliverable.setActionCommand("editDeliverable");
+        cmdOpenGradeWindow.setActionCommand("openGradeWindow");
+        
         cboCourseList.setActionCommand("courseList");
         cboStudentList.setActionCommand("studentList");
         cboDeliverableList.setActionCommand("deliverableList");
@@ -217,6 +221,7 @@ public class MainWindow extends JFrame implements ActionListener {
         cmdEditCourse.addActionListener(this);
         cmdEditStudent.addActionListener(this);
         cmdEditDeliverable.addActionListener(this);
+        cmdOpenGradeWindow.addActionListener(this);
 
         cboCourseList.addActionListener(this);
         cboStudentList.addActionListener(this);
@@ -240,9 +245,13 @@ public class MainWindow extends JFrame implements ActionListener {
 
         layout.putConstraint(SpringLayout.WEST, cmdEditStudent, 300, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, cmdEditStudent, 150, SpringLayout.NORTH, getContentPane());
-
+        
         layout.putConstraint(SpringLayout.WEST, cmdEditDeliverable, 300, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, cmdEditDeliverable, 300, SpringLayout.NORTH, getContentPane());
+
+        layout.putConstraint(SpringLayout.WEST, cmdOpenGradeWindow, 300, SpringLayout.WEST, getContentPane());
+        layout.putConstraint(SpringLayout.NORTH, cmdOpenGradeWindow, 430, SpringLayout.NORTH, getContentPane());       
+
 
         //Position the comboboxes
         layout.putConstraint(SpringLayout.WEST, cboCourseList, 0, SpringLayout.WEST, getContentPane());
@@ -621,8 +630,7 @@ public class MainWindow extends JFrame implements ActionListener {
            ObjectInputStream in = new ObjectInputStream(fileIn);
            ObjectInputStream inStudent = new ObjectInputStream(fileInStudent);
            courses = (ArrayList<Course>) in.readObject();
-           students = (ArrayList<Student>) inStudent.readObject();
-           
+           students = (ArrayList<Student>) inStudent.readObject();       
            in.close();
            inStudent.close();
            fileIn.close();
@@ -634,6 +642,17 @@ public class MainWindow extends JFrame implements ActionListener {
            c.printStackTrace();
            return;
         }
+    }
+    
+    private void openGradeWindow( ArrayList < Student > s){
+
+    	GradeWindow g=new GradeWindow(s);
+
+    	g.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+    	g.pack();
+    	
+    	g.setVisible(true);
     }
 
     //Create actions
@@ -667,5 +686,8 @@ public class MainWindow extends JFrame implements ActionListener {
             deliverableList();
 //            save();
         }
-    }
+        else if (evt.getActionCommand().equals("openGradeWindow")) {
+            openGradeWindow(students);
+        }
+  }
 }
