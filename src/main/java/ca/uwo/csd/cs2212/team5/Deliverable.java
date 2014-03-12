@@ -3,7 +3,7 @@ package ca.uwo.csd.cs2212.team5;
 public class Deliverable implements java.io.Serializable{
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -7944796098054250965L;
 	private String name, type;
@@ -14,6 +14,13 @@ public class Deliverable implements java.io.Serializable{
 		this.name=name;
 		this.type=type;
 		this.weight=weight;
+	}
+
+	/**
+	 *returns a String representation of the Deliverable's data
+	 */
+	public String stringRepresentation(){
+		return getName() + " - " + getType() + " - " + getWeight();
 	}
 
 	String getName(){

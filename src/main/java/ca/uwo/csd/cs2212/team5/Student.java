@@ -7,7 +7,7 @@ package ca.uwo.csd.cs2212.team5;
  */
 public class Student implements java.io.Serializable{
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -980046860904744892L;
 	private String firstName;
@@ -32,6 +32,13 @@ public class Student implements java.io.Serializable{
 		this.lastName = lastName;
 		this.number = number;
 		this.emailAddress = emailAddress;
+	}
+
+	/**
+	 *returns a String representation of the Student's data
+	 */
+	public String stringRepresentation(){
+		return getFirstName() + " " + getLastName() + " " + getNumber() + " " + getEmailAddress();
 	}
 
 	/**

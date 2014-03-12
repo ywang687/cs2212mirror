@@ -10,7 +10,7 @@ import java.util.*;
 public class Course implements java.io.Serializable
 {
 /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -5938679076671064779L;
 /************************************************************* * Instance Variables *************************************************************/
@@ -46,11 +46,18 @@ public Course(String title, String c, String t, boolean act) {
 
 /**
  * Adds a new student to the list of students in a course
- * @param newStudent the new student to add 
+ * @param newStudent the new student to add
  */
 public void addStudent(Student newStudent){
 	this.students.add(newStudent);
 }
+
+/**
+ *Creates and returns a String representing this Course's data
+ */
+ public String stringRepresentation(){
+ 	return (new String(this.getTitle() + " - " + this.getCode() + " - " + this.getTerm()));
+ }
 
 /**
  * Finds a student with a given student number
@@ -89,7 +96,7 @@ public ArrayList<Deliverable> getDeliverables(){
 	return this.deliverables;
 }
 
-/** 
+/**
  * Gets the course title
  * @return the title of the course */
 public String getTitle()

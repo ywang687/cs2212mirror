@@ -86,7 +86,7 @@ public class MainWindow extends JFrame implements ActionListener {
     private JLabel lblSelect = new JLabel("Select a course:");
     private JLabel lblStudentSelect = new JLabel("Select a student:");
     private JLabel lblDeliverableSelect = new JLabel("Select a deliverable:");
-    
+
     private static final String save_path_course = System.getProperty("user.dir") + System.getProperty("file.separator") + "course.ser";
     private static final String save_path_student = System.getProperty("user.dir") + System.getProperty("file.separator") + "student.ser";
 
@@ -98,7 +98,7 @@ public class MainWindow extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setJMenuBar(this.createMenubar());
-        
+
         try{
         	load();
         	for (int i = 0; i < courses.size(); i++) {
@@ -112,19 +112,19 @@ public class MainWindow extends JFrame implements ActionListener {
         	courses.add(new Course("Computer Science", "CS2212","B",true));
         	System.out.println("New file!");
         }
-        
+
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
-             
+
              try {
                 save();
              } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
              }
-             
-                System.out.println("In shutdown hook");            
-                
+
+                System.out.println("In shutdown hook");
+
             }
         }, "Shutdown-thread"));
     }
@@ -143,7 +143,7 @@ public class MainWindow extends JFrame implements ActionListener {
         add(cmdAddDeliverable);
         add(cmdEditDeliverable);
         add(cmdOpenGradeWindow);
-        
+
         add(cboCourseList);
         add(cboStudentList);
         add(cboDeliverableList);
@@ -209,7 +209,7 @@ public class MainWindow extends JFrame implements ActionListener {
         cmdEditStudent.setActionCommand("editStudent");
         cmdEditDeliverable.setActionCommand("editDeliverable");
         cmdOpenGradeWindow.setActionCommand("openGradeWindow");
-        
+
         cboCourseList.setActionCommand("courseList");
         cboStudentList.setActionCommand("studentList");
         cboDeliverableList.setActionCommand("deliverableList");
@@ -245,12 +245,12 @@ public class MainWindow extends JFrame implements ActionListener {
 
         layout.putConstraint(SpringLayout.WEST, cmdEditStudent, 300, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, cmdEditStudent, 150, SpringLayout.NORTH, getContentPane());
-        
+
         layout.putConstraint(SpringLayout.WEST, cmdEditDeliverable, 300, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, cmdEditDeliverable, 300, SpringLayout.NORTH, getContentPane());
 
         layout.putConstraint(SpringLayout.WEST, cmdOpenGradeWindow, 300, SpringLayout.WEST, getContentPane());
-        layout.putConstraint(SpringLayout.NORTH, cmdOpenGradeWindow, 430, SpringLayout.NORTH, getContentPane());       
+        layout.putConstraint(SpringLayout.NORTH, cmdOpenGradeWindow, 430, SpringLayout.NORTH, getContentPane());
 
 
         //Position the comboboxes
@@ -396,19 +396,26 @@ public class MainWindow extends JFrame implements ActionListener {
         if (!txtCourseName.getText().equals("") && !txtCourseCode.getText().equals("") && !txtCourseTerm.getText().equals("")) {
             lblGreeting.setText("Currently active course has been modified");
 
-            //Remove the old course and replace with the new one
-            cboCourseList.removeItem(new String(activeCourse.getTitle() + " - " + activeCourse.getCode() + " - " + activeCourse.getTerm()));
+            String oldCourse = activeCourse.stringRepresentation();
+
+            System.out.println("Number of students this changed course has:" + activeCourse.getStudents().size());
 
             activeCourse.setTitle(txtCourseName.getText());
             activeCourse.setCode(txtCourseCode.getText());
             activeCourse.setTerm(txtCourseTerm.getText());
 
-            cboCourseList.addItem(new String(activeCourse.getTitle() + " - " + activeCourse.getCode() + " - " + activeCourse.getTerm()));
+            //Remove the old course and replace with the new one
+            cboCourseList.addItem(activeCourse.stringRepresentation());
+            cboCourseList.removeItem(oldCourse);
         }
+
         //Clear the text boxes for new data
         txtCourseName.setText("");
         txtCourseCode.setText("");
         txtCourseTerm.setText("");
+
+        //Reload the students and reload the deliverables
+        System.out.println("Number of students this changed course has:" + activeCourse.getStudents().size());
     }
 
     //Creates a student object for the currently selected class
@@ -416,11 +423,13 @@ public class MainWindow extends JFrame implements ActionListener {
         if (!txtFirstName.getText().equals("") && !txtLastName.getText().equals("") && !txtNumber.getText().equals("") && !txtEmail.getText().equals("")) {
             if (activeCourse != null) {
 
-                activeCourse.addStudent(new Student(txtFirstName.getText(), txtLastName.getText(), txtNumber.getText(), txtEmail.getText()));
+				//Create a new student object
+				Student newStud = new Student(txtFirstName.getText(), txtLastName.getText(), txtNumber.getText(), txtEmail.getText());
+                activeCourse.addStudent(newStud);
                 lblGreeting.setText("Student " + txtFirstName.getText() + " " + txtLastName.getText() + " added successfully to " + activeCourse.getTitle() + ".");
 
                 //Add the new student to the combo box
-                cboStudentList.addItem(new String(txtFirstName.getText() + " " + txtLastName.getText() + " " + txtNumber.getText() + " " + txtEmail.getText()));
+                cboStudentList.addItem(newStud.stringRepresentation());
 
                 txtFirstName.setText("");
                 txtLastName.setText("");
@@ -458,11 +467,12 @@ public class MainWindow extends JFrame implements ActionListener {
         if (!txtDeliverName.getText().equals("") && !txtDeliverType.getText().equals("") && !txtDeliverWeight.getText().equals("")) {
             if (activeCourse != null) {
 
-                activeCourse.addDeliverable(new Deliverable(txtDeliverName.getText(), txtDeliverType.getText(), Double.parseDouble(txtDeliverWeight.getText())));
+				Deliverable newDeliver = new Deliverable(txtDeliverName.getText(), txtDeliverType.getText(), Double.parseDouble(txtDeliverWeight.getText()));
+                activeCourse.addDeliverable(newDeliver);
                 lblGreeting.setText("Deliverable " + txtDeliverName.getText() + " added successfully to " + activeCourse.getTitle() + ".");
 
                 //Add the new student to the combo box
-                cboDeliverableList.addItem(new String(txtDeliverName.getText() + " - " + txtDeliverType.getText() + " - " + txtDeliverWeight.getText()));
+                cboDeliverableList.addItem(newDeliver.stringRepresentation());
 
                 txtDeliverName.setText("");
                 txtDeliverType.setText("");
@@ -497,7 +507,7 @@ public class MainWindow extends JFrame implements ActionListener {
         //Clear the combo box
     	if (activeCourse != null){
 	        cboStudentList.removeAllItems();
-	
+
 	        //Iterate through the active course's students, adding each one to the combo box
 	        for (ListIterator < Student > iterator = activeCourse.getStudents().listIterator(); iterator.hasNext();) {
 	            Student x = iterator.next();
@@ -605,7 +615,7 @@ public class MainWindow extends JFrame implements ActionListener {
 //            System.err.println("Error: " + e.getMessage());
 //        }
 //    }
-    
+
     private void save() throws IOException {
         FileOutputStream file_out_course = new FileOutputStream(save_path_course);
         FileOutputStream file_out_student = new FileOutputStream(save_path_student);
@@ -630,12 +640,12 @@ public class MainWindow extends JFrame implements ActionListener {
            ObjectInputStream in = new ObjectInputStream(fileIn);
            ObjectInputStream inStudent = new ObjectInputStream(fileInStudent);
            courses = (ArrayList<Course>) in.readObject();
-           students = (ArrayList<Student>) inStudent.readObject();       
+           students = (ArrayList<Student>) inStudent.readObject();
            in.close();
            inStudent.close();
            fileIn.close();
            fileInStudent.close();
-        
+
         }catch(ClassNotFoundException c)
         {
            System.out.println("School class not found.");
@@ -643,7 +653,7 @@ public class MainWindow extends JFrame implements ActionListener {
            return;
         }
     }
-    
+
     private void openGradeWindow( ArrayList < Student > s){
 
     	GradeWindow g=new GradeWindow(s);
@@ -651,7 +661,7 @@ public class MainWindow extends JFrame implements ActionListener {
     	g.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
     	g.pack();
-    	
+
     	g.setVisible(true);
     }
 
