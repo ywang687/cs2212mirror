@@ -398,8 +398,6 @@ public class MainWindow extends JFrame implements ActionListener {
 
             String oldCourse = activeCourse.stringRepresentation();
 
-            System.out.println("Number of students this changed course has:" + activeCourse.getStudents().size());
-
             activeCourse.setTitle(txtCourseName.getText());
             activeCourse.setCode(txtCourseCode.getText());
             activeCourse.setTerm(txtCourseTerm.getText());
@@ -593,28 +591,6 @@ public class MainWindow extends JFrame implements ActionListener {
             }
         }
     }
-
-    //A method to save the course arrayList to a textfile
-    //A method to save the course arrayList to a textfile
-
-//    private void save() {
-//        ListIterator < Course > iter = courses.listIterator();
-//        try {
-//            // Create file
-//            File info = new File("info.txt");
-//            BufferedWriter out = new BufferedWriter(new FileWriter(info));
-//
-//            while (iter.hasNext()) {
-//                Course c = iter.next();
-//                out.write(c.getTitle() + " " + c.getCode() + " " + c.getTerm() + "\n");
-//                System.out.println(c.getTitle() + " " + c.getCode() + " " + c.getTerm() + "\n");
-//            }
-//            //Close the output stream
-//            out.close();
-//        } catch (Exception e) { //Catch exception if any
-//            System.err.println("Error: " + e.getMessage());
-//        }
-//    }
 
     private void save() throws IOException {
         FileOutputStream file_out_course = new FileOutputStream(save_path_course);
