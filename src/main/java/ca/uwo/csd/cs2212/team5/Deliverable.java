@@ -27,7 +27,7 @@ public class Deliverable implements java.io.Serializable{
 		return name;
 	}
 
-	double getWeight(){
+	Double getWeight(){
 		return weight;
 	}
 
@@ -40,7 +40,7 @@ public class Deliverable implements java.io.Serializable{
 	}
 
 
-	void setWeight(double x){
+	void setWeight(Double x){
 		weight = x;
 	}
 

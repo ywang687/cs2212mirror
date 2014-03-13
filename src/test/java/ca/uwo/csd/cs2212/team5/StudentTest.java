@@ -39,6 +39,7 @@ public class StudentTest {
 	Assert.assertEquals("testFirst",student.getFirstName());
   }
 
+
   @Test
   public void testSetLasetName() {
 	student.setLastName("testLast");
