@@ -43,7 +43,7 @@ public class Student implements java.io.Serializable{
 	 */
 	public void addGrade(Double grade){
 		//Determine if there is room for the new grade and if not, expand the array
-		System.out.println("Student Name: + firstName" + "Numgrades:" + numGrades + "Gradelist length" + gradeList.length);
+		System.out.println("Student Name: " + firstName + "Numgrades: " + numGrades + "Gradelist length " + gradeList.length);
 		if (numGrades == gradeList.length)
 			expandGradeList();
 
