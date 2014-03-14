@@ -333,7 +333,7 @@ public class MainWindow extends JFrame implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, lblDeliverWeight, 390, SpringLayout.NORTH, getContentPane());
 
 
-        layout.putConstraint(SpringLayout.WEST, lblGreeting, 280, SpringLayout.WEST, getContentPane());
+        layout.putConstraint(SpringLayout.WEST, lblGreeting, 320, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, lblGreeting, 0, SpringLayout.NORTH, getContentPane());
 
         layout.putConstraint(SpringLayout.WEST, lblSelect, 0, SpringLayout.WEST, getContentPane());
@@ -448,7 +448,7 @@ public class MainWindow extends JFrame implements ActionListener {
     //Creates a student object for the currently selected class
     private void addStudent() {
         if (!txtFirstName.getText().equals("") && !txtLastName.getText().equals("") && !txtNumber.getText().equals("") && !txtEmail.getText().equals("")) {
-            if (activeCourse != null) {
+            if (activeStudent != null) {
 
 				//Create a new student object
 				Student newStud = new Student(txtFirstName.getText(), txtLastName.getText(), txtNumber.getText(), txtEmail.getText());
@@ -463,7 +463,7 @@ public class MainWindow extends JFrame implements ActionListener {
                 txtNumber.setText("");
                 txtEmail.setText("");
             } else
-                lblGreeting.setText("Error: Please select a course before adding a student.");
+                lblGreeting.setText("Error: Please select an existing student before editing.");
         } 
         //print an error message if one or more of the fields are not filled in
         else if(txtFirstName.getText().equals("")){
