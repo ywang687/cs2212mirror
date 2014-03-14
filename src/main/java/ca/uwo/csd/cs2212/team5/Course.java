@@ -47,6 +47,27 @@ public Course(String title, String c, String t, boolean act) {
 
 }
 
+public boolean hasStudentNumber(String num){
+	Iterator<Student> iter=this.students.iterator();
+	Boolean b=false;
+	while(iter.hasNext()){
+		Student s=iter.next();
+		if(s.getNumber().equals(num)) b=true;
+	}
+	return b;
+}
+
+public boolean hasStudentEmail(String email){
+	Iterator<Student> iter=this.students.iterator();
+	Boolean b=false;
+	while(iter.hasNext()){
+		Student s=iter.next();
+		if(s.getNumber().equals(email)) b=true;
+	}
+	return b;
+}
+
+
 /**
  * Adds a new student to the list of students in a course
  * @param newStudent the new student to add

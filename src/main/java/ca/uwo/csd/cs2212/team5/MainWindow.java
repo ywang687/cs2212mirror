@@ -80,7 +80,8 @@ public class MainWindow extends JFrame implements ActionListener {
     private JLabel lblDeliverWeight = new JLabel("<html>Deliverable Weight<br>Enter a double (0.0)</html>");
 
     //Add a label for greeting the user
-    private JLabel lblGreeting = new JLabel("Welcome to Gradebook!");
+    private JLabel lblGreeting2 = new JLabel("Welcome to Gradebook!");
+    private JLabel lblGreeting = new JLabel("");
 
     //Add a label for telling the user to select a course
     private JLabel lblSelect = new JLabel("Select a course:");
@@ -178,6 +179,7 @@ public class MainWindow extends JFrame implements ActionListener {
         add(lblDeliverWeight);
 
         add(lblGreeting);
+        add(lblGreeting2);
         add(lblSelect);
         add(lblStudentSelect);
         add(lblDeliverableSelect);
@@ -333,9 +335,12 @@ public class MainWindow extends JFrame implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, lblDeliverWeight, 390, SpringLayout.NORTH, getContentPane());
 
 
-        layout.putConstraint(SpringLayout.WEST, lblGreeting, 320, SpringLayout.WEST, getContentPane());
-        layout.putConstraint(SpringLayout.NORTH, lblGreeting, 0, SpringLayout.NORTH, getContentPane());
+        layout.putConstraint(SpringLayout.WEST, lblGreeting2, 320, SpringLayout.WEST, getContentPane());
+        layout.putConstraint(SpringLayout.NORTH, lblGreeting2, 0, SpringLayout.NORTH, getContentPane());
 
+        layout.putConstraint(SpringLayout.WEST, lblGreeting, 220, SpringLayout.WEST, getContentPane());
+        layout.putConstraint(SpringLayout.NORTH, lblGreeting, 490, SpringLayout.NORTH, getContentPane());
+        
         layout.putConstraint(SpringLayout.WEST, lblSelect, 0, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, lblSelect, 0, SpringLayout.NORTH, getContentPane());
 
@@ -448,7 +453,7 @@ public class MainWindow extends JFrame implements ActionListener {
     //Creates a student object for the currently selected class
     private void addStudent() {
         if (!txtFirstName.getText().equals("") && !txtLastName.getText().equals("") && !txtNumber.getText().equals("") && !txtEmail.getText().equals("")) {
-           
+           if(!activeCourse.hasStudentEmail(txtEmail.getText())&&!activeCourse.hasStudentNumber(txtNumber.getText())){
 
 				//Create a new student object
 				Student newStud = new Student(txtFirstName.getText(), txtLastName.getText(), txtNumber.getText(), txtEmail.getText());
@@ -462,6 +467,13 @@ public class MainWindow extends JFrame implements ActionListener {
                 txtLastName.setText("");
                 txtNumber.setText("");
                 txtEmail.setText("");
+           }
+           else if(activeCourse.hasStudentEmail(txtEmail.getText())){
+        	   lblGreeting.setText("Error:Invalid email. Email address already assigned to another student."); 
+           }
+           else if(activeCourse.hasStudentNumber(txtNumber.getText())){
+        	   lblGreeting.setText("Error:Invalid student number. Student number already assigned to another student.");
+           }
            
         } 
         //print an error message if one or more of the fields are not filled in
