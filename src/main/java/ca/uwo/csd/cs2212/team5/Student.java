@@ -35,7 +35,7 @@ public class Student implements java.io.Serializable{
 		this.number = number;
 		this.emailAddress = emailAddress;
 		numGrades = 0;
-		Double[] gradeList = new Double [10];
+		gradeList = new Double [10];
 	}
 
 	/**
@@ -43,7 +43,8 @@ public class Student implements java.io.Serializable{
 	 */
 	public void addGrade(Double grade){
 		//Determine if there is room for the new grade and if not, expand the array
-		if (numGrades == this.gradeList.length)
+		System.out.println("Student Name: + firstName" + "Numgrades:" + numGrades + "Gradelist length" + gradeList.length);
+		if (numGrades == gradeList.length)
 			expandGradeList();
 
 		//Insert the grade
