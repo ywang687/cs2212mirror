@@ -26,6 +26,8 @@ private boolean isActive;
 private ArrayList<Student> students;
 //The course list of deliverables
 private ArrayList<Deliverable> deliverables;
+//the number of deliverables a course has
+private int numDeliverables;
 
 /**
 * Constructor.
@@ -41,6 +43,7 @@ public Course(String title, String c, String t, boolean act) {
 	this.isActive=act;
 	this.students=new ArrayList<Student>();
 	this.deliverables= new ArrayList<Deliverable>();
+	this.numDeliverables=0;
 
 }
 
@@ -90,11 +93,31 @@ public ArrayList<Student> getStudents(){
  */
 public void addDeliverable(Deliverable d){
 	this.deliverables.add(d);
+	this.numDeliverables++;
 }
 
+/**
+ * A method that returns the deliverables for a course
+ * @return an arrayList of the deliverables in the course so far
+ */
 public ArrayList<Deliverable> getDeliverables(){
 	return this.deliverables;
 }
+
+/**
+ * Returns a specific deliverable in a course
+ * @param deliverableNumber the deliverable number to find
+ * @return the deliverable object
+ */
+public Deliverable getDeliverable(int deliverableNumber){
+	if(this.numDeliverables>deliverableNumber){
+	    return this.deliverables.get(deliverableNumber);
+	}
+	else{
+		return null;
+	}
+}
+
 
 /**
  * Gets the course title
