@@ -4,7 +4,7 @@ team5-gradebook,ca.uwo.csd.cs2212.team5,GradeWindow.new ActionListener() {...},8
 team5-gradebook,ca.uwo.csd.cs2212.team5,StudentTableModel,165,0,28,0,52,0,23,0,9,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,App,8,0,0,0,3,0,2,0,2,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow.new ActionListener() {...},9,0,0,0,3,0,2,0,2,0
-team5-gradebook,ca.uwo.csd.cs2212.team5,Student,100,50,4,0,16,20,8,9,6,9
+team5-gradebook,ca.uwo.csd.cs2212.team5,Student,105,50,4,0,16,20,8,9,6,9
 team5-gradebook,ca.uwo.csd.cs2212.team5,App.new Runnable() {...},11,0,0,0,4,0,2,0,2,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow.new Runnable() {...},17,0,0,0,7,0,2,0,2,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,Grade,7,0,0,0,3,0,2,0,2,0
