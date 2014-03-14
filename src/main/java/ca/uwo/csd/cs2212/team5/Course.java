@@ -62,7 +62,7 @@ public boolean hasStudentEmail(String email){
 	Boolean b=false;
 	while(iter.hasNext()){
 		Student s=iter.next();
-		if(s.getNumber().equals(email)) b=true;
+		if(s.getEmailAddress().equals(email)) b=true;
 	}
 	return b;
 }

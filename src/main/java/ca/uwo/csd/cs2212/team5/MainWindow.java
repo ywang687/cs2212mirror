@@ -491,12 +491,16 @@ public class MainWindow extends JFrame implements ActionListener {
     private void editStudent() {
         if (!txtFirstName.getText().equals("") && !txtLastName.getText().equals("") && !txtNumber.getText().equals("") && !txtEmail.getText().equals("")) {
             if(activeStudent!=null){
-        	lblGreeting.setText("Success! Active student has been modified");
+        	    //checks to make sure student number or email doesn't already exist
+            	if((!(!activeStudent.getEmailAddress().equals(txtEmail.getText()) && activeCourse.hasStudentEmail(txtEmail.getText())))  && 
+        			   (!(!activeStudent.getNumber().equals(txtNumber.getText()) && activeCourse.hasStudentNumber(txtNumber.getText())))){
+           
+                lblGreeting.setText("Success! Active student has been modified");
 
-            activeStudent.setFirstName(txtFirstName.getText());
-            activeStudent.setLastName(txtLastName.getText());
-            activeStudent.setNumber(txtNumber.getText());
-            activeStudent.setEmailAddress(txtEmail.getText());
+                activeStudent.setFirstName(txtFirstName.getText());
+                activeStudent.setLastName(txtLastName.getText());
+                activeStudent.setNumber(txtNumber.getText());
+                activeStudent.setEmailAddress(txtEmail.getText());
 
             rebuildStudents();
 
@@ -505,6 +509,14 @@ public class MainWindow extends JFrame implements ActionListener {
             txtLastName.setText("");
             txtNumber.setText("");
             txtEmail.setText("");
+        	   }
+        	   else if(!activeStudent.getEmailAddress().equals(txtEmail.getText()) && activeCourse.hasStudentEmail(txtEmail.getText())){
+        		   lblGreeting.setText("Error: Invalid email. Email address already assigned to another student.");
+        	   }
+        	   else if((!activeStudent.getNumber().equals(txtNumber.getText()) && activeCourse.hasStudentNumber(txtNumber.getText()))){
+        		   lblGreeting.setText("Error: Invalid student number. Student number already assigned to another student.");
+        	   }
+            
             }
             else{
                 lblGreeting.setText("Error: Please select an existing student before editing.");
