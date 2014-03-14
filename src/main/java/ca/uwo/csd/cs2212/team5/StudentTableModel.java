@@ -38,16 +38,6 @@ public class StudentTableModel extends AbstractTableModel {
     }
     
     @Override
-    public Class<?> getColumnClass(int columnIndex) {
-        if(columnIndex==0 || columnIndex==1){
-        	return String.class;
-        }
-        else{
-        	return Double.class;
-        }
-    }
-    
-    @Override
     public String getColumnName(int columnIndex) {
         switch (columnIndex) {
             case IDX_FIRST_NAME:
@@ -78,18 +68,18 @@ public class StudentTableModel extends AbstractTableModel {
              case IDX_LAST_NAME:
                  return s.getLastName();
              case DEL_1:
-                 return "Deliverable 1";
+                 return "";
              case DEL_2:
-                 return "Deliverable 2";
+                 return "";
              case DEL_3:
-                 return "Deliverable 3";
+                 return "";
              default:
                  return null; 
              }
          }
     }
     
-    @Override
+   /* @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         if ((rowIndex < 0) || (rowIndex >= students.size()))
             return;
@@ -103,7 +93,7 @@ public class StudentTableModel extends AbstractTableModel {
         }
 
      
-    }
+    }*/
     
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
