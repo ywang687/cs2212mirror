@@ -448,7 +448,7 @@ public class MainWindow extends JFrame implements ActionListener {
     //Creates a student object for the currently selected class
     private void addStudent() {
         if (!txtFirstName.getText().equals("") && !txtLastName.getText().equals("") && !txtNumber.getText().equals("") && !txtEmail.getText().equals("")) {
-            if (activeStudent != null) {
+           
 
 				//Create a new student object
 				Student newStud = new Student(txtFirstName.getText(), txtLastName.getText(), txtNumber.getText(), txtEmail.getText());
@@ -462,8 +462,7 @@ public class MainWindow extends JFrame implements ActionListener {
                 txtLastName.setText("");
                 txtNumber.setText("");
                 txtEmail.setText("");
-            } else
-                lblGreeting.setText("Error: Please select an existing student before editing.");
+           
         } 
         //print an error message if one or more of the fields are not filled in
         else if(txtFirstName.getText().equals("")){
@@ -479,7 +478,8 @@ public class MainWindow extends JFrame implements ActionListener {
     //edits the student object currently selected
     private void editStudent() {
         if (!txtFirstName.getText().equals("") && !txtLastName.getText().equals("") && !txtNumber.getText().equals("") && !txtEmail.getText().equals("")) {
-            lblGreeting.setText("Success! Active student has been modified");
+            if(activeStudent!=null){
+        	lblGreeting.setText("Success! Active student has been modified");
 
             activeStudent.setFirstName(txtFirstName.getText());
             activeStudent.setLastName(txtLastName.getText());
@@ -493,6 +493,10 @@ public class MainWindow extends JFrame implements ActionListener {
             txtLastName.setText("");
             txtNumber.setText("");
             txtEmail.setText("");
+            }
+            else{
+                lblGreeting.setText("Error: Please select an existing student before editing.");
+            }
         } 
         
         //print an error message if one or more of the fields are not filled in
