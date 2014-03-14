@@ -107,6 +107,11 @@ public class MainWindow extends JFrame implements ActionListener {
         	}
         	rebuildStudents();
         	System.out.println(courses.size());
+        	
+        	//make the active course the first course in the list
+        	if(courses.size()!=0){
+        		this.activeCourse=courses.get(0);
+        	}
         }catch (Exception e){
         	e.printStackTrace();
         	courses.add(new Course("Computer Science", "CS2212","B",true));
@@ -376,7 +381,7 @@ public class MainWindow extends JFrame implements ActionListener {
     private void addCourse() {
         //Check to make sure the text fields are filled out fully
         if (!txtCourseName.getText().equals("") && !txtCourseCode.getText().equals("") && !txtCourseTerm.getText().equals("")) {
-            lblGreeting.setText("Course successfully added!");
+            lblGreeting.setText("Success! Course successfully added!");
             courses.add(new Course(txtCourseName.getText(), txtCourseCode.getText(), txtCourseTerm.getText(), true));
 
             //Add this to the combo box
@@ -388,15 +393,22 @@ public class MainWindow extends JFrame implements ActionListener {
             txtCourseCode.setText("");
             txtCourseTerm.setText("");
         } 
-        else{
-            lblGreeting.setText("Error. Please enter a proper course name, code and term.");
-        }
+        
+      //print an error message if one or more of the fields are left empty
+        else if(txtCourseName.getText().equals("")){
+            lblGreeting.setText("Error: Invalid course name. Course name cannot be empty.");}
+        else if(txtCourseCode.getText().equals("")){
+            lblGreeting.setText("Error: Invalid course code. Course code cannot be empty.");}
+        else if(txtCourseTerm.getText().equals("")){
+            lblGreeting.setText("Error: Invalid course term. Course term cannot be empty.");}
     }
 
     //Method to edit the active course's data
     private void editCourse() {
         if (!txtCourseName.getText().equals("") && !txtCourseCode.getText().equals("") && !txtCourseTerm.getText().equals("")) {
-            lblGreeting.setText("Currently active course has been modified");
+        	if (activeCourse != null) {
+        	
+        	lblGreeting.setText("Success! Active course has been modified.");
 
             String oldCourse = activeCourse.stringRepresentation();
 
@@ -407,15 +419,28 @@ public class MainWindow extends JFrame implements ActionListener {
             //Remove the old course and replace with the new one
             cboCourseList.addItem(activeCourse.stringRepresentation());
             cboCourseList.removeItem(oldCourse);
-        }
+        
 
         //Clear the text boxes for new data
         txtCourseName.setText("");
         txtCourseCode.setText("");
         txtCourseTerm.setText("");
-
+    
+        } else
+            lblGreeting.setText("Error: Please select an active course to edit.");
         //Reload the students and reload the deliverables
         System.out.println("Number of students this changed course has:" + activeCourse.getStudents().size());
+        }
+        
+      //print an error message if one or more of the fields are not filled in
+        else if(txtFirstName.getText().equals("")){
+            lblGreeting.setText("Error: Invalid first name. First name cannot be empty.");}
+        else if(txtLastName.getText().equals("")){
+            lblGreeting.setText("Error: Invalid last name. Last cannot be empty.");}
+        else if(txtNumber.getText().equals("")){
+            lblGreeting.setText("Error: Invalid student number. Student number cannot be empty.");}
+        else if(txtEmail.getText().equals("")){
+            lblGreeting.setText("Error: Invalid email. Student email address cannot be empty.");}
     }
 
     //Creates a student object for the currently selected class
@@ -436,15 +461,23 @@ public class MainWindow extends JFrame implements ActionListener {
                 txtNumber.setText("");
                 txtEmail.setText("");
             } else
-                lblGreeting.setText("Error. Please select a course before adding a student.");
-        } else
-            lblGreeting.setText("Error. Please enter a proper Student name, number and email.");
+                lblGreeting.setText("Error: Please select a course before adding a student.");
+        } 
+        //print an error message if one or more of the fields are not filled in
+        else if(txtFirstName.getText().equals("")){
+            lblGreeting.setText("Error: Invalid first name. First name cannot be empty.");}
+        else if(txtLastName.getText().equals("")){
+            lblGreeting.setText("Error: Invalid last name. Last cannot be empty.");}
+        else if(txtNumber.getText().equals("")){
+            lblGreeting.setText("Error: Invalid student number. Student number cannot be empty.");}
+        else if(txtEmail.getText().equals("")){
+            lblGreeting.setText("Error: Invalid email. Student email address cannot be empty.");}
     }
 
     //edits the student object currently selected
     private void editStudent() {
         if (!txtFirstName.getText().equals("") && !txtLastName.getText().equals("") && !txtNumber.getText().equals("") && !txtEmail.getText().equals("")) {
-            lblGreeting.setText("Currently active student has been modified");
+            lblGreeting.setText("Success! Active student has been modified");
 
             activeStudent.setFirstName(txtFirstName.getText());
             activeStudent.setLastName(txtLastName.getText());
@@ -458,8 +491,17 @@ public class MainWindow extends JFrame implements ActionListener {
             txtLastName.setText("");
             txtNumber.setText("");
             txtEmail.setText("");
-        } else
-            lblGreeting.setText("To edit the selected student, please fill in appropriate student data in the text boxes.");
+        } 
+        
+        //print an error message if one or more of the fields are not filled in
+        else if(txtFirstName.getText().equals("")){
+            lblGreeting.setText("Error: Invalid first name. First name cannot be empty.");}
+        else if(txtLastName.getText().equals("")){
+            lblGreeting.setText("Error: Invalid last name. Last cannot be empty.");}
+        else if(txtNumber.getText().equals("")){
+            lblGreeting.setText("Error: Invalid student number. Student number cannot be empty.");}
+        else if(txtEmail.getText().equals("")){
+            lblGreeting.setText("Error: Invalid email. Student email address cannot be empty.");}
     }
 
     //Adds a deliverable to the currently selected course
@@ -478,14 +520,21 @@ public class MainWindow extends JFrame implements ActionListener {
                 txtDeliverType.setText("");
                 txtDeliverWeight.setText("");
             } else
-                lblGreeting.setText("Error. Please select a course before adding a deliverable.");
-        } else
-            lblGreeting.setText("Error. Please enter a proper Deliverable name, type, and weight.");
+                lblGreeting.setText("Error: Please select a course before adding a deliverable.");
+        } 
+        
+        //print an error message if one or more of the fields are left empty
+        else if(txtDeliverName.getText().equals("")){
+            lblGreeting.setText("Error: Invalid deliverable name. Deliverable name cannot be empty.");}
+        else if(txtDeliverType.getText().equals("")){
+            lblGreeting.setText("Error: Invalid deliverable type. Deliverable type cannot be empty.");}
+        else if(txtDeliverWeight.getText().equals("")){
+            lblGreeting.setText("Error: Invalid deliverable weight. Deliverable weight cannot be empty.");}
     }
 
     private void editDeliverable() {
         if (!txtDeliverName.getText().equals("") && !txtDeliverType.getText().equals("") && !txtDeliverWeight.getText().equals("")) {
-            lblGreeting.setText("Currently active deliverable has been modified");
+            lblGreeting.setText("Success! Active deliverable has been modified.");
 
             activeDeliverable.setName(txtDeliverName.getText());
             activeDeliverable.setType(txtDeliverType.getText());
@@ -497,9 +546,13 @@ public class MainWindow extends JFrame implements ActionListener {
             txtDeliverName.setText("");
             txtDeliverType.setText("");
             txtDeliverWeight.setText("");
-        } else
-            lblGreeting.setText("To edit the selected deliverable, please fill in appropriate data in the text boxes.");
-
+        } 
+        else if(txtDeliverName.getText().equals("")){
+            lblGreeting.setText("Error: Invalid deliverable name. Deliverable name cannot be empty.");}
+        else if(txtDeliverType.getText().equals("")){
+            lblGreeting.setText("Error: Invalid deliverable type. Deliverable type cannot be empty.");}
+        else if(txtDeliverWeight.getText().equals("")){
+            lblGreeting.setText("Error: Invalid deliverable weight. Deliverable weight cannot be empty.");}
     }
 
     //Rebuild the list of students when the course is changed
@@ -544,7 +597,7 @@ public class MainWindow extends JFrame implements ActionListener {
             Course x = iterator.next();
             if (currentCourse.equals(x.getTitle() + " - " + x.getCode() + " - " + x.getTerm())) {
                 activeCourse = x;
-                lblGreeting.setText("Changed active course to " + currentCourse + " successfully.");
+                lblGreeting.setText("Success! Changed active course to " + currentCourse + " successfully.");
             }
         }
 
@@ -569,7 +622,7 @@ public class MainWindow extends JFrame implements ActionListener {
                 Student x = iterator.next();
                 if (currentStudent.equals(x.getFirstName() + " " + x.getLastName() + " " + x.getNumber() + " " + x.getEmailAddress())) {
                     activeStudent = x;
-                    lblGreeting.setText("Success. changed active student to " + activeStudent.getFirstName() + ".");
+                    lblGreeting.setText("Success! Changed active student to " + activeStudent.getFirstName() + ".");
                 }
             }
         }
@@ -588,7 +641,7 @@ public class MainWindow extends JFrame implements ActionListener {
                 Deliverable x = iterator.next();
                 if (currentDeliverable.equals(x.getName() + " - " + x.getType() + " - " + x.getWeight())) {
                     activeDeliverable = x;
-                    lblGreeting.setText("Success. changed active deliverable to " + activeDeliverable.getName() + ".");
+                    lblGreeting.setText("Success! Changed active deliverable to " + activeDeliverable.getName() + ".");
                 }
             }
         }
