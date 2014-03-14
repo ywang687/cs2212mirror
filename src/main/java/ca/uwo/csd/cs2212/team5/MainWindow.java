@@ -387,8 +387,10 @@ public class MainWindow extends JFrame implements ActionListener {
             txtCourseName.setText("");
             txtCourseCode.setText("");
             txtCourseTerm.setText("");
-        } else
+        } 
+        else{
             lblGreeting.setText("Error. Please enter a proper course name, code and term.");
+        }
     }
 
     //Method to edit the active course's data
@@ -673,7 +675,7 @@ public class MainWindow extends JFrame implements ActionListener {
 //            save();
         }
         else if (evt.getActionCommand().equals("openGradeWindow")) {
-            openGradeWindow(students);
+            openGradeWindow(activeCourse.getStudents());
         }
   }
 }
