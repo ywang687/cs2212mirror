@@ -111,6 +111,8 @@ public class MainWindow extends JFrame implements ActionListener {
         	//make the active course the first course in the list
         	if(courses.size()!=0){
         		this.activeCourse=courses.get(0);
+        		rebuildStudents();
+        		rebuildDeliverables();
         	}
         }catch (Exception e){
         	e.printStackTrace();
