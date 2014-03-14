@@ -26,8 +26,6 @@ private boolean isActive;
 private ArrayList<Student> students;
 //The course list of deliverables
 private ArrayList<Deliverable> deliverables;
-//the number of deliverables a course has
-private int numDeliverables;
 
 /**
 * Constructor.
@@ -43,7 +41,6 @@ public Course(String title, String c, String t, boolean act) {
 	this.isActive=act;
 	this.students=new ArrayList<Student>();
 	this.deliverables= new ArrayList<Deliverable>();
-	this.numDeliverables=0;
 
 }
 
@@ -67,7 +64,9 @@ public boolean hasStudentEmail(String email){
 	return b;
 }
 
-
+public int getNumDeliverables(){
+	return this.deliverables.size();
+}
 /**
  * Adds a new student to the list of students in a course
  * @param newStudent the new student to add
@@ -114,7 +113,6 @@ public ArrayList<Student> getStudents(){
  */
 public void addDeliverable(Deliverable d){
 	this.deliverables.add(d);
-	this.numDeliverables++;
 }
 
 /**
@@ -131,7 +129,7 @@ public ArrayList<Deliverable> getDeliverables(){
  * @return the deliverable object
  */
 public Deliverable getDeliverable(int deliverableNumber){
-	if(this.numDeliverables>deliverableNumber){
+	if(this.getNumDeliverables()>deliverableNumber){
 	    return this.deliverables.get(deliverableNumber);
 	}
 	else{

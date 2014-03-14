@@ -541,6 +541,11 @@ public class MainWindow extends JFrame implements ActionListener {
 
 				Deliverable newDeliver = new Deliverable(txtDeliverName.getText(), txtDeliverType.getText(), Double.parseDouble(txtDeliverWeight.getText()));
                 activeCourse.addDeliverable(newDeliver);
+                for(int i=0; i<activeCourse.getStudents().size();i++){
+                	Student s=activeCourse.getStudents().get(i);
+                	s.addGrade(200.0);
+                }
+                
                 lblGreeting.setText("Deliverable " + txtDeliverName.getText() + " added successfully to " + activeCourse.getTitle() + ".");
 
                 //Add the new student to the combo box
@@ -715,9 +720,9 @@ public class MainWindow extends JFrame implements ActionListener {
         }
     }
 
-    private void openGradeWindow( ArrayList < Student > s){
+    private void openGradeWindow(Course course){
 
-    	GradeWindow g=new GradeWindow(s);
+    	GradeWindow g=new GradeWindow(course);
 
     	g.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -758,7 +763,7 @@ public class MainWindow extends JFrame implements ActionListener {
 //            save();
         }
         else if (evt.getActionCommand().equals("openGradeWindow")) {
-            openGradeWindow(activeCourse.getStudents());
+            openGradeWindow(activeCourse);
         }
   }
 }

@@ -14,7 +14,7 @@ public class Student implements java.io.Serializable{
 	private String lastName;
 	private String number;
 	private String emailAddress;
-	private double [] gradeList;
+	private Double [] gradeList;
 	private int numGrades;
 
 	public static void main (String[] args) {
@@ -35,19 +35,19 @@ public class Student implements java.io.Serializable{
 		this.number = number;
 		this.emailAddress = emailAddress;
 		numGrades = 0;
-		double[] gradeList = new double [10];
+		Double[] gradeList = new Double [10];
 	}
 
 	/**
 	 *
 	 */
-	public void addGrade(double grade){
+	public void addGrade(Double grade){
 		//Determine if there is room for the new grade and if not, expand the array
-		if (numGrades == gradeList.length)
+		if (numGrades == this.gradeList.length)
 			expandGradeList();
 
 		//Insert the grade
-		gradeList[numGrades] = grade;
+		this.gradeList[numGrades] = grade;
 		numGrades++;
 	}
 
@@ -56,7 +56,7 @@ public class Student implements java.io.Serializable{
 	 * @param deliverableNumber The deliverable selected to be retrieved
 	 * @return gradeList[deliverableNumber]
 	 */
-	public double getGrade(int deliverableNumber){
+	public Double getGrade(int deliverableNumber){
 		return gradeList[deliverableNumber];
 	}
 
@@ -65,7 +65,7 @@ public class Student implements java.io.Serializable{
 	 * @param grade new grade for this deliverable
 	 * @param deliverableNumber The deliverable whose grade will be edited
 	 */
-	public void editGrade(double grade, int deliverableNumber){
+	public void editGrade(Double grade, int deliverableNumber){
 		gradeList[deliverableNumber] = grade;
 	}
 
@@ -146,7 +146,7 @@ public class Student implements java.io.Serializable{
 	 */
 	private void expandGradeList(){
 		//Create an array with twice the capacity
-		double [] newList = new double [gradeList.length*2];
+		Double [] newList = new Double [gradeList.length*2];
 
 		//Move all the information of the old array into the new one
 		for(int x = 0; x < gradeList.length; x++)
