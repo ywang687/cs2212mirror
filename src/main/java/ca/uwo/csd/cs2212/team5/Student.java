@@ -14,6 +14,8 @@ public class Student implements java.io.Serializable{
 	private String lastName;
 	private String number;
 	private String emailAddress;
+	private double [] gradeList;
+	private int numGrades;
 
 	public static void main (String[] args) {
 
@@ -32,10 +34,44 @@ public class Student implements java.io.Serializable{
 		this.lastName = lastName;
 		this.number = number;
 		this.emailAddress = emailAddress;
+		numGrades = 0;
+		double[] gradeList = new double [10];
+	}
+
+	/**
+	 *
+	 */
+	public void addGrade(double grade){
+		//Determine if there is room for the new grade and if not, expand the array
+		if (numGrades == gradeList.length)
+			expandGradeList();
+
+		//Insert the grade
+		gradeList[numGrades] = grade;
+		numGrades++;
+	}
+
+	/**
+	 * returns the grade of a specific deliverable of this student
+	 * @param deliverableNumber The deliverable selected to be retrieved
+	 * @return gradeList[deliverableNumber]
+	 */
+	public double getGrade(int deliverableNumber){
+		return gradeList[deliverableNumber];
+	}
+
+	/**
+	 * Edits a selected deliverable's grade with the new data
+	 * @param grade new grade for this deliverable
+	 * @param deliverableNumber The deliverable whose grade will be edited
+	 */
+	public void editGrade(double grade, int deliverableNumber){
+		gradeList[deliverableNumber] = grade;
 	}
 
 	/**
 	 *returns a String representation of the Student's data
+	 *@return
 	 */
 	public String stringRepresentation(){
 		return getFirstName() + " " + getLastName() + " " + getNumber() + " " + getEmailAddress();
@@ -73,7 +109,6 @@ public class Student implements java.io.Serializable{
 		return emailAddress;
 	}
 
-	
 	/**
 	 * sets first name
 	 * @param firstName
@@ -104,5 +139,20 @@ public class Student implements java.io.Serializable{
 	 */
 	public void setEmailAddress(String emailAddress){
 		this.emailAddress = emailAddress;
+	}
+
+	/**
+	 * A method that expands the gradeList to make room for more deliverables
+	 */
+	private void expandGradeList(){
+		//Create an array with twice the capacity
+		double [] newList = new double [gradeList.length*2];
+
+		//Move all the information of the old array into the new one
+		for(int x = 0; x < gradeList.length; x++)
+			newList[x] = gradeList[x];
+
+		//Point to the new array
+		gradeList = newList;
 	}
 }
