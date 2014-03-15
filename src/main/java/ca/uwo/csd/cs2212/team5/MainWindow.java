@@ -279,10 +279,10 @@ public class MainWindow extends JFrame implements ActionListener {
 
         layout.putConstraint(SpringLayout.WEST, cmdDeleteCourse, 500, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, cmdDeleteCourse, 30, SpringLayout.NORTH, getContentPane());
-        
+
         layout.putConstraint(SpringLayout.WEST, cmdDeleteStudent, 500, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, cmdDeleteStudent, 150, SpringLayout.NORTH, getContentPane());
-        
+
         layout.putConstraint(SpringLayout.WEST, cmdDeleteDeliverable, 500, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, cmdDeleteDeliverable, 300, SpringLayout.NORTH, getContentPane());
 
@@ -494,7 +494,7 @@ public class MainWindow extends JFrame implements ActionListener {
 
                 //Initialize the student's deliverable grades
                 for(int x = 0; x < activeCourse.getDeliverables().size(); x++){
-					newStud.addGrade(0.0);
+					newStud.addGrade(null);
                 }
            }
            else if(activeCourse.hasStudentEmail(txtEmail.getText())){
@@ -583,7 +583,7 @@ public class MainWindow extends JFrame implements ActionListener {
                 //Add a new deliverable to each student's grades
 
                 for(int x = 0; x < activeCourse.getStudents().size(); x++){
-                	activeCourse.getStudents().get(x).addGrade(0.0);
+                	activeCourse.getStudents().get(x).addGrade(null);
                 }
             } else
                 lblGreeting.setText("Error: Please select a course before adding a deliverable.");
@@ -620,18 +620,18 @@ public class MainWindow extends JFrame implements ActionListener {
         else if(txtDeliverWeight.getText().equals("")){
             lblGreeting.setText("Error: Invalid deliverable weight. Deliverable weight cannot be empty.");}
     }
-    
+
     private void rebuildCourses() {
-    	
+
     	cboCourseList.removeAllItems();
-    	
+
     	Object[] tmpList = courses.toArray();
     	Arrays.sort(tmpList);
     	courses = new ArrayList<Course>();
     	for (Object tmp: tmpList) {
     		courses.add((Course)tmp);
     	}
-    	
+
     	for (ListIterator < Course > iterator = courses.listIterator(); iterator.hasNext();) {
             Course x = iterator.next();
             cboCourseList.addItem(new String(x.getTitle() + " - " + x.getCode() + " - " + x.getTerm()));
@@ -643,7 +643,7 @@ public class MainWindow extends JFrame implements ActionListener {
         //Clear the combo box
     	if (activeCourse != null){
 	        cboStudentList.removeAllItems();
-	        
+
 	        activeCourse.order();
 
 	        //Iterate through the active course's students, adding each one to the combo box
@@ -660,7 +660,7 @@ public class MainWindow extends JFrame implements ActionListener {
     private void rebuildDeliverables() {
         //Clear the combo box
         cboDeliverableList.removeAllItems();
-        
+
         activeCourse.order();
 
         //Iterate through the active course's deliverables, adding each one to the combo box
@@ -788,60 +788,60 @@ public class MainWindow extends JFrame implements ActionListener {
 
     	g.setVisible(true);
     }
-    
+
     private void deleteCourse() {
     	if (activeCourse != null) {
     		int pos = courses.indexOf(activeCourse);
     		Course removed = courses.remove(pos);
-    		
+
     		if (courses.size() > 0) {
     			activeCourse = courses.get(Math.min(pos, courses.size() - 1));
     		}
     		else{
     			activeCourse = null;
     		}
-    		
+
     		String nameToRemove = removed.getTitle() + " - " + removed.getCode() + " - " + removed.getTerm();
-    		
+
     		cboCourseList.removeItem(nameToRemove);
     	}
     }
-    
+
     private void deleteStudent() {
     	if (activeCourse != null && activeStudent != null) {
     		int pos = activeCourse.getStudents().indexOf(activeStudent);
     		Student removed = activeCourse.deleteStudent(activeStudent);
-    		
+
     		if (activeCourse.getStudents().size() > 0){
     			activeStudent = activeCourse.getStudents().get(Math.min(pos, activeCourse.getStudents().size() - 1));
     		}
     		else {
     			activeStudent = null;
     		}
-    		
+
     		rebuildStudents();
-    		
+
 //    		String nameToRemove = removed.getFirstName() + " " + removed.getLastName() + " " + removed.getNumber() + " " + removed.getEmailAddress();
-//    		
+//
 //    		cboStudentList.removeItem(nameToRemove);
     	}
     }
-    
+
     private void deleteDeliverable() {
     	if (activeCourse != null && activeDeliverable != null) {
     		int pos = activeCourse.getDeliverables().indexOf(activeDeliverable);
     		Deliverable removed = activeCourse.deleteDeliverable(activeDeliverable);
-    		
+
     		if (activeCourse.getDeliverables().size() > 0){
     			activeDeliverable = activeCourse.getDeliverables().get(Math.min(pos, activeCourse.getDeliverables().size() - 1));
     		}
     		else {
     			activeDeliverable = null;
     		}
-    		
+
     		rebuildDeliverables();
 //    		String nameToRemove = removed.getName() + " - " + removed.getType() + " - " + removed.getWeight();
-    		
+
 //    		cboDeliverableList.removeItem(nameToRemove);
     	}
     }
@@ -876,7 +876,7 @@ public class MainWindow extends JFrame implements ActionListener {
         } else if (evt.getActionCommand().equals("deliverableList")) {
             deliverableList();
 //            save();
-            
+
         } else if (evt.getActionCommand().equals("deleteCourse")){
         	deleteCourse();
         } else if (evt.getActionCommand().equals("deleteStudent")){
