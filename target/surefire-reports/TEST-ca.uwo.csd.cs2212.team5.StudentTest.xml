@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0" errors="0" skipped="0" tests="8" name="ca.uwo.csd.cs2212.team5.StudentTest">
+<testsuite failures="0" time="0.001" errors="0" skipped="0" tests="8" name="ca.uwo.csd.cs2212.team5.StudentTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="c:\Program Files (x86)\Java\jdk1.7.0_51\jre\bin"/>
@@ -65,7 +65,7 @@
   <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testSetLasetName"/>
   <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testGetLastName"/>
   <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testGetEmailAddress"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testSetNumber"/>
+  <testcase time="0.001" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testSetNumber"/>
   <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testGetFirstName"/>
   <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testSetEmailAddress"/>
   <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testGetNumber"/>

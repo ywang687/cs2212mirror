@@ -3,7 +3,7 @@ package ca.uwo.csd.cs2212.team5;
 public class Deliverable implements java.io.Serializable, Comparable{
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -7944796098054250965L;
 	private String name, type;
@@ -16,11 +16,18 @@ public class Deliverable implements java.io.Serializable, Comparable{
 		this.weight=weight;
 	}
 
+	/**
+	 *returns a String representation of the Deliverable's data
+	 */
+	public String stringRepresentation(){
+		return getName() + " - " + getType() + " - " + getWeight();
+	}
+
 	String getName(){
 		return name;
 	}
 
-	double getWeight(){
+	Double getWeight(){
 		return weight;
 	}
 
@@ -33,7 +40,7 @@ public class Deliverable implements java.io.Serializable, Comparable{
 	}
 
 
-	void setWeight(double x){
+	void setWeight(Double x){
 		weight = x;
 	}
 

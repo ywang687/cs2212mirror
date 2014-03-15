@@ -7,13 +7,15 @@ package ca.uwo.csd.cs2212.team5;
  */
 public class Student implements java.io.Serializable, Comparable{
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -980046860904744892L;
 	private String firstName;
 	private String lastName;
 	private String number;
 	private String emailAddress;
+	private Double [] gradeList;
+	private int numGrades;
 
 	public static void main (String[] args) {
 
@@ -32,6 +34,48 @@ public class Student implements java.io.Serializable, Comparable{
 		this.lastName = lastName;
 		this.number = number;
 		this.emailAddress = emailAddress;
+		numGrades = 0;
+		gradeList = new Double [10];
+	}
+
+	/**
+	 *
+	 */
+	public void addGrade(Double grade){
+		//Determine if there is room for the new grade and if not, expand the array
+		System.out.println("Student Name: " + firstName + "Numgrades: " + numGrades + "Gradelist length " + gradeList.length);
+		if (numGrades == gradeList.length)
+			expandGradeList();
+
+		//Insert the grade
+		this.gradeList[numGrades] = grade;
+		numGrades++;
+	}
+
+	/**
+	 * returns the grade of a specific deliverable of this student
+	 * @param deliverableNumber The deliverable selected to be retrieved
+	 * @return gradeList[deliverableNumber]
+	 */
+	public Double getGrade(int deliverableNumber){
+		return gradeList[deliverableNumber];
+	}
+
+	/**
+	 * Edits a selected deliverable's grade with the new data
+	 * @param grade new grade for this deliverable
+	 * @param deliverableNumber The deliverable whose grade will be edited
+	 */
+	public void editGrade(Double grade, int deliverableNumber){
+		gradeList[deliverableNumber] = grade;
+	}
+
+	/**
+	 *returns a String representation of the Student's data
+	 *@return
+	 */
+	public String stringRepresentation(){
+		return getFirstName() + " " + getLastName() + " " + getNumber() + " " + getEmailAddress();
 	}
 
 	/**
@@ -98,7 +142,21 @@ public class Student implements java.io.Serializable, Comparable{
 		this.emailAddress = emailAddress;
 	}
 
+	/**
+	 * A method that expands the gradeList to make room for more deliverables
+	 */
+	private void expandGradeList(){
+		//Create an array with twice the capacity
+		Double [] newList = new Double [gradeList.length*2];
 
+		//Move all the information of the old array into the new one
+		for(int x = 0; x < gradeList.length; x++)
+			newList[x] = gradeList[x];
+
+		//Point to the new array
+		gradeList = newList;
+	}
+	
 	@Override
 	public int compareTo(Object o) {
 		Student tmp = (Student)o;

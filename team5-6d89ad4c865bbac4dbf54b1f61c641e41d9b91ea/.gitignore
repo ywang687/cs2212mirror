@@ -1,0 +1,9 @@
+
+.DS_STORE
+*.class
+*.html
+*.css
+.project
+.settings
+.classpath
+/bin
