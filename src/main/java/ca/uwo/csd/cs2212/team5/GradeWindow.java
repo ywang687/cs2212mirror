@@ -82,6 +82,7 @@ public class GradeWindow extends JFrame {
         setColumnWidths();
         tblStudents.setAutoCreateRowSorter(true);
         tblStudents.setCellSelectionEnabled(true);
+        tblStudents.setDefaultRenderer(Double.class, new DoubleCellRenderer());
         tblStudents.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "startEditing");
 
         this.btnGetSelection.addActionListener(new ActionListener() {

@@ -111,14 +111,12 @@ public class StudentTableModel extends AbstractTableModel {
                fireTableCellUpdated(rowIndex, columnIndex);
               }
               catch(NullPointerException e){
-            	  try{
+            	  
             	  Double d=Double.valueOf(aValue.toString());
             	  c.addGrade(d);
                   fireTableCellUpdated(rowIndex, columnIndex);
-            	  }
-            	  catch(NullPointerException e2){
-            		  System.out.println("Your program sucks...");
-            	  }
+            	  
+            	 
               }
             }
         }
