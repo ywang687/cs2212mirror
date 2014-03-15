@@ -74,26 +74,19 @@ public class StudentTableModel extends AbstractTableModel {
         if ((rowIndex < 0) || (rowIndex >= students.size()))
             return null;
         else{
-        	Student s=this.students.get(rowIndex);
+        	Student s=this.activeCourse.getStudents().get(rowIndex);
+        	
         	 if(columnIndex==IDX_FIRST_NAME) {
                  return s.getFirstName();}
         	 else if(columnIndex==IDX_LAST_NAME){
                  return s.getLastName();}
         	 else if(columnIndex>IDX_LAST_NAME){
-        		 try{
-        		 Double d = s.getGrade(columnIndex);
-        		 if(!d.equals(200.0))
-        			 return d.toString();
-        		 else
-        			 return " ";
-        		 }
-        		 catch(NullPointerException e){
-        			 return " ";
-        		 }
-        	  }
-        	 else{
-                 return null; 
-             }
+        		
+        		 Double d = s.getGrade(columnIndex-2);
+        	     return d.toString();
+    	 }
+        	 else
+        		 return " ";
          }
     }
    
@@ -103,21 +96,14 @@ public class StudentTableModel extends AbstractTableModel {
             return;
 
             else{
-            Student c=students.get(rowIndex);
+            Student c=this.activeCourse.getStudents().get(rowIndex);
             if(columnIndex>1){
-              try{
+ 
                Double d=Double.valueOf(aValue.toString());
                c.editGrade(d, columnIndex-2);
-               fireTableCellUpdated(rowIndex, columnIndex);
-              }
-              catch(NullPointerException e){
-            	  
-            	  Double d=Double.valueOf(aValue.toString());
-            	  c.addGrade(d);
-                  fireTableCellUpdated(rowIndex, columnIndex);
-            	  
-            	 
-              }
+               fireTableCellUpdated(rowIndex, columnIndex); 
+            
+              
             }
         }
     }
