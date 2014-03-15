@@ -16,6 +16,7 @@ import java.awt.event.*;
 import javax.imageio.ImageIO;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ListIterator;
 
 public class MainWindow extends JFrame implements ActionListener {
@@ -44,6 +45,9 @@ public class MainWindow extends JFrame implements ActionListener {
     private JButton cmdEditStudent = new JButton("Edit active student");
     private JButton cmdAddDeliverable = new JButton("Add deliverable");
     private JButton cmdEditDeliverable = new JButton("Edit active deliverable");
+    private JButton cmdDeleteStudent = new JButton("Delete active student");
+    private JButton cmdDeleteCourse = new JButton("Delete active course");
+    private JButton cmdDeleteDeliverable = new JButton("Delete active deliverable");
     private JButton cmdOpenGradeWindow = new JButton("Open grade spreadsheet");
 
     //Add a drop down box to select current course
@@ -80,14 +84,13 @@ public class MainWindow extends JFrame implements ActionListener {
     private JLabel lblDeliverWeight = new JLabel("<html>Deliverable Weight<br>Enter a double (0.0)</html>");
 
     //Add a label for greeting the user
-    private JLabel lblGreeting2 = new JLabel("Welcome to Gradebook!");
-    private JLabel lblGreeting = new JLabel("");
+    private JLabel lblGreeting = new JLabel("Welcome to Gradebook!");
 
     //Add a label for telling the user to select a course
     private JLabel lblSelect = new JLabel("Select a course:");
     private JLabel lblStudentSelect = new JLabel("Select a student:");
     private JLabel lblDeliverableSelect = new JLabel("Select a deliverable:");
-
+    
     private static final String save_path_course = System.getProperty("user.dir") + System.getProperty("file.separator") + "course.ser";
     private static final String save_path_student = System.getProperty("user.dir") + System.getProperty("file.separator") + "student.ser";
 
@@ -99,7 +102,7 @@ public class MainWindow extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setJMenuBar(this.createMenubar());
-
+        
         try{
         	load();
         	for (int i = 0; i < courses.size(); i++) {
@@ -108,31 +111,24 @@ public class MainWindow extends JFrame implements ActionListener {
         	}
         	rebuildStudents();
         	System.out.println(courses.size());
-
-        	//make the active course the first course in the list
-        	if(courses.size()!=0){
-        		this.activeCourse=courses.get(0);
-        		rebuildStudents();
-        		rebuildDeliverables();
-        	}
         }catch (Exception e){
         	e.printStackTrace();
         	courses.add(new Course("Computer Science", "CS2212","B",true));
         	System.out.println("New file!");
         }
-
+        
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
-
+             
              try {
                 save();
              } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
              }
-
-                System.out.println("In shutdown hook");
-
+             
+                System.out.println("In shutdown hook");            
+                
             }
         }, "Shutdown-thread"));
     }
@@ -150,8 +146,11 @@ public class MainWindow extends JFrame implements ActionListener {
         add(cmdEditStudent);
         add(cmdAddDeliverable);
         add(cmdEditDeliverable);
+        add(cmdDeleteCourse);
+        add(cmdDeleteStudent);
+        add(cmdDeleteDeliverable);
         add(cmdOpenGradeWindow);
-
+        
         add(cboCourseList);
         add(cboStudentList);
         add(cboDeliverableList);
@@ -179,7 +178,6 @@ public class MainWindow extends JFrame implements ActionListener {
         add(lblDeliverWeight);
 
         add(lblGreeting);
-        add(lblGreeting2);
         add(lblSelect);
         add(lblStudentSelect);
         add(lblDeliverableSelect);
@@ -191,6 +189,9 @@ public class MainWindow extends JFrame implements ActionListener {
         cmdEditCourse.setPreferredSize(new Dimension(200, 25));
         cmdEditStudent.setPreferredSize(new Dimension(200, 25));
         cmdEditDeliverable.setPreferredSize(new Dimension(200, 25));
+        cmdDeleteCourse.setPreferredSize(new Dimension(200, 25));
+        cmdDeleteStudent.setPreferredSize(new Dimension(200, 25));
+        cmdDeleteDeliverable.setPreferredSize(new Dimension(200, 25));
         cmdOpenGradeWindow.setPreferredSize(new Dimension(200, 25));
 
         cboCourseList.setPreferredSize(new Dimension(160, 25));
@@ -217,8 +218,11 @@ public class MainWindow extends JFrame implements ActionListener {
         cmdEditCourse.setActionCommand("editCourse");
         cmdEditStudent.setActionCommand("editStudent");
         cmdEditDeliverable.setActionCommand("editDeliverable");
+        cmdDeleteCourse.setActionCommand("deleteCourse");
+        cmdDeleteStudent.setActionCommand("deleteStudent");
+        cmdDeleteDeliverable.setActionCommand("deleteDeliverable");
         cmdOpenGradeWindow.setActionCommand("openGradeWindow");
-
+        
         cboCourseList.setActionCommand("courseList");
         cboStudentList.setActionCommand("studentList");
         cboDeliverableList.setActionCommand("deliverableList");
@@ -230,6 +234,9 @@ public class MainWindow extends JFrame implements ActionListener {
         cmdEditCourse.addActionListener(this);
         cmdEditStudent.addActionListener(this);
         cmdEditDeliverable.addActionListener(this);
+        cmdDeleteCourse.addActionListener(this);
+        cmdDeleteStudent.addActionListener(this);
+        cmdDeleteDeliverable.addActionListener(this);
         cmdOpenGradeWindow.addActionListener(this);
 
         cboCourseList.addActionListener(this);
@@ -254,12 +261,21 @@ public class MainWindow extends JFrame implements ActionListener {
 
         layout.putConstraint(SpringLayout.WEST, cmdEditStudent, 300, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, cmdEditStudent, 150, SpringLayout.NORTH, getContentPane());
-
+        
         layout.putConstraint(SpringLayout.WEST, cmdEditDeliverable, 300, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, cmdEditDeliverable, 300, SpringLayout.NORTH, getContentPane());
+        
+        layout.putConstraint(SpringLayout.WEST, cmdDeleteCourse, 500, SpringLayout.WEST, getContentPane());
+        layout.putConstraint(SpringLayout.NORTH, cmdDeleteCourse, 30, SpringLayout.NORTH, getContentPane());
+        
+        layout.putConstraint(SpringLayout.WEST, cmdDeleteStudent, 500, SpringLayout.WEST, getContentPane());
+        layout.putConstraint(SpringLayout.NORTH, cmdDeleteStudent, 150, SpringLayout.NORTH, getContentPane());
+        
+        layout.putConstraint(SpringLayout.WEST, cmdDeleteDeliverable, 500, SpringLayout.WEST, getContentPane());
+        layout.putConstraint(SpringLayout.NORTH, cmdDeleteDeliverable, 300, SpringLayout.NORTH, getContentPane());
 
         layout.putConstraint(SpringLayout.WEST, cmdOpenGradeWindow, 300, SpringLayout.WEST, getContentPane());
-        layout.putConstraint(SpringLayout.NORTH, cmdOpenGradeWindow, 430, SpringLayout.NORTH, getContentPane());
+        layout.putConstraint(SpringLayout.NORTH, cmdOpenGradeWindow, 430, SpringLayout.NORTH, getContentPane());       
 
 
         //Position the comboboxes
@@ -335,11 +351,8 @@ public class MainWindow extends JFrame implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, lblDeliverWeight, 390, SpringLayout.NORTH, getContentPane());
 
 
-        layout.putConstraint(SpringLayout.WEST, lblGreeting2, 320, SpringLayout.WEST, getContentPane());
-        layout.putConstraint(SpringLayout.NORTH, lblGreeting2, 0, SpringLayout.NORTH, getContentPane());
-
-        layout.putConstraint(SpringLayout.WEST, lblGreeting, 220, SpringLayout.WEST, getContentPane());
-        layout.putConstraint(SpringLayout.NORTH, lblGreeting, 490, SpringLayout.NORTH, getContentPane());
+        layout.putConstraint(SpringLayout.WEST, lblGreeting, 280, SpringLayout.WEST, getContentPane());
+        layout.putConstraint(SpringLayout.NORTH, lblGreeting, 0, SpringLayout.NORTH, getContentPane());
 
         layout.putConstraint(SpringLayout.WEST, lblSelect, 0, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, lblSelect, 0, SpringLayout.NORTH, getContentPane());
@@ -388,124 +401,72 @@ public class MainWindow extends JFrame implements ActionListener {
     private void addCourse() {
         //Check to make sure the text fields are filled out fully
         if (!txtCourseName.getText().equals("") && !txtCourseCode.getText().equals("") && !txtCourseTerm.getText().equals("")) {
-            lblGreeting.setText("Success! Course successfully added!");
+            lblGreeting.setText("Course successfully added!");
             courses.add(new Course(txtCourseName.getText(), txtCourseCode.getText(), txtCourseTerm.getText(), true));
 
             //Add this to the combo box
-            String title = (txtCourseName.getText() + " - " + txtCourseCode.getText() + " - " + txtCourseTerm.getText());
-            cboCourseList.addItem(title);
+//            String title = (txtCourseName.getText() + " - " + txtCourseCode.getText() + " - " + txtCourseTerm.getText());
+//            cboCourseList.addItem(title);
+            rebuildCourses();
 
             //Clear the text boxes for new data
             txtCourseName.setText("");
             txtCourseCode.setText("");
             txtCourseTerm.setText("");
-        }
-
-      //print an error message if one or more of the fields are left empty
-        else if(txtCourseName.getText().equals("")){
-            lblGreeting.setText("Error: Invalid course name. Course name cannot be empty.");}
-        else if(txtCourseCode.getText().equals("")){
-            lblGreeting.setText("Error: Invalid course code. Course code cannot be empty.");}
-        else if(txtCourseTerm.getText().equals("")){
-            lblGreeting.setText("Error: Invalid course term. Course term cannot be empty.");}
+        } else
+            lblGreeting.setText("Error. Please enter a proper course name, code and term.");
     }
 
     //Method to edit the active course's data
     private void editCourse() {
         if (!txtCourseName.getText().equals("") && !txtCourseCode.getText().equals("") && !txtCourseTerm.getText().equals("")) {
-        	if (activeCourse != null) {
+            lblGreeting.setText("Currently active course has been modified");
 
-        	lblGreeting.setText("Success! Active course has been modified.");
-
-            String oldCourse = activeCourse.stringRepresentation();
+            //Remove the old course and replace with the new one
+            cboCourseList.removeItem(new String(activeCourse.getTitle() + " - " + activeCourse.getCode() + " - " + activeCourse.getTerm()));
 
             activeCourse.setTitle(txtCourseName.getText());
             activeCourse.setCode(txtCourseCode.getText());
             activeCourse.setTerm(txtCourseTerm.getText());
 
-            //Remove the old course and replace with the new one
-            cboCourseList.addItem(activeCourse.stringRepresentation());
-            cboCourseList.removeItem(oldCourse);
-
-
+            cboCourseList.addItem(new String(activeCourse.getTitle() + " - " + activeCourse.getCode() + " - " + activeCourse.getTerm()));
+        }
         //Clear the text boxes for new data
         txtCourseName.setText("");
         txtCourseCode.setText("");
         txtCourseTerm.setText("");
-
-        } else
-            lblGreeting.setText("Error: Please select an active course to edit.");
-        //Reload the students and reload the deliverables
-        System.out.println("Number of students this changed course has:" + activeCourse.getStudents().size());
-        }
-
-      //print an error message if one or more of the fields are not filled in
-        else if(txtFirstName.getText().equals("")){
-            lblGreeting.setText("Error: Invalid first name. First name cannot be empty.");}
-        else if(txtLastName.getText().equals("")){
-            lblGreeting.setText("Error: Invalid last name. Last cannot be empty.");}
-        else if(txtNumber.getText().equals("")){
-            lblGreeting.setText("Error: Invalid student number. Student number cannot be empty.");}
-        else if(txtEmail.getText().equals("")){
-            lblGreeting.setText("Error: Invalid email. Student email address cannot be empty.");}
     }
 
     //Creates a student object for the currently selected class
     private void addStudent() {
         if (!txtFirstName.getText().equals("") && !txtLastName.getText().equals("") && !txtNumber.getText().equals("") && !txtEmail.getText().equals("")) {
-           if(!activeCourse.hasStudentEmail(txtEmail.getText())&&!activeCourse.hasStudentNumber(txtNumber.getText())){
+            if (activeCourse != null) {
 
-				//Create a new student object
-				Student newStud = new Student(txtFirstName.getText(), txtLastName.getText(), txtNumber.getText(), txtEmail.getText());
-                activeCourse.addStudent(newStud);
+                activeCourse.addStudent(new Student(txtFirstName.getText(), txtLastName.getText(), txtNumber.getText(), txtEmail.getText()));
                 lblGreeting.setText("Student " + txtFirstName.getText() + " " + txtLastName.getText() + " added successfully to " + activeCourse.getTitle() + ".");
 
                 //Add the new student to the combo box
-                cboStudentList.addItem(newStud.stringRepresentation());
-
+//                cboStudentList.addItem(new String(txtFirstName.getText() + " " + txtLastName.getText() + " " + txtNumber.getText() + " " + txtEmail.getText()));
+                rebuildStudents();
                 txtFirstName.setText("");
                 txtLastName.setText("");
                 txtNumber.setText("");
                 txtEmail.setText("");
-
-                //Initialize the student's deliverable grades
-                for(int x = 0; x < activeCourse.getDeliverables().size(); x++){
-					newStud.addGrade(0.0);
-                }
-           }
-           else if(activeCourse.hasStudentEmail(txtEmail.getText())){
-        	   lblGreeting.setText("Error:Invalid email. Email address already assigned to another student.");
-           }
-           else if(activeCourse.hasStudentNumber(txtNumber.getText())){
-        	   lblGreeting.setText("Error:Invalid student number. Student number already assigned to another student.");
-           }
-
-        }
-        //print an error message if one or more of the fields are not filled in
-        else if(txtFirstName.getText().equals("")){
-            lblGreeting.setText("Error: Invalid first name. First name cannot be empty.");}
-        else if(txtLastName.getText().equals("")){
-            lblGreeting.setText("Error: Invalid last name. Last cannot be empty.");}
-        else if(txtNumber.getText().equals("")){
-            lblGreeting.setText("Error: Invalid student number. Student number cannot be empty.");}
-        else if(txtEmail.getText().equals("")){
-            lblGreeting.setText("Error: Invalid email. Student email address cannot be empty.");}
+            } else
+                lblGreeting.setText("Error. Please select a course before adding a student.");
+        } else
+            lblGreeting.setText("Error. Please enter a proper Student name, number and email.");
     }
 
     //edits the student object currently selected
     private void editStudent() {
         if (!txtFirstName.getText().equals("") && !txtLastName.getText().equals("") && !txtNumber.getText().equals("") && !txtEmail.getText().equals("")) {
-            if(activeStudent!=null){
-        	    //checks to make sure student number or email doesn't already exist
-            	if((!(!activeStudent.getEmailAddress().equals(txtEmail.getText()) && activeCourse.hasStudentEmail(txtEmail.getText())))  &&
-        			   (!(!activeStudent.getNumber().equals(txtNumber.getText()) && activeCourse.hasStudentNumber(txtNumber.getText())))){
+            lblGreeting.setText("Currently active student has been modified");
 
-                lblGreeting.setText("Success! Active student has been modified");
-
-                activeStudent.setFirstName(txtFirstName.getText());
-                activeStudent.setLastName(txtLastName.getText());
-                activeStudent.setNumber(txtNumber.getText());
-                activeStudent.setEmailAddress(txtEmail.getText());
+            activeStudent.setFirstName(txtFirstName.getText());
+            activeStudent.setLastName(txtLastName.getText());
+            activeStudent.setNumber(txtNumber.getText());
+            activeStudent.setEmailAddress(txtEmail.getText());
 
             rebuildStudents();
 
@@ -514,29 +475,8 @@ public class MainWindow extends JFrame implements ActionListener {
             txtLastName.setText("");
             txtNumber.setText("");
             txtEmail.setText("");
-        	   }
-        	   else if(!activeStudent.getEmailAddress().equals(txtEmail.getText()) && activeCourse.hasStudentEmail(txtEmail.getText())){
-        		   lblGreeting.setText("Error: Invalid email. Email address already assigned to another student.");
-        	   }
-        	   else if((!activeStudent.getNumber().equals(txtNumber.getText()) && activeCourse.hasStudentNumber(txtNumber.getText()))){
-        		   lblGreeting.setText("Error: Invalid student number. Student number already assigned to another student.");
-        	   }
-
-            }
-            else{
-                lblGreeting.setText("Error: Please select an existing student before editing.");
-            }
-        }
-
-        //print an error message if one or more of the fields are not filled in
-        else if(txtFirstName.getText().equals("")){
-            lblGreeting.setText("Error: Invalid first name. First name cannot be empty.");}
-        else if(txtLastName.getText().equals("")){
-            lblGreeting.setText("Error: Invalid last name. Last cannot be empty.");}
-        else if(txtNumber.getText().equals("")){
-            lblGreeting.setText("Error: Invalid student number. Student number cannot be empty.");}
-        else if(txtEmail.getText().equals("")){
-            lblGreeting.setText("Error: Invalid email. Student email address cannot be empty.");}
+        } else
+            lblGreeting.setText("To edit the selected student, please fill in appropriate student data in the text boxes.");
     }
 
     //Adds a deliverable to the currently selected course
@@ -544,39 +484,24 @@ public class MainWindow extends JFrame implements ActionListener {
         if (!txtDeliverName.getText().equals("") && !txtDeliverType.getText().equals("") && !txtDeliverWeight.getText().equals("")) {
             if (activeCourse != null) {
 
-				Deliverable newDeliver = new Deliverable(txtDeliverName.getText(), txtDeliverType.getText(), Double.parseDouble(txtDeliverWeight.getText()));
-                activeCourse.addDeliverable(newDeliver);
-
+                activeCourse.addDeliverable(new Deliverable(txtDeliverName.getText(), txtDeliverType.getText(), Double.parseDouble(txtDeliverWeight.getText())));
                 lblGreeting.setText("Deliverable " + txtDeliverName.getText() + " added successfully to " + activeCourse.getTitle() + ".");
 
                 //Add the new student to the combo box
-                cboDeliverableList.addItem(newDeliver.stringRepresentation());
-
+//                cboDeliverableList.addItem(new String(txtDeliverName.getText() + " - " + txtDeliverType.getText() + " - " + txtDeliverWeight.getText()));
+                rebuildDeliverables();
                 txtDeliverName.setText("");
                 txtDeliverType.setText("");
                 txtDeliverWeight.setText("");
-
-                //Add a new deliverable to each student's grades
-
-                for(int x = 0; x < activeCourse.getStudents().size(); x++){
-                	activeCourse.getStudents().get(x).addGrade(0.0);
-                }
             } else
-                lblGreeting.setText("Error: Please select a course before adding a deliverable.");
-        }
-
-        //print an error message if one or more of the fields are left empty
-        else if(txtDeliverName.getText().equals("")){
-            lblGreeting.setText("Error: Invalid deliverable name. Deliverable name cannot be empty.");}
-        else if(txtDeliverType.getText().equals("")){
-            lblGreeting.setText("Error: Invalid deliverable type. Deliverable type cannot be empty.");}
-        else if(txtDeliverWeight.getText().equals("")){
-            lblGreeting.setText("Error: Invalid deliverable weight. Deliverable weight cannot be empty.");}
+                lblGreeting.setText("Error. Please select a course before adding a deliverable.");
+        } else
+            lblGreeting.setText("Error. Please enter a proper Deliverable name, type, and weight.");
     }
 
     private void editDeliverable() {
         if (!txtDeliverName.getText().equals("") && !txtDeliverType.getText().equals("") && !txtDeliverWeight.getText().equals("")) {
-            lblGreeting.setText("Success! Active deliverable has been modified.");
+            lblGreeting.setText("Currently active deliverable has been modified");
 
             activeDeliverable.setName(txtDeliverName.getText());
             activeDeliverable.setType(txtDeliverType.getText());
@@ -588,21 +513,35 @@ public class MainWindow extends JFrame implements ActionListener {
             txtDeliverName.setText("");
             txtDeliverType.setText("");
             txtDeliverWeight.setText("");
-        }
-        else if(txtDeliverName.getText().equals("")){
-            lblGreeting.setText("Error: Invalid deliverable name. Deliverable name cannot be empty.");}
-        else if(txtDeliverType.getText().equals("")){
-            lblGreeting.setText("Error: Invalid deliverable type. Deliverable type cannot be empty.");}
-        else if(txtDeliverWeight.getText().equals("")){
-            lblGreeting.setText("Error: Invalid deliverable weight. Deliverable weight cannot be empty.");}
+        } else
+            lblGreeting.setText("To edit the selected deliverable, please fill in appropriate data in the text boxes.");
+
     }
 
+    private void rebuildCourses() {
+    	
+    	cboCourseList.removeAllItems();
+    	
+    	Object[] tmpList = courses.toArray();
+    	Arrays.sort(tmpList);
+    	courses = new ArrayList<Course>();
+    	for (Object tmp: tmpList) {
+    		courses.add((Course)tmp);
+    	}
+    	
+    	for (ListIterator < Course > iterator = courses.listIterator(); iterator.hasNext();) {
+            Course x = iterator.next();
+            cboCourseList.addItem(new String(x.getTitle() + " - " + x.getCode() + " - " + x.getTerm()));
+        }
+    }
     //Rebuild the list of students when the course is changed
     private void rebuildStudents() {
         //Clear the combo box
     	if (activeCourse != null){
 	        cboStudentList.removeAllItems();
-
+	        
+	        activeCourse.order();
+	
 	        //Iterate through the active course's students, adding each one to the combo box
 	        for (ListIterator < Student > iterator = activeCourse.getStudents().listIterator(); iterator.hasNext();) {
 	            Student x = iterator.next();
@@ -616,7 +555,9 @@ public class MainWindow extends JFrame implements ActionListener {
     //Rebuild the list of deliverables when the course is changed
     private void rebuildDeliverables() {
         //Clear the combo box
+    	System.out.println("Rebuilding list!");
         cboDeliverableList.removeAllItems();
+        activeCourse.order();
 
         //Iterate through the active course's deliverables, adding each one to the combo box
         for (ListIterator < Deliverable > iterator = activeCourse.getDeliverables().listIterator(); iterator.hasNext();) {
@@ -629,6 +570,8 @@ public class MainWindow extends JFrame implements ActionListener {
 
     //Changes the selected course
     public void courseList() {
+    	if (courses.size() == 0 || cboCourseList.getItemCount() == 0)
+    		return;
         activeStudent = null;
         String currentCourse = cboCourseList.getSelectedItem().toString();
         System.out.println("Trying");
@@ -639,7 +582,7 @@ public class MainWindow extends JFrame implements ActionListener {
             Course x = iterator.next();
             if (currentCourse.equals(x.getTitle() + " - " + x.getCode() + " - " + x.getTerm())) {
                 activeCourse = x;
-                lblGreeting.setText("Success! Changed active course to " + currentCourse + " successfully.");
+                lblGreeting.setText("Changed active course to " + currentCourse + " successfully.");
             }
         }
 
@@ -664,7 +607,7 @@ public class MainWindow extends JFrame implements ActionListener {
                 Student x = iterator.next();
                 if (currentStudent.equals(x.getFirstName() + " " + x.getLastName() + " " + x.getNumber() + " " + x.getEmailAddress())) {
                     activeStudent = x;
-                    lblGreeting.setText("Success! Changed active student to " + activeStudent.getFirstName() + ".");
+                    lblGreeting.setText("Success. changed active student to " + activeStudent.getFirstName() + ".");
                 }
             }
         }
@@ -675,20 +618,46 @@ public class MainWindow extends JFrame implements ActionListener {
     //Makes the selected deliverable active
     public void deliverableList() {
         if (cboDeliverableList.getSelectedItem() != null) {
+        	if (activeCourse.getDeliverables().size() == 0)
+        		return;
             String currentDeliverable = cboDeliverableList.getSelectedItem().toString();
+            System.out.println("Current Deliverable: " + currentDeliverable);
             lblGreeting.setText("Attempting to change active deliverable to " + currentDeliverable + ".");
 
             //Find the selected student in the arrayList
             for (ListIterator < Deliverable > iterator = activeCourse.getDeliverables().listIterator(); iterator.hasNext();) {
                 Deliverable x = iterator.next();
+                System.out.println(x.getName());
                 if (currentDeliverable.equals(x.getName() + " - " + x.getType() + " - " + x.getWeight())) {
                     activeDeliverable = x;
-                    lblGreeting.setText("Success! Changed active deliverable to " + activeDeliverable.getName() + ".");
+                    lblGreeting.setText("Success. changed active deliverable to " + activeDeliverable.getName() + ".");
                 }
             }
         }
     }
 
+    //A method to save the course arrayList to a textfile
+    //A method to save the course arrayList to a textfile
+
+//    private void save() {
+//        ListIterator < Course > iter = courses.listIterator();
+//        try {
+//            // Create file
+//            File info = new File("info.txt");
+//            BufferedWriter out = new BufferedWriter(new FileWriter(info));
+//
+//            while (iter.hasNext()) {
+//                Course c = iter.next();
+//                out.write(c.getTitle() + " " + c.getCode() + " " + c.getTerm() + "\n");
+//                System.out.println(c.getTitle() + " " + c.getCode() + " " + c.getTerm() + "\n");
+//            }
+//            //Close the output stream
+//            out.close();
+//        } catch (Exception e) { //Catch exception if any
+//            System.err.println("Error: " + e.getMessage());
+//        }
+//    }
+    
     private void save() throws IOException {
         FileOutputStream file_out_course = new FileOutputStream(save_path_course);
         FileOutputStream file_out_student = new FileOutputStream(save_path_student);
@@ -713,12 +682,12 @@ public class MainWindow extends JFrame implements ActionListener {
            ObjectInputStream in = new ObjectInputStream(fileIn);
            ObjectInputStream inStudent = new ObjectInputStream(fileInStudent);
            courses = (ArrayList<Course>) in.readObject();
-           students = (ArrayList<Student>) inStudent.readObject();
+           students = (ArrayList<Student>) inStudent.readObject();       
            in.close();
            inStudent.close();
            fileIn.close();
            fileInStudent.close();
-
+        
         }catch(ClassNotFoundException c)
         {
            System.out.println("School class not found.");
@@ -726,15 +695,72 @@ public class MainWindow extends JFrame implements ActionListener {
            return;
         }
     }
+    
+    private void deleteCourse() {
+    	if (activeCourse != null) {
+    		int pos = courses.indexOf(activeCourse);
+    		Course removed = courses.remove(pos);
+    		
+    		if (courses.size() > 0) {
+    			activeCourse = courses.get(Math.min(pos, courses.size() - 1));
+    		}
+    		else{
+    			activeCourse = null;
+    		}
+    		
+    		String nameToRemove = removed.getTitle() + " - " + removed.getCode() + " - " + removed.getTerm();
+    		
+    		cboCourseList.removeItem(nameToRemove);
+    	}
+    }
+    
+    private void deleteStudent() {
+    	if (activeCourse != null && activeStudent != null) {
+    		int pos = activeCourse.getStudents().indexOf(activeStudent);
+    		Student removed = activeCourse.deleteStudent(activeStudent);
+    		
+    		if (activeCourse.getStudents().size() > 0){
+    			activeStudent = activeCourse.getStudents().get(Math.min(pos, activeCourse.getStudents().size() - 1));
+    		}
+    		else {
+    			activeStudent = null;
+    		}
+    		
+    		rebuildStudents();
+    		
+//    		String nameToRemove = removed.getFirstName() + " " + removed.getLastName() + " " + removed.getNumber() + " " + removed.getEmailAddress();
+//    		
+//    		cboStudentList.removeItem(nameToRemove);
+    	}
+    }
+    
+    private void deleteDeliverable() {
+    	if (activeCourse != null && activeDeliverable != null) {
+    		int pos = activeCourse.getDeliverables().indexOf(activeDeliverable);
+    		Deliverable removed = activeCourse.deleteDeliverable(activeDeliverable);
+    		
+    		if (activeCourse.getDeliverables().size() > 0){
+    			activeDeliverable = activeCourse.getDeliverables().get(Math.min(pos, activeCourse.getDeliverables().size() - 1));
+    		}
+    		else {
+    			activeDeliverable = null;
+    		}
+    		
+    		rebuildDeliverables();
+//    		String nameToRemove = removed.getName() + " - " + removed.getType() + " - " + removed.getWeight();
+    		
+//    		cboDeliverableList.removeItem(nameToRemove);
+    	}
+    }
+    
+    private void openGradeWindow( ArrayList < Student > s){
 
-    private void openGradeWindow(Course course){
-
-    	GradeWindow g=new GradeWindow(course);
+    	GradeWindow g=new GradeWindow(s);
 
     	g.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
     	g.pack();
-
+    	
     	g.setVisible(true);
     }
 
@@ -768,9 +794,15 @@ public class MainWindow extends JFrame implements ActionListener {
         } else if (evt.getActionCommand().equals("deliverableList")) {
             deliverableList();
 //            save();
+        } else if (evt.getActionCommand().equals("deleteCourse")){
+        	deleteCourse();
+        } else if (evt.getActionCommand().equals("deleteStudent")){
+        	deleteStudent();
+        } else if (evt.getActionCommand().equals("deleteDeliverable")) {
+        	deleteDeliverable();
         }
         else if (evt.getActionCommand().equals("openGradeWindow")) {
-            openGradeWindow(activeCourse);
+            openGradeWindow(students);
         }
   }
 }

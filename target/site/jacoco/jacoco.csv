@@ -1,13 +1,17 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow,2881,0,162,0,455,0,101,0,20,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow,2897,0,120,0,457,0,84,0,24,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,AVLnode,101,0,8,0,22,0,16,0,12,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,GradeWindow.new ActionListener() {...},82,0,2,0,9,0,3,0,2,0
-team5-gradebook,ca.uwo.csd.cs2212.team5,StudentTableModel,165,0,28,0,52,0,23,0,9,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,App,8,0,0,0,3,0,2,0,2,0
-team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow.new ActionListener() {...},9,0,0,0,3,0,2,0,2,0
-team5-gradebook,ca.uwo.csd.cs2212.team5,Student,105,50,4,0,16,20,8,9,6,9
+team5-gradebook,ca.uwo.csd.cs2212.team5,Student,97,0,0,0,23,0,11,0,11,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,App.new Runnable() {...},11,0,0,0,4,0,2,0,2,0
-team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow.new Runnable() {...},17,0,0,0,7,0,2,0,2,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,Deliverable,88,0,0,0,22,0,9,0,9,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,AVLtreeException,4,0,0,0,2,0,1,0,1,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,StudentTableModel,101,0,26,0,35,0,27,0,10,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,DictEntry,15,0,0,0,6,0,3,0,3,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow.new ActionListener() {...},9,0,0,0,3,0,2,0,2,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,AVLTree,434,0,54,0,112,0,47,0,20,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,Grade,7,0,0,0,3,0,2,0,2,0
-team5-gradebook,ca.uwo.csd.cs2212.team5,Deliverable,0,61,0,0,0,19,0,9,0,9
-team5-gradebook,ca.uwo.csd.cs2212.team5,Course,101,82,10,4,23,30,13,13,8,11
-team5-gradebook,ca.uwo.csd.cs2212.team5,GradeWindow,251,0,6,0,60,0,9,0,6,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow.new Runnable() {...},17,0,0,0,7,0,2,0,2,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,Course,218,0,8,0,53,0,22,0,18,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,GradeWindow,231,0,2,0,58,0,7,0,6,0

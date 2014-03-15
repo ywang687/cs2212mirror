@@ -10,16 +10,13 @@ import javax.swing.table.*;
  
 public class GradeWindow extends JFrame {
  
-    private JButton btnGetSelection;
+	private JButton btnGetSelection;
     private JTable tblStudents;
     private JTextArea txtOutput;
     private ArrayList < Student > studentList;
-    private Course activeCourse;
-  
  
-    public GradeWindow(Course activeCourse) {
-        this.studentList=activeCourse.getStudents();
-        this.activeCourse=activeCourse;
+    public GradeWindow( ArrayList < Student > studentList) {
+        this.studentList=studentList;
     	initComponents();
         initTable();
     }
@@ -46,7 +43,7 @@ public class GradeWindow extends JFrame {
         pnlOutput.setLayout(new BorderLayout());
  
         txtOutput.setColumns(20);
-        txtOutput.setRows(8);
+        txtOutput.setRows(5);
         scrOutput.setViewportView(txtOutput);
  
         pnlOutput.add(scrOutput, BorderLayout.CENTER);
@@ -103,7 +100,7 @@ public class GradeWindow extends JFrame {
     private void initModel(){
        Iterator<Student> iter=this.getStudents();
        Student s;
-       StudentTableModel model=new StudentTableModel(this.activeCourse);
+       StudentTableModel model=new StudentTableModel();
        while(iter.hasNext()){
     	   s=iter.next();
     	   System.out.println(s.getFirstName());
@@ -114,13 +111,10 @@ public class GradeWindow extends JFrame {
 }
 
 private void setColumnWidths(){
-	while(tblStudents.getColumnModel().getColumnCount()<(this.activeCourse.getNumDeliverables()+2)){
-		tblStudents.addColumn(new TableColumn()); 
-	}
   tblStudents.getColumnModel().getColumn(0).setPreferredWidth(40);
   tblStudents.getColumnModel().getColumn(1).setPreferredWidth(40);
- for(int i=2;i<(activeCourse.getNumDeliverables()+2);i++){
-  tblStudents.getColumnModel().getColumn(i).setPreferredWidth(50);
- }
+  tblStudents.getColumnModel().getColumn(2).setPreferredWidth(50);
+  tblStudents.getColumnModel().getColumn(3).setPreferredWidth(50);
+  tblStudents.getColumnModel().getColumn(4).setPreferredWidth(50);
 }
 }

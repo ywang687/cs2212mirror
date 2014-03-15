@@ -5,9 +5,9 @@ public class Grade implements java.io.Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1963245831664970835L;
-	Double grade;
+	double grade;
 
-	private void setGrade(Double x){
+	private void setGrade(double x){
 		grade = x;
 	}
 
