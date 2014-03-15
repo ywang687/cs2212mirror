@@ -10,7 +10,7 @@ import java.util.*;
 public class Course implements java.io.Serializable, Comparable
 {
 /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -5938679076671064779L;
 /************************************************************* * Instance Variables *************************************************************/
@@ -44,9 +44,32 @@ public Course(String title, String c, String t, boolean act) {
 
 }
 
+public boolean hasStudentNumber(String num){
+	Iterator<Student> iter=this.students.iterator();
+	Boolean b=false;
+	while(iter.hasNext()){
+		Student s=iter.next();
+		if(s.getNumber().equals(num)) b=true;
+	}
+	return b;
+}
+
+public boolean hasStudentEmail(String email){
+	Iterator<Student> iter=this.students.iterator();
+	Boolean b=false;
+	while(iter.hasNext()){
+		Student s=iter.next();
+		if(s.getEmailAddress().equals(email)) b=true;
+	}
+	return b;
+}
+
+public int getNumDeliverables(){
+	return this.deliverables.size();
+}
 /**
  * Adds a new student to the list of students in a course
- * @param newStudent the new student to add 
+ * @param newStudent the new student to add
  */
 public void addStudent(Student newStudent){
 	this.students.add(newStudent);
@@ -63,22 +86,28 @@ public Deliverable deleteDeliverable(Deliverable deliverable) {
 }
 
 /**
+ *Creates and returns a String representing this Course's data
+ */
+ public String stringRepresentation(){
+ 	return (new String(this.getTitle() + " - " + this.getCode() + " - " + this.getTerm()));
+ }
+
+/**
  * Finds a student with a given student number
  * @param studentNumber the student to find
  * @return the student if it exists in the course
  */
-public Student getStudent(String studentNumber){
-	Student found=null;
-	Iterator<Student> iter=this.students.iterator();
-	while(iter.hasNext()){
-	   Student s=iter.next();
-	   if(s.getNumber().equals(studentNumber)){
-		   found=s;
-	   }
+ public Student getStudent(String studentNumber){
+		Student found=null;
+		Iterator<Student> iter=this.students.iterator();
+		while(iter.hasNext()){
+		   Student s=iter.next();
+		   if(s.getNumber().equals(studentNumber)){
+			   found=s;
+		   }
+		}
+		return found;
 	}
-	return found;
-}
-
 /**
  * A method that returns an iterator containing all students
  * @return an iterator for the list of students
@@ -112,11 +141,30 @@ public void order() {
 	
 }
 
+/**
+ * A method that returns the deliverables for a course
+ * @return an arrayList of the deliverables in the course so far
+ */
 public ArrayList<Deliverable> getDeliverables(){
 	return this.deliverables;
 }
 
-/** 
+/**
+ * Returns a specific deliverable in a course
+ * @param deliverableNumber the deliverable number to find
+ * @return the deliverable object
+ */
+public Deliverable getDeliverable(int deliverableNumber){
+	if(this.getNumDeliverables()>deliverableNumber){
+	    return this.deliverables.get(deliverableNumber);
+	}
+	else{
+		return null;
+	}
+}
+
+
+/**
  * Gets the course title
  * @return the title of the course */
 public String getTitle()
@@ -181,5 +229,6 @@ public int compareTo(Object o) {
 	String compare2 = tmp.getTitle() + " - " + tmp.getCode() + " - " + tmp.getTerm();
 	return compare1.compareTo(compare2);
 }
+
 
 }
