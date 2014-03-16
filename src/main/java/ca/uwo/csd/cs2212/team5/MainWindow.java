@@ -81,7 +81,7 @@ public class MainWindow extends JFrame implements ActionListener {
 
     private JLabel lblDeliverName = new JLabel("Deliverable Name:");
     private JLabel lblDeliverType = new JLabel("Deliverable Type:");
-    private JLabel lblDeliverWeight = new JLabel("<html>Deliverable Weight<br>Enter a double (0.0)</html>");
+    private JLabel lblDeliverWeight = new JLabel("<html>Deliverable Weight<br>(Enter as Percentage)</html>");
 
     //Add a label for greeting the user
     private JLabel lblGreeting2 = new JLabel("Welcome to Gradebook!");
@@ -362,7 +362,7 @@ public class MainWindow extends JFrame implements ActionListener {
         layout.putConstraint(SpringLayout.WEST, lblGreeting2, 320, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, lblGreeting2, 0, SpringLayout.NORTH, getContentPane());
 
-        layout.putConstraint(SpringLayout.WEST, lblGreeting, 220, SpringLayout.WEST, getContentPane());
+        layout.putConstraint(SpringLayout.WEST, lblGreeting, 170, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, lblGreeting, 490, SpringLayout.NORTH, getContentPane());
 
         layout.putConstraint(SpringLayout.WEST, lblSelect, 0, SpringLayout.WEST, getContentPane());
