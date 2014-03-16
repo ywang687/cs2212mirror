@@ -1,5 +1,5 @@
-// This is the interface for the AVLTree class you have to write 
-//package findkeywords;
+// The interface for the AVLTree class
+
 package ca.uwo.csd.cs2212.team5;
 import java.util.Iterator;
 public interface AVLTreeInterface{

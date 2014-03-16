@@ -39,7 +39,8 @@ public class Student implements java.io.Serializable, Comparable{
 	}
 
 	/**
-	 *
+	 * Adds a grade to a students grade list
+	 * @param grade the grade to add
 	 */
 	public void addGrade(Double grade){
 		//Determine if there is room for the new grade and if not, expand the array

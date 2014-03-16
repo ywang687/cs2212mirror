@@ -1,5 +1,9 @@
 package ca.uwo.csd.cs2212.team5;
 import java.lang.*;
+
+/**
+ * AVLnode class represents a node in an AVL tree
+ */
 public class AVLnode implements Position{
     private AVLnode parent;     // reference to the parent node
     private AVLnode left;       // reference to the left child

@@ -3,6 +3,9 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+/**
+ * AVLTree class represents an AVL tree made up of AVL nodes
+ */
 public class AVLTree implements AVLTreeInterface{
 
 	private Comparator comparator;

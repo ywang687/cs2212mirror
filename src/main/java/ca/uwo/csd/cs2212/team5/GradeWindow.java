@@ -8,15 +8,21 @@ import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
  
+/**
+ *Grade Window class represents a window with a spreadsheet for viewing and editing student grades
+ *for the active course in a grade book application
+ */
 public class GradeWindow extends JFrame {
  
-    private JButton btnGetSelection;
-    private JTable tblStudents;
-    private JTextArea txtOutput;
-    private ArrayList < Student > studentList;
-    private Course activeCourse;
+    private JButton btnGetSelection; //button to get selected student info
+    private JTable tblStudents; //spreadsheet showing student grades
+    private JTextArea txtOutput;//output box for viewing info of selected students
+    private ArrayList < Student > studentList; //list of students
+    private Course activeCourse; //active course
   
- 
+ /*
+  * Constructor
+  */
     public GradeWindow(Course activeCourse) {
         this.studentList=activeCourse.getStudents();
         this.activeCourse=activeCourse;
@@ -24,10 +30,17 @@ public class GradeWindow extends JFrame {
         initTable();
     }
     
+    /**
+     * Returns an iterator of the student list
+     * @return an iterator of the list of students
+     */
     private Iterator<Student> getStudents(){
     	return this.studentList.iterator();
     }
-                         
+             
+    /**
+     * Initializes components in the window
+     */
     private void initComponents() {
  
         JPanel pnlOutput = new JPanel();
@@ -77,6 +90,9 @@ public class GradeWindow extends JFrame {
         pack();
     }        
    
+    /**
+     * Initializes the grade spreadsheet
+     */
     private void initTable(){
         initModel();
         setColumnWidths();
@@ -101,6 +117,10 @@ public class GradeWindow extends JFrame {
                       txtOutput.setText(txtOutput.getText() + "\n" + sb.toString()); }
         });
     }
+    
+    /**
+     * Initializes the student table model
+     */
     private void initModel(){
        Iterator<Student> iter=this.getStudents();
        Student s;
@@ -114,14 +134,18 @@ public class GradeWindow extends JFrame {
    tblStudents.setModel(model);
 }
 
-private void setColumnWidths(){
-	while(tblStudents.getColumnModel().getColumnCount()<(this.activeCourse.getNumDeliverables()+2)){
-		tblStudents.addColumn(new TableColumn()); 
-	}
-  tblStudents.getColumnModel().getColumn(0).setPreferredWidth(40);
-  tblStudents.getColumnModel().getColumn(1).setPreferredWidth(40);
- for(int i=2;i<(activeCourse.getNumDeliverables()+2);i++){
-  tblStudents.getColumnModel().getColumn(i).setPreferredWidth(50);
- }
-}
+  /**
+   * Sets column widths    
+   */
+   private void setColumnWidths(){
+	   while(tblStudents.getColumnModel().getColumnCount()<(this.activeCourse.getNumDeliverables()+2)){
+		  tblStudents.addColumn(new TableColumn()); 
+	   }
+       tblStudents.getColumnModel().getColumn(0).setPreferredWidth(40);
+       tblStudents.getColumnModel().getColumn(1).setPreferredWidth(40);
+       
+       for(int i=2;i<(activeCourse.getNumDeliverables()+2);i++){
+           tblStudents.getColumnModel().getColumn(i).setPreferredWidth(50);
+        }
+   }
 }

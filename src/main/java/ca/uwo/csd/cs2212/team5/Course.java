@@ -4,14 +4,11 @@ package ca.uwo.csd.cs2212.team5;
 import java.util.*;
 /**
  * Course is a class that will be used to add a course in a gradebook application
- * @author mgurnett
  *
  */
 public class Course implements java.io.Serializable, Comparable
 {
-/**
-	 *
-	 */
+
 	private static final long serialVersionUID = -5938679076671064779L;
 /************************************************************* * Instance Variables *************************************************************/
 // The course title
@@ -26,6 +23,7 @@ private boolean isActive;
 private ArrayList<Student> students;
 //The course list of deliverables
 private ArrayList<Deliverable> deliverables;
+
 
 /**
 * Constructor.
@@ -44,6 +42,11 @@ public Course(String title, String c, String t, boolean act) {
 
 }
 
+/**
+ * returns true if a course contains a student with a student number equal to the passed string parameter
+ * @param num the number you wish to check
+ * @return true if a student exists in the course with that number
+ */
 public boolean hasStudentNumber(String num){
 	Iterator<Student> iter=this.students.iterator();
 	Boolean b=false;
@@ -54,6 +57,11 @@ public boolean hasStudentNumber(String num){
 	return b;
 }
 
+/**
+ * returns true if a course contains a student with the given email address
+ * @param email the email you wish to check
+ * @return true if a student exists in the course with that number
+ */
 public boolean hasStudentEmail(String email){
 	Iterator<Student> iter=this.students.iterator();
 	Boolean b=false;
@@ -64,9 +72,7 @@ public boolean hasStudentEmail(String email){
 	return b;
 }
 
-public int getNumDeliverables(){
-	return this.deliverables.size();
-}
+
 /**
  * Adds a new student to the list of students in a course
  * @param newStudent the new student to add
@@ -75,11 +81,21 @@ public void addStudent(Student newStudent){
 	this.students.add(newStudent);
 }
 
+/**
+ * Deletes a given student from the course
+ * @param student the student to be deleted
+ * @return
+ */
 public Student deleteStudent(Student student) {
 	this.students.remove(student);
 	return student;
 }
 
+/**
+ * Deletes a given deliverable from the course
+ * @param deliverable the deliverable to be deleted
+ * @return
+ */
 public Deliverable deleteDeliverable(Deliverable deliverable) {
 	this.deliverables.remove(deliverable);
 	return deliverable;
@@ -92,22 +108,6 @@ public Deliverable deleteDeliverable(Deliverable deliverable) {
  	return (new String(this.getTitle() + " - " + this.getCode() + " - " + this.getTerm()));
  }
 
-/**
- * Finds a student with a given student number
- * @param studentNumber the student to find
- * @return the student if it exists in the course
- */
- public Student getStudent(String studentNumber){
-		Student found=null;
-		Iterator<Student> iter=this.students.iterator();
-		while(iter.hasNext()){
-		   Student s=iter.next();
-		   if(s.getNumber().equals(studentNumber)){
-			   found=s;
-		   }
-		}
-		return found;
-	}
 /**
  * A method that returns an iterator containing all students
  * @return an iterator for the list of students
@@ -124,6 +124,9 @@ public void addDeliverable(Deliverable d){
 	this.deliverables.add(d);
 }
 
+/**
+ * Orders the deliverables and students in a course
+ */
 public void order() {
 	Object[] tmpList = this.deliverables.toArray();
 	Arrays.sort(tmpList);
@@ -140,6 +143,25 @@ public void order() {
 	}
 	
 }
+
+
+//*******************************GETTER METHODS*************************************//
+/**
+ * Finds a student with a given student number
+ * @param studentNumber the student to find
+ * @return the student if it exists in the course
+ */
+ public Student getStudent(String studentNumber){
+		Student found=null;
+		Iterator<Student> iter=this.students.iterator();
+		while(iter.hasNext()){
+		   Student s=iter.next();
+		   if(s.getNumber().equals(studentNumber)){
+			   found=s;
+		   }
+		}
+		return found;
+	}
 
 /**
  * A method that returns the deliverables for a course
@@ -163,6 +185,13 @@ public Deliverable getDeliverable(int deliverableNumber){
 	}
 }
 
+/**
+ * returns the current number of deliverables in the course
+ * @return
+ */
+public int getNumDeliverables(){
+	return this.deliverables.size();
+}
 
 /**
  * Gets the course title
