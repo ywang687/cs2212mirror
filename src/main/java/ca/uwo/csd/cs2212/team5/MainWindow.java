@@ -19,6 +19,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ListIterator;
 
+import javax.swing.filechooser.*;
+import au.com.bytecode.opencsv.*;
+
 public class MainWindow extends JFrame implements ActionListener {
     /** Instance variables **/
 
@@ -49,6 +52,7 @@ public class MainWindow extends JFrame implements ActionListener {
     private JButton cmdDeleteStudent = new JButton("Delete active student");
     private JButton cmdDeleteCourse = new JButton("Delete active course");
     private JButton cmdDeleteDeliverable = new JButton("Delete active deliverable");
+    private JButton cmdImportGrade = new JButton("Import Grades");
 
     //Add a drop down box to select current course
     private JComboBox cboCourseList = new JComboBox ();
@@ -96,6 +100,8 @@ public class MainWindow extends JFrame implements ActionListener {
     private static final String save_path_student = System.getProperty("user.dir") + System.getProperty("file.separator") + "student.ser";
 
     private final String ICON_EXIT = "exit.png";
+    private final String ICON_IMPORT = "icon_import.png";
+    private final String ICON_EXPORT = "icon_export.png";
 
     private void initUI() {
         this.setTitle("GradeBook");
@@ -158,6 +164,7 @@ public class MainWindow extends JFrame implements ActionListener {
         add(cmdDeleteCourse);
         add(cmdDeleteStudent);
         add(cmdDeleteDeliverable);
+	add(cmdImportGrade);
 
         add(cboCourseList);
         add(cboStudentList);
@@ -202,6 +209,7 @@ public class MainWindow extends JFrame implements ActionListener {
         cmdDeleteCourse.setPreferredSize(new Dimension(200, 25));
         cmdDeleteStudent.setPreferredSize(new Dimension(200, 25));
         cmdDeleteDeliverable.setPreferredSize(new Dimension(200, 25));
+	cmdImportGrade.setPreferredSize(new Dimension(200, 25));
 
         cboCourseList.setPreferredSize(new Dimension(160, 25));
         cboStudentList.setPreferredSize(new Dimension(160, 25));
@@ -231,6 +239,7 @@ public class MainWindow extends JFrame implements ActionListener {
         cmdDeleteCourse.setActionCommand("deleteCourse");
         cmdDeleteStudent.setActionCommand("deleteStudent");
         cmdDeleteDeliverable.setActionCommand("deleteDeliverable");
+	cmdImportGrade.setActionCommand("importGrade");
 
         cboCourseList.setActionCommand("courseList");
         cboStudentList.setActionCommand("studentList");
@@ -247,6 +256,7 @@ public class MainWindow extends JFrame implements ActionListener {
         cmdDeleteCourse.addActionListener(this);
         cmdDeleteStudent.addActionListener(this);
         cmdDeleteDeliverable.addActionListener(this);
+	cmdImportGrade.addActionListener(this);
 
         cboCourseList.addActionListener(this);
         cboStudentList.addActionListener(this);
@@ -274,8 +284,12 @@ public class MainWindow extends JFrame implements ActionListener {
         layout.putConstraint(SpringLayout.WEST, cmdEditDeliverable, 300, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, cmdEditDeliverable, 300, SpringLayout.NORTH, getContentPane());
 
-        layout.putConstraint(SpringLayout.WEST, cmdOpenGradeWindow, 300, SpringLayout.WEST, getContentPane());
+	layout.putConstraint(SpringLayout.WEST, cmdOpenGradeWindow, 300, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, cmdOpenGradeWindow, 430, SpringLayout.NORTH, getContentPane());
+
+
+        layout.putConstraint(SpringLayout.WEST, cmdImportGrade, 300, SpringLayout.WEST, getContentPane());
+        layout.putConstraint(SpringLayout.NORTH, cmdImportGrade, 470, SpringLayout.NORTH, getContentPane());
 
         layout.putConstraint(SpringLayout.WEST, cmdDeleteCourse, 500, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, cmdDeleteCourse, 30, SpringLayout.NORTH, getContentPane());
@@ -393,7 +407,6 @@ public class MainWindow extends JFrame implements ActionListener {
         });
 
         mnuFile.add(mniFileExit);
-        menubar.add(mnuFile);
 
         return menubar;
     }
@@ -846,6 +859,72 @@ public class MainWindow extends JFrame implements ActionListener {
     	}
     }
 
+    private void importGrade() {
+	System.out.println("importGrade");
+	JFileChooser fc = new JFileChooser();
+	System.out.println("file chooser");
+	int returnVal = fc.showOpenDialog(this);
+	//String fileName = fc.getSelectedFile().getName();
+	//System.out.println(fileName);
+ 
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+	System.out.println("return arrove");
+	File file = fc.getSelectedFile();
+	System.out.println("get file");
+	  try {
+            CSVReader cr = new CSVReader(new FileReader(file));
+	    System.out.println(1111);
+	    String [] firstRow;
+	    String [] rows;
+	    firstRow = cr.readNext();
+	    if (!firstRow[0].equals("Student Number") && !firstRow[0].equals("Student number") && !firstRow[0].equals("student number")) {
+		System.out.println("student numbers are needed to import the grades");
+		return;
+	    }
+	    while ((rows = cr.readNext()) != null) {
+            System.out.println(rows[0] + "," + rows[1] + "," + "etc...");
+		for (ListIterator < Student > iterator = activeCourse.getStudents().listIterator(); iterator.hasNext();) {
+			System.out.println("iterator");
+	            Student student = iterator.next();
+			System.out.println(student.getNumber());
+		    if(student.getNumber().equals(rows[0])){
+			System.out.println("number match");
+			System.out.println("length" + firstRow.length);
+			for (int i = 1; i < firstRow.length; i++) {
+				System.out.println("columnName: " + firstRow[i]);
+			 // int x = 1;
+			//ListIterator < Deliverable > deliverableIterator = activeCourse.getDeliverables().listIterator();
+			//System.out.println(iterator.hasNext());
+				
+			  
+			  for (ListIterator < Deliverable > deliverableIterator = activeCourse.getDeliverables().listIterator(); deliverableIterator.hasNext(); ) {
+            			Deliverable deliverable = deliverableIterator.next();
+				System.out.println("deliverableName: " + deliverable.getName() + "columnName: " + firstRow[i]);
+				if (deliverable.getName().equals(firstRow[i])) {
+					System.out.println("deliverable found, column: " + i + "import value: " + rows[i] + "index: " + activeCourse.getDeliverables().indexOf(deliverable) );
+					student.editGrade(Double.valueOf(rows[i]),activeCourse.getDeliverables().indexOf(deliverable));
+					//student.editGrade(Double.valueOf(rows[x]),i);	
+					break;
+				}
+			  }
+				
+		        }
+		   }
+		}
+            }
+          } catch (FileNotFoundException e) {
+            System.out.println("CSV file not found!");
+            e.printStackTrace();
+          } catch (IOException e) {
+            System.out.println("Eception in reading the file!");
+            e.printStackTrace();
+          }
+        }
+	
+
+
+    }
+
     //Create actions
     public void actionPerformed(ActionEvent evt) {
         //Make actions for class buttons
@@ -887,5 +966,9 @@ public class MainWindow extends JFrame implements ActionListener {
         else if (evt.getActionCommand().equals("openGradeWindow")) {
             openGradeWindow(activeCourse);
         }
+	else if (evt.getActionCommand().equals("importGrade")) {
+	    System.out.println("testsssss");
+	    importGrade();
+	}
   }
 }

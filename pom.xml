@@ -16,6 +16,11 @@
       <artifactId>junit</artifactId>
       <version>4.11</version>
     </dependency>
+    <dependency>
+      <groupId>net.sf.opencsv</groupId>
+      <artifactId>opencsv</artifactId>
+      <version>2.3</version>
+    </dependency>
   </dependencies>
  
 <build>
@@ -40,19 +45,43 @@
         </execution>
       </executions>
     </plugin>
-    
     <plugin>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-jar-plugin</artifactId>
-		<version>2.4</version>
-		<configuration>
-			<archive>
-				<manifest>
-					<mainClass>ca.uwo.csd.cs2212.team5.App</mainClass >
-				</manifest>
-			</archive>
-		</configuration>
-	</plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-jar-plugin</artifactId>
+	<version>2.4</version>
+	<configuration>
+		<archive>
+			<manifest>
+				<mainClass>ca.uwo.csd.cs2212.team5.App</mainClass >
+			</manifest>
+		</archive>
+	</configuration>
+      </plugin>
+      <plugin>
+  	<groupId>org.apache.maven.plugins</groupId>
+  	<artifactId>maven-assembly-plugin</artifactId>
+  	<version>2.4</version>
+  	<configuration>
+    	  <descriptorRefs>
+      		<descriptorRef>jar-with-dependencies</descriptorRef>
+    	  </descriptorRefs>
+	  <finalName>team5-gradebook-1.0-SNAPSHOT</finalName>
+	  <appendAssemblyId>false</appendAssemblyId>
+    	  <archive>
+      		<manifest>
+        	  <mainClass>ca.uwo.csd.cs2212.team5.App</mainClass>
+      		</manifest>
+    	  </archive>
+  	</configuration>
+  	<executions>
+    	  <execution>
+      		<phase>package</phase>
+      		<goals>
+        		<goal>single</goal>
+      		</goals>
+    	  </execution>
+  	</executions>
+      </plugin>
   </plugins>
 </build>
 

@@ -1,14 +1,14 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow,3302,0,194,0,526,0,121,0,24,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow,3598,0,216,0,579,0,133,0,25,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,AVLnode,101,0,8,0,22,0,16,0,12,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,DoubleCellRenderer,29,0,2,0,7,0,4,0,3,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,GradeWindow.new ActionListener() {...},82,0,2,0,9,0,3,0,2,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,App,8,0,0,0,3,0,2,0,2,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,Student,158,50,4,0,20,20,9,9,7,9
 team5-gradebook,ca.uwo.csd.cs2212.team5,App.new Runnable() {...},11,0,0,0,4,0,2,0,2,0
-team5-gradebook,ca.uwo.csd.cs2212.team5,Deliverable,43,61,0,0,4,19,1,9,1,9
+team5-gradebook,ca.uwo.csd.cs2212.team5,Deliverable,50,64,0,0,7,20,3,9,3,9
 team5-gradebook,ca.uwo.csd.cs2212.team5,AVLtreeException,4,0,0,0,2,0,1,0,1,0
-team5-gradebook,ca.uwo.csd.cs2212.team5,StudentTableModel,169,0,32,0,52,0,26,0,10,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,StudentTableModel,153,0,30,0,45,0,25,0,10,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,DictEntry,15,0,0,0,6,0,3,0,3,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow.new ActionListener() {...},9,0,0,0,3,0,2,0,2,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow.new Runnable() {...},17,0,0,0,7,0,2,0,2,0
