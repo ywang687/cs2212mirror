@@ -438,7 +438,7 @@ public class MainWindow extends JFrame implements ActionListener {
         //Check to make sure the text fields are filled out fully
         if (!txtCourseName.getText().equals("") && !txtCourseCode.getText().equals("") && !txtCourseTerm.getText().equals("")) {
             lblGreeting.setText("Success! Course successfully added!");
-            courses.add(new Course(txtCourseName.getText(), txtCourseCode.getText(), txtCourseTerm.getText(), true));
+            courses.add(new Course(txtCourseName.getText().toUpperCase(), txtCourseCode.getText(), txtCourseTerm.getText(), true));
 
             //Add this to the combo box
             String title = (txtCourseName.getText() + " - " + txtCourseCode.getText() + " - " + txtCourseTerm.getText());
@@ -448,7 +448,9 @@ public class MainWindow extends JFrame implements ActionListener {
             txtCourseName.setText("");
             txtCourseCode.setText("");
             txtCourseTerm.setText("");
+            rebuildCourses();
         }
+        
 
       //print an error message if one or more of the fields are left empty
         else if(txtCourseName.getText().equals("")){
@@ -457,6 +459,8 @@ public class MainWindow extends JFrame implements ActionListener {
             lblGreeting.setText("Error: Invalid course code. Course code cannot be empty.");}
         else if(txtCourseTerm.getText().equals("")){
             lblGreeting.setText("Error: Invalid course term. Course term cannot be empty.");}
+        
+        
     }
 
     //Method to edit the active course's data
@@ -505,7 +509,7 @@ public class MainWindow extends JFrame implements ActionListener {
            if(!activeCourse.hasStudentEmail(txtEmail.getText())&&!activeCourse.hasStudentNumber(txtNumber.getText())){
 
 				//Create a new student object
-				Student newStud = new Student(txtFirstName.getText(), txtLastName.getText(), txtNumber.getText(), txtEmail.getText());
+				Student newStud = new Student(txtFirstName.getText().toUpperCase(), txtLastName.getText().toUpperCase(), txtNumber.getText(), txtEmail.getText());
                 activeCourse.addStudent(newStud);
                 lblGreeting.setText("Student " + txtFirstName.getText() + " " + txtLastName.getText() + " added successfully to " + activeCourse.getTitle() + ".");
 
@@ -521,6 +525,8 @@ public class MainWindow extends JFrame implements ActionListener {
                 for(int x = 0; x < activeCourse.getDeliverables().size(); x++){
 					newStud.addGrade(null);
                 }
+                
+                rebuildStudents();
            }
            else if(activeCourse.hasStudentEmail(txtEmail.getText())){
         	   lblGreeting.setText("Error:Invalid email. Email address already assigned to another student.");
@@ -593,7 +599,7 @@ public class MainWindow extends JFrame implements ActionListener {
         if (!txtDeliverName.getText().equals("") && !txtDeliverType.getText().equals("") && !txtDeliverWeight.getText().equals("")) {
             if (activeCourse != null) {
 
-				Deliverable newDeliver = new Deliverable(txtDeliverName.getText(), txtDeliverType.getText(), Double.parseDouble(txtDeliverWeight.getText()));
+				Deliverable newDeliver = new Deliverable(txtDeliverName.getText().toUpperCase(), txtDeliverType.getText(), Double.parseDouble(txtDeliverWeight.getText()));
                 activeCourse.addDeliverable(newDeliver);
 
                 lblGreeting.setText("Deliverable " + txtDeliverName.getText() + " added successfully to " + activeCourse.getTitle() + ".");
@@ -610,6 +616,8 @@ public class MainWindow extends JFrame implements ActionListener {
                 for(int x = 0; x < activeCourse.getStudents().size(); x++){
                 	activeCourse.getStudents().get(x).addGrade(null);
                 }
+                
+                rebuildDeliverables();
             } else
                 lblGreeting.setText("Error: Please select a course before adding a deliverable.");
         }
