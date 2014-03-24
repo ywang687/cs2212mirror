@@ -10,7 +10,6 @@ public class Deliverable implements java.io.Serializable, Comparable{
 	private String name, type;
 	private Double weight;
 	private Grade mark;
-	private int index;
 
 	/**
 	 * Constructor
@@ -19,7 +18,6 @@ public class Deliverable implements java.io.Serializable, Comparable{
 		this.name=name;
 		this.type=type;
 		this.weight=weight;
-		this.index=-1;
 	}
 
 	/**
@@ -54,13 +52,6 @@ public class Deliverable implements java.io.Serializable, Comparable{
 		return type;
 	}
 
-	/**
-	 * Returns the index of a deliverable to import grades
-	 * @return the index of the deliverable in a gradeList
-	 */
-	int getIndex(){
-		return index;
-	}
 
 	/**
 	 * Sets the name of a deliverable
@@ -86,15 +77,6 @@ public class Deliverable implements java.io.Serializable, Comparable{
 		type = x;
 	}
 	
-     /**
-     * Sets the index of a deliverable
-     * @param x the index of the deliverable in a grade list
-     */
-
-	void setIndex(int x) {
-		index = x;
-	}
-
     /**
      * Deletes a deliverable
      */

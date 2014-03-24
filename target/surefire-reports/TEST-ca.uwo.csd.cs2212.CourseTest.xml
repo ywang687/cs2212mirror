@@ -63,9 +63,9 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.004" classname="ca.uwo.csd.cs2212.CourseTest" name="testSetActiveCourse"/>
-  <testcase time="0.002" classname="ca.uwo.csd.cs2212.CourseTest" name="testAddStudents"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.CourseTest" name="testModifyCourseCode"/>
+  <testcase time="0.005" classname="ca.uwo.csd.cs2212.CourseTest" name="testSetActiveCourse"/>
+  <testcase time="0.001" classname="ca.uwo.csd.cs2212.CourseTest" name="testAddStudents"/>
+  <testcase time="0.001" classname="ca.uwo.csd.cs2212.CourseTest" name="testModifyCourseCode"/>
   <testcase time="0" classname="ca.uwo.csd.cs2212.CourseTest" name="testModifyCourseTerm"/>
-  <testcase time="0.001" classname="ca.uwo.csd.cs2212.CourseTest" name="testModifyCourseTitle"/>
+  <testcase time="0" classname="ca.uwo.csd.cs2212.CourseTest" name="testModifyCourseTitle"/>
 </testsuite>

@@ -68,7 +68,7 @@
   <testcase time="0" classname="ca.uwo.csd.cs2212.team5.DeliverableTest" name="testSStringRepresentation"/>
   <testcase time="0" classname="ca.uwo.csd.cs2212.team5.DeliverableTest" name="testDelete"/>
   <testcase time="0" classname="ca.uwo.csd.cs2212.team5.DeliverableTest" name="testSetWeight"/>
-  <testcase time="0.001" classname="ca.uwo.csd.cs2212.team5.DeliverableTest" name="testGetWeight"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.DeliverableTest" name="testSetName"/>
+  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.DeliverableTest" name="testGetWeight"/>
+  <testcase time="0.001" classname="ca.uwo.csd.cs2212.team5.DeliverableTest" name="testSetName"/>
   <testcase time="0" classname="ca.uwo.csd.cs2212.team5.DeliverableTest" name="testSetType"/>
 </testsuite>

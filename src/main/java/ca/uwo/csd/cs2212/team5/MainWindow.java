@@ -53,6 +53,8 @@ public class MainWindow extends JFrame implements ActionListener {
     private JButton cmdDeleteCourse = new JButton("Delete active course");
     private JButton cmdDeleteDeliverable = new JButton("Delete active deliverable");
     private JButton cmdImportGrade = new JButton("Import Grades");
+    private JButton cmdExportGrade = new JButton("Export Grades");
+
 
     //Add a drop down box to select current course
     private JComboBox cboCourseList = new JComboBox ();
@@ -165,6 +167,7 @@ public class MainWindow extends JFrame implements ActionListener {
         add(cmdDeleteStudent);
         add(cmdDeleteDeliverable);
 	add(cmdImportGrade);
+	add(cmdExportGrade);
 
         add(cboCourseList);
         add(cboStudentList);
@@ -210,6 +213,8 @@ public class MainWindow extends JFrame implements ActionListener {
         cmdDeleteStudent.setPreferredSize(new Dimension(200, 25));
         cmdDeleteDeliverable.setPreferredSize(new Dimension(200, 25));
 	cmdImportGrade.setPreferredSize(new Dimension(200, 25));
+	cmdExportGrade.setPreferredSize(new Dimension(200, 25));
+
 
         cboCourseList.setPreferredSize(new Dimension(160, 25));
         cboStudentList.setPreferredSize(new Dimension(160, 25));
@@ -240,6 +245,8 @@ public class MainWindow extends JFrame implements ActionListener {
         cmdDeleteStudent.setActionCommand("deleteStudent");
         cmdDeleteDeliverable.setActionCommand("deleteDeliverable");
 	cmdImportGrade.setActionCommand("importGrade");
+	cmdExportGrade.setActionCommand("exportGrade");
+
 
         cboCourseList.setActionCommand("courseList");
         cboStudentList.setActionCommand("studentList");
@@ -256,7 +263,9 @@ public class MainWindow extends JFrame implements ActionListener {
         cmdDeleteCourse.addActionListener(this);
         cmdDeleteStudent.addActionListener(this);
         cmdDeleteDeliverable.addActionListener(this);
-	cmdImportGrade.addActionListener(this);
+	cmdImportGrade.addActionListener(this);	
+	cmdExportGrade.addActionListener(this);
+
 
         cboCourseList.addActionListener(this);
         cboStudentList.addActionListener(this);
@@ -290,6 +299,9 @@ public class MainWindow extends JFrame implements ActionListener {
 
         layout.putConstraint(SpringLayout.WEST, cmdImportGrade, 300, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, cmdImportGrade, 470, SpringLayout.NORTH, getContentPane());
+
+	layout.putConstraint(SpringLayout.WEST, cmdExportGrade, 300, SpringLayout.WEST, getContentPane());
+        layout.putConstraint(SpringLayout.NORTH, cmdExportGrade, 510, SpringLayout.NORTH, getContentPane());
 
         layout.putConstraint(SpringLayout.WEST, cmdDeleteCourse, 500, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, cmdDeleteCourse, 30, SpringLayout.NORTH, getContentPane());
@@ -859,51 +871,51 @@ public class MainWindow extends JFrame implements ActionListener {
     	}
     }
 
+
+    //import grades of students from .csv files
+    //select the file from the file chooser
+    //student numbers must be stored in the .csv file to import the grades
     private void importGrade() {
-	System.out.println("importGrade");
+        //initialize a file chooser dialog
 	JFileChooser fc = new JFileChooser();
-	System.out.println("file chooser");
 	int returnVal = fc.showOpenDialog(this);
-	//String fileName = fc.getSelectedFile().getName();
-	//System.out.println(fileName);
- 
+	
+	//if a file has been selected 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-	System.out.println("return arrove");
+	//get the file
 	File file = fc.getSelectedFile();
-	System.out.println("get file");
+	  //try to read and import the selected file
 	  try {
+	    //initialize a CVSReader to read the selected file
             CSVReader cr = new CSVReader(new FileReader(file));
-	    System.out.println(1111);
+	    //initialize a string array to store the title(student, eamil, deliverables) of the data sheet
 	    String [] firstRow;
+	    //initialize a string array to store the data
 	    String [] rows;
+	    //read the first row
 	    firstRow = cr.readNext();
+	    //if the student number is not given, print an error message
 	    if (!firstRow[0].equals("Student Number") && !firstRow[0].equals("Student number") && !firstRow[0].equals("student number")) {
 		System.out.println("student numbers are needed to import the grades");
 		return;
 	    }
+	    //read the rest lines of the data sheet
 	    while ((rows = cr.readNext()) != null) {
-            System.out.println(rows[0] + "," + rows[1] + "," + "etc...");
+		//initialize a integer to indicate whether the student is in the grade book or not
+		int found = -1;
+		//use the iterator to find the student
 		for (ListIterator < Student > iterator = activeCourse.getStudents().listIterator(); iterator.hasNext();) {
-			System.out.println("iterator");
-	            Student student = iterator.next();
-			System.out.println(student.getNumber());
+	            	Student student = iterator.next();
+		    //if the student is in the grade book
 		    if(student.getNumber().equals(rows[0])){
-			System.out.println("number match");
-			System.out.println("length" + firstRow.length);
+			//mark it as found
+			found = 0;
+			//found the deliverable index of each deliverable to import the grades
 			for (int i = 1; i < firstRow.length; i++) {
-				System.out.println("columnName: " + firstRow[i]);
-			 // int x = 1;
-			//ListIterator < Deliverable > deliverableIterator = activeCourse.getDeliverables().listIterator();
-			//System.out.println(iterator.hasNext());
-				
-			  
 			  for (ListIterator < Deliverable > deliverableIterator = activeCourse.getDeliverables().listIterator(); deliverableIterator.hasNext(); ) {
             			Deliverable deliverable = deliverableIterator.next();
-				System.out.println("deliverableName: " + deliverable.getName() + "columnName: " + firstRow[i]);
 				if (deliverable.getName().equals(firstRow[i])) {
-					System.out.println("deliverable found, column: " + i + "import value: " + rows[i] + "index: " + activeCourse.getDeliverables().indexOf(deliverable) );
 					student.editGrade(Double.valueOf(rows[i]),activeCourse.getDeliverables().indexOf(deliverable));
-					//student.editGrade(Double.valueOf(rows[x]),i);	
 					break;
 				}
 			  }
@@ -911,7 +923,12 @@ public class MainWindow extends JFrame implements ActionListener {
 		        }
 		   }
 		}
+		//if the student is not in the grade book, print an error message
+		if (found == -1)
+			System.out.println("student number: "  + rows[0] + " is not in the grade book");
             }
+	    System.out.println("Grades have been successfully imported!");
+	  // if the file is not found, print an error message
           } catch (FileNotFoundException e) {
             System.out.println("CSV file not found!");
             e.printStackTrace();
@@ -921,7 +938,91 @@ public class MainWindow extends JFrame implements ActionListener {
           }
         }
 	
+    }
 
+
+
+    //export grades of students to selected .csv files
+    //select the file from the file chooser
+    //the CSV file will contain a header row listing the columns, followed by rows listing student grades.
+    private void exportGrade() {
+	//initialize a file chooser dialog
+	JFileChooser fc = new JFileChooser();
+	int returnVal = fc.showSaveDialog(this);	
+
+	//if a file has been selected
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+	//get the file
+	File file = fc.getSelectedFile();
+	  //try to write the grades into the selected file
+	  try {
+		//initialize a CVSReader to read the selected file
+		CSVWriter writer = new CSVWriter(new FileWriter(file));
+		//initialize a array list to store all the active deliverables
+		ArrayList<Deliverable> deliverables = activeCourse.getDeliverables();
+		//initialize a array list to store all the active students
+		ArrayList<Student> students = activeCourse.getStudents();
+		//store all the deliverables in the array list to an array
+		Deliverable[] deliverableArray = deliverables.toArray(new Deliverable[deliverables.size()]);
+		//store all the students in the array list to an array
+		Student[] studentArray = students.toArray(new Student[students.size()]);
+		//initialize an string array to store all the titiles of the data
+		String[] columns = new String[deliverables.size() + 4];
+		//initialize an string array to store all the data of each students
+		String[] info = new String[deliverables.size() + 4];
+		//store the basic information of the students
+		columns[0] = "First Name";
+		columns[1] = "Last Name";
+		columns[2] = "Student Number";
+		columns[3] = "Email";	
+		int n = 4;
+		//store the name of each deliverable into the string array
+		for (Deliverable deliverable : deliverableArray) {
+			columns[n] = deliverable.getName();
+			n++;
+		}
+		//write the first row(the name of the columns) into the file
+		writer.writeNext(columns);
+		//loop through each student in the array
+		for (Student student: studentArray) {
+			//store their basic information in the string array
+			info[0] = student.getFirstName();
+			info[1] = student.getLastName();
+			info[2] = student.getNumber();
+			info[3] = student.getEmailAddress();
+			//loop through each deliverable to get the deliverable index to get the grade
+			for (int i = 4; i < columns.length; i++) {
+			  for (ListIterator < Deliverable > deliverableIterator = deliverables.listIterator(); deliverableIterator.hasNext(); ) {
+            			Deliverable deliverable = deliverableIterator.next();
+				if (deliverable.getName().equals(columns[i])) {
+					//if the grade is null, store the grade as zero
+					if (student.getGrade(deliverables.indexOf(deliverable)) == null) {
+						info[i] = "0";
+					} 
+					//else store the return grade in the string array 
+					else {
+						info[i] = student.getGrade(deliverables.indexOf(deliverable)).toString();
+					}
+					break;
+				}
+			  }
+			}
+			//export the grades of each student
+			writer.writeNext(info);
+		}
+		//close the writer
+		writer.close();	
+		System.out.println("Grades have been successfully exported!");
+	  // if the file is not found, print an error message
+	  } catch (FileNotFoundException e) {
+            System.out.println("CSV file not found!");
+            e.printStackTrace();
+          } catch (IOException e) {
+            System.out.println("Eception in reading the file!");
+            e.printStackTrace();
+          }
+
+	}
 
     }
 
@@ -967,8 +1068,12 @@ public class MainWindow extends JFrame implements ActionListener {
             openGradeWindow(activeCourse);
         }
 	else if (evt.getActionCommand().equals("importGrade")) {
-	    System.out.println("testsssss");
 	    importGrade();
 	}
+	else if (evt.getActionCommand().equals("exportGrade")) {
+	    exportGrade();
+	}
+
   }
 }
+
