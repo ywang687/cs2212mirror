@@ -62,6 +62,9 @@ public class Student implements java.io.Serializable, Comparable{
 		return gradeList[deliverableNumber];
 	}
 
+	public int getNumGrades(){
+		return this.numGrades;
+	}
 	/**
 	 * Edits a selected deliverable's grade with the new data
 	 * @param grade new grade for this deliverable
