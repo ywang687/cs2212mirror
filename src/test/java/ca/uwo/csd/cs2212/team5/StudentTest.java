@@ -57,4 +57,21 @@ public class StudentTest {
 	student.setEmailAddress("example@test.com");
 	Assert.assertEquals("example@test.com",student.getEmailAddress());
   }
+
+  @Test
+  public void testGetGrade() {
+	Assert.assertNull(student.getGrade(0));
+  }
+
+  @Test
+  public void testAddGrade() {
+	student.addGrade(20.1);
+	Assert.assertEquals((Double)20.1,(Double)student.getGrade(0));
+  }
+
+  @Test
+  public void testEditGrade() {
+	student.editGrade(30.1,0);
+	Assert.assertEquals((Double)30.1,(Double)student.getGrade(0));
+  }  
 }

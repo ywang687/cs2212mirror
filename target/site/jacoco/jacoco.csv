@@ -4,7 +4,7 @@ team5-gradebook,ca.uwo.csd.cs2212.team5,AVLnode,101,0,8,0,22,0,16,0,12,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,DoubleCellRenderer,29,0,2,0,7,0,4,0,3,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,GradeWindow.new ActionListener() {...},82,0,2,0,9,0,3,0,2,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,App,8,0,0,0,3,0,2,0,2,0
-team5-gradebook,ca.uwo.csd.cs2212.team5,Student,161,50,4,0,21,20,10,9,8,9
+team5-gradebook,ca.uwo.csd.cs2212.team5,Student,109,102,3,1,13,28,7,12,5,12
 team5-gradebook,ca.uwo.csd.cs2212.team5,App.new Runnable() {...},11,0,0,0,4,0,2,0,2,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,Deliverable,0,104,0,0,0,23,0,10,0,10
 team5-gradebook,ca.uwo.csd.cs2212.team5,AVLtreeException,4,0,0,0,2,0,1,0,1,0
