@@ -42,6 +42,22 @@ public Course(String title, String c, String t, boolean act) {
 
 }
 
+public Double getWeightedAverage(Student s){
+	Double d=0.0,c=0.0;
+	for(int i=0;i<s.getNumGrades();i++){
+		if(s.getGrade(i)!=null){
+		   d+=(s.getGrade(i)*this.deliverables.get(i).getWeight());
+		}
+	}
+	for(int j=0;j<s.getNumGrades();j++){
+		if(s.getGrade(j)!=null){
+		  c+=(this.deliverables.get(j).getWeight());
+		}
+	}
+	return (d/c);
+	
+}
+
 /**
  * returns true if a course contains a student with a student number equal to the passed string parameter
  * @param num the number you wish to check

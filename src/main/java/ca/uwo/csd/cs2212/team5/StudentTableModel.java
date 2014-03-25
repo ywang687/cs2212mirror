@@ -8,6 +8,8 @@ public class StudentTableModel extends AbstractTableModel {
  
     private final static int IDX_FIRST_NAME = 0;
     private final static int IDX_LAST_NAME = 1;
+    private final static int IDX_STUDENT_NUM=2;
+    private final static int IDX_WEIGHTED_AVG=3;
      
     private final List<Student> students;
     private Course activeCourse;
@@ -46,7 +48,7 @@ public class StudentTableModel extends AbstractTableModel {
     public int getColumnCount() {
     	
            int a=this.activeCourse.getNumDeliverables();
-           return a+2;
+           return a+4;
     	
     }
     
@@ -59,9 +61,14 @@ public class StudentTableModel extends AbstractTableModel {
                   return "First Name";}
          	 else if(columnIndex==IDX_LAST_NAME){
                   return "Last Name";}
-         	 else if(columnIndex>IDX_LAST_NAME){
-         	
-         		 return this.activeCourse.getDeliverables().get(columnIndex-2).getName();
+         	 else if(columnIndex==IDX_STUDENT_NUM){
+         		 return "Student Number";
+         	 }
+         	 else if(columnIndex==IDX_WEIGHTED_AVG){
+        		 return "Weighted Average";
+        	 }
+         	 else if(columnIndex>IDX_WEIGHTED_AVG){
+         		 return this.activeCourse.getDeliverables().get(columnIndex-4).getName();
          	 }
          	 else{
                   return null; 
@@ -71,7 +78,7 @@ public class StudentTableModel extends AbstractTableModel {
     
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        if(columnIndex==0 || columnIndex==1){
+        if(columnIndex==0 || columnIndex==1 || columnIndex==2){
         	return String.class;
         }
         else{
@@ -90,9 +97,15 @@ public class StudentTableModel extends AbstractTableModel {
                  return s.getFirstName();}
         	 else if(columnIndex==IDX_LAST_NAME){
                  return s.getLastName();}
-        	 else if(columnIndex>IDX_LAST_NAME){
+        	 else if(columnIndex==IDX_STUDENT_NUM){
+        		 return s.getNumber();
+        	 }
+        	 else if(columnIndex==IDX_WEIGHTED_AVG){
+         		 return this.activeCourse.getWeightedAverage(s);
+         	 }
+        	 else if(columnIndex>IDX_WEIGHTED_AVG){
         		 try{
-        		 Double d = s.getGrade(columnIndex-2);
+        		 Double d = s.getGrade(columnIndex-4);
         	     return d.toString();
         		 }
         		 catch(NullPointerException e){
@@ -113,10 +126,10 @@ public class StudentTableModel extends AbstractTableModel {
        else{
             Student c=this.activeCourse.getStudents().get(rowIndex);
             //if the column index represents a deliverable
-              if(columnIndex>1){
+              if(columnIndex>3){
                //change the grade of the student who is represented in that row and update the cell
                Double d=Double.valueOf(aValue.toString());
-               c.editGrade(d, columnIndex-2);
+               c.editGrade(d, columnIndex-4);
                fireTableCellUpdated(rowIndex, columnIndex); 
             
               }
@@ -126,7 +139,7 @@ public class StudentTableModel extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
        //if the column represents grades for a deliverable set true
-       if(columnIndex>1)return true;
+       if(columnIndex>3)return true;
        else return false;
     }
  
