@@ -15,7 +15,7 @@ public class DeliverableTest {
   }
 
   @Test
-  public void testSStringRepresentation(){
+  public void testStringRepresentation(){
 	Assert.assertEquals("testDeliverable - test - 11.17",deliverable.stringRepresentation());
   }
 
@@ -58,6 +58,17 @@ public class DeliverableTest {
 	Assert.assertNull(deliverable.getName());
 	Assert.assertNull(deliverable.getType());
 	Assert.assertNull(deliverable.getType());
+  }
+
+  @Test
+  public void testTrueCompareTo() {
+	Assert.assertEquals(0,deliverable.compareTo(deliverable));
+  }
+
+  @Test
+  public void testFalseCompareTo(){
+  	Deliverable comp = new Deliverable("compDeliverable","comp",15.2);
+	Assert.assertTrue(0!=deliverable.compareTo(comp));
   }
 
 }
