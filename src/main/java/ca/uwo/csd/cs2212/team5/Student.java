@@ -17,10 +17,6 @@ public class Student implements java.io.Serializable, Comparable{
 	private Double [] gradeList;
 	private int numGrades;
 
-	public static void main (String[] args) {
-
-	}
-
 
 	/**
 	 * constructor method for student

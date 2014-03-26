@@ -64,14 +64,71 @@ public class StudentTest {
   }
 
   @Test
-  public void testAddGrade() {
+  public void testAddGradeWithoutExpanding() {
 	student.addGrade(20.1);
 	Assert.assertEquals((Double)20.1,(Double)student.getGrade(0));
   }
+  
+  @Test
+  public void testAddGradeWithExpanding() {
+	student.addGrade(20.1);
+	student.addGrade(89.2);
+	student.addGrade(78.9);
+	student.addGrade(67.8);
+	student.addGrade(54.5);
+	student.addGrade(34.2);
+	student.addGrade(12.4);
+	student.addGrade(24.5);
+	student.addGrade(22.3);
+	student.addGrade(21.2);
+	student.addGrade(33.3);
+	Assert.assertEquals((Double)33.3,(Double)student.getGrade(10));
+  }
+
 
   @Test
   public void testEditGrade() {
 	student.editGrade(30.1,0);
 	Assert.assertEquals((Double)30.1,(Double)student.getGrade(0));
   }  
+
+  @Test
+  public void testTrueCompareTo() {
+	Assert.assertEquals(0,student.compareTo(student));
+  }
+
+  @Test
+  public void testFalseCompareTo() {
+	Student comp = new Student("test","test","000","example@test.com");
+	Assert.assertTrue(0!=student.compareTo(comp));
+  }
+
+  @Test
+  public void testStringRepresentation() {
+ 	Assert.assertEquals("first last 12345678 test@example.com", student.stringRepresentation());
+  }
+
+  @Test
+  public void testGetNumGrades() {
+	Assert.assertEquals(0,student.getNumGrades());
+  }
+
+  @Test
+  public void testExpandGradeList() {
+	student.addGrade(20.1);
+	student.addGrade(89.2);
+	student.addGrade(78.9);
+	student.addGrade(67.8);
+	student.addGrade(54.5);
+	student.addGrade(34.2);
+	student.addGrade(12.4);
+	student.addGrade(24.5);
+	student.addGrade(22.3);
+	student.addGrade(21.2);
+	student.addGrade(33.3);
+	Assert.assertEquals(11,student.getNumGrades());
+  
+  }
+
 }
+
