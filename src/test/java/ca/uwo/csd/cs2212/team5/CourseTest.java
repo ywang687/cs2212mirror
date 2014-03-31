@@ -92,7 +92,16 @@ public class CourseTest {
 		Deliverable d= new Deliverable("test", "exam" , "0.5");
 		course.addDeliverable(d);
 	    Boolean b=(course.getDeliverable(0).getName().equals("test") && course.getNumDeliverables()==1);
-	    Assert.asserEquals(true,b);
+	    Assert.assertEquals(true,b);
+	}
+	
+	@Test
+	public void testDeleteDeliverable(){
+		Deliverable d= new Deliverable("test", "exam" , "0.5");
+		course.addDeliverable(d);
+		course.deleteDeliverable(d);
+		Boolean b=(course.getDeliverable(0)==null);
+		Assert.assertEquals(true, b);
 	}
 	
 	
