@@ -97,11 +97,20 @@ public class CourseTest {
 	
 	@Test
 	public void testDeleteDeliverable(){
-		Deliverable d= new Deliverable("test", "exam" , "0.5");
+		Deliverable d= new Deliverable("test", "exam" , 0.5);
 		course.addDeliverable(d);
 		course.deleteDeliverable(d);
 		Boolean b=(course.getDeliverable(0)==null);
 		Assert.assertEquals(true, b);
+	}
+	
+	@Test
+	public void testOrder(){
+		Student a=new Student("A","A","1","A@uwo.ca");
+		Student b=new Student("B","B","1","B@uwo.ca");
+		Student c=new Student("A","A","1","A@uwo.ca");
+		Student d=new Student("A","A","1","A@uwo.ca");
+	
 	}
 	
 	
