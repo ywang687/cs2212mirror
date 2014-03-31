@@ -134,6 +134,13 @@ public class CourseTest {
 	
 	}
 	
+	@Test
+	public void testCompareObject(){
+		Course course2=new Course("title", "1000", "1", false);
+		int a= course.compareTo(course2);
+		Assert.assertEquals(1, a);
+	}
+	
 	
 	
 }
