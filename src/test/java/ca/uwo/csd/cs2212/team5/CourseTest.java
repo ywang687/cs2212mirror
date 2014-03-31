@@ -139,9 +139,9 @@ public class CourseTest {
 		Course course2=new Course("title", "1000", "1", false);
 		int a= course.compareTo(course2);
 		Assert.assertEquals(0, a);
+		
 	}
-	
-	/*
+
 	@Test
 	public void testWeightedAverage(){
 		Student s=new Student("A","A","1","A@uwo.ca");
@@ -150,9 +150,10 @@ public class CourseTest {
 		s.addGrade(60.0);
 		s.addGrade(90.0);
 		Double d=course.getWeightedAverage(s);
-		Assert.assertEquals(60.0,d);
+		Double c=new Double(60.0);
+		Assert.assertEquals(c,d);
 	}
-	*/
+	
 	
 	
 }
