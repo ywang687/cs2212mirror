@@ -65,18 +65,35 @@ public class CourseTest {
 	
 	@Test
 	public void testHasStudentEmail(){
-         Student s=new Student("Jane","Doe","250555555","jdoe@uwo.ca");	
+        Student s=new Student("Jane","Doe","250555555","jdoe1@uwo.ca");	
 		course.addStudent(s);
 		Boolean b=course.hasStudentEmail("jdoe1@uwo.ca");
 		Assert.assertEquals(true, b);
 	}
 	
-	/*@Test
+	@Test
 	public void testDeleteStudent(){
+		Student s=new Student("Jane","Doe","250555555","jdoe@uwo.ca");	
+	    course.addStudent(s);
 		course.deleteStudent(s);
 		Boolean b=(course.getStudent("250555555")==null);
 		Assert.assertEquals(true, b);
-	}*/
+	}
+	
+	@Test
+	public void testStringRepresentation(){
+		String s = course.stringRepresentation();
+		Boolean b = (s.equals("title - 1000 - 1"));
+		Assert.assertEquals(true, b);
+	}
+	
+	@Test
+	public void testAddDeliverable(){
+		Deliverable d= new Deliverable("test", "exam" , "0.5");
+		course.addDeliverable(d);
+	    Boolean b=(course.getDeliverable(0).getName.equals("test") && course.getNumDeliverables()==1);
+	    Assert.asserEquals(true,b);
+	}
 	
 	
 }
