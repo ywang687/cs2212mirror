@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 
+import ca.uwo.csd.cs2212.team5.Course;
+
 public class CourseTest {
  
 	private Course course;
@@ -52,4 +54,25 @@ public class CourseTest {
 		Boolean b=(course.getStudent("250555555")==null);
 		Assert.assertEquals(false, b);
 	}
+	
+	@Test
+	public void testHasStudentNumber(){
+		Boolean b=course.hasStudentNumber("250555555");
+		Assert.assertEquals(true, b);
+	}
+	
+	@Test
+	public void testHasStudentEmail(){
+		Boolean b=course.hasStudentEmail("jdoe1@uwo.ca");
+		Assert.assertEquals(true, b);
+	}
+	
+	@Test
+	public void testDeleteStudent(){
+		course.deleteStudent(s);
+		Boolean b=(course.getStudent("250555555")==null);
+		Assert.assertEquals(true, b);
+	}
+	
+	
 }

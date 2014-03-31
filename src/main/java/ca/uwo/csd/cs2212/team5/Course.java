@@ -42,6 +42,11 @@ public Course(String title, String c, String t, boolean act) {
 
 }
 
+/**
+ * Returns the weighted average of a student in a course
+ * @param s the student
+ * @return the student's weighted average
+ */
 public Double getWeightedAverage(Student s){
 	Double d=0.0,c=0.0;
 	for(int i=0;i<s.getNumGrades();i++){
@@ -59,7 +64,7 @@ public Double getWeightedAverage(Student s){
 }
 
 /**
- * returns true if a course contains a student with a student number equal to the passed string parameter
+ * Returns true if a course contains a student with a student number equal to the passed string parameter
  * @param num the number you wish to check
  * @return true if a student exists in the course with that number
  */
