@@ -67,12 +67,12 @@ public class CourseTest {
 		Assert.assertEquals(true, b);
 	}
 	
-	@Test
+	/*@Test
 	public void testDeleteStudent(){
 		course.deleteStudent(s);
 		Boolean b=(course.getStudent("250555555")==null);
 		Assert.assertEquals(true, b);
-	}
+	}*/
 	
 	
 }
