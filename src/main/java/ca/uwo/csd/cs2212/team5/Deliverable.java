@@ -32,7 +32,7 @@ public class Deliverable implements java.io.Serializable, Comparable{
 	 * Returns the name of a deliverable
 	 * @return the name of the deliverable
 	 */
-	String getName(){
+	public String getName(){
 		return name;
 	}
 
@@ -40,7 +40,7 @@ public class Deliverable implements java.io.Serializable, Comparable{
 	 * Returns the weight of a deliverable
 	 * @return the weight of the deliverable
 	 */
-	Double getWeight(){
+	public Double getWeight(){
 		return weight;
 	}
 
@@ -48,7 +48,7 @@ public class Deliverable implements java.io.Serializable, Comparable{
 	 * Returns the type of a deliverable
 	 * @return the type of the deliverable
 	 */
-	String getType(){
+	public String getType(){
 		return type;
 	}
 
@@ -57,7 +57,7 @@ public class Deliverable implements java.io.Serializable, Comparable{
 	 * Sets the name of a deliverable
 	 * @param x the name of the deliverable
 	 */
-	void setName(String x){
+	public void setName(String x){
 		name = x;
 	}
 
@@ -65,7 +65,7 @@ public class Deliverable implements java.io.Serializable, Comparable{
      * Sets the weight of a deliverable
      * @param x the weight of the deliverable
      */
-	void setWeight(Double x){
+	public void setWeight(Double x){
 		weight = x;
 	}
 
@@ -73,14 +73,14 @@ public class Deliverable implements java.io.Serializable, Comparable{
      * Sets the type of a deliverable
      * @param x the type of the deliverable
      */
-	void setType(String x){
+	public void setType(String x){
 		type = x;
 	}
 	
     /**
      * Deletes a deliverable
      */
-	void delete(){
+	public void delete(){
 		this.name = null;
 		this.type = null;
 		this.weight = null;
