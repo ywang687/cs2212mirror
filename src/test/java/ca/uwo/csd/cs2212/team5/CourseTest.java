@@ -127,7 +127,9 @@ public class CourseTest {
 		course.order();
 		ArrayList<Deliverable> listD=course.getDeliverables();
 		ArrayList<Student> listS=course.getStudents();
-		Boolean test=( listD.get(0).getName().equals("X") && listS.get(0).getFirstName().equals("A"));
+		Boolean test=( listD.get(0).getName().equals("X") && listS.get(0).getFirstName().equals("A")
+				&& listD.get(1).getName().equals("Y") && listS.get(1).getFirstName().equals("B")
+				&& listD.get(1).getName().equals("Z") && listS.get(1).getFirstName().equals("C"));
 		Assert.assertEquals(true,test);
 	
 	}
