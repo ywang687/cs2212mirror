@@ -89,7 +89,7 @@ public class CourseTest {
 	
 	@Test
 	public void testAddDeliverable(){
-		Deliverable d= new Deliverable("test", "exam" , "0.5");
+		Deliverable d= new Deliverable("test", "exam" , 0.5);
 		course.addDeliverable(d);
 	    Boolean b=(course.getDeliverable(0).getName().equals("test") && course.getNumDeliverables()==1);
 	    Assert.assertEquals(true,b);
@@ -103,16 +103,23 @@ public class CourseTest {
 		Boolean b=(course.getDeliverable(0)==null);
 		Assert.assertEquals(true, b);
 	}
-	
+	/*
 	@Test
 	public void testOrder(){
 		Student a=new Student("A","A","1","A@uwo.ca");
-		Student b=new Student("B","B","1","B@uwo.ca");
-		Student c=new Student("A","A","1","A@uwo.ca");
-		Student d=new Student("A","A","1","A@uwo.ca");
+		Student b=new Student("B","B","2","B@uwo.ca");
+		Student c=new Student("C","C","3","C@uwo.ca");
+		Student d=new Student("D","D","4","D@uwo.ca");
+		Deliverable e=new Deliverable("X","exam", 0.1);
+		Deliverable f=new Deliverable("Y","exam", 0.1);
+		Deliverable g=new Deliverable("Z","exam", 0.1);
+		course.addStudent(d);
+		course.addStudent(b);
+		course.addStudent(c);
+		course.addStudent(a);
 	
 	}
-	
+	*/
 	
 	
 }
