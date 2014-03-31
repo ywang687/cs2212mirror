@@ -103,7 +103,7 @@ public class CourseTest {
 		Boolean b=(course.getDeliverable(0)==null);
 		Assert.assertEquals(true, b);
 	}
-	/*
+	
 	@Test
 	public void testOrder(){
 		Student a=new Student("A","A","1","A@uwo.ca");
@@ -117,9 +117,17 @@ public class CourseTest {
 		course.addStudent(b);
 		course.addStudent(c);
 		course.addStudent(a);
+		course.addDeliverable(f);
+		course.addDeliverable(g);
+		course.addDeliverable(e);
+		course.order();
+		ArrayList<Deliverables> listD=course.getDeliverables();
+		ArrayList<Students> listS=course.getStudents();
+		Boolean b=( listD.get(0).getName().equals("X") && listS.get(0).getName().equals("A"));
+		Asser.assertEquals(true,b);
 	
 	}
-	*/
+	
 	
 	
 }
