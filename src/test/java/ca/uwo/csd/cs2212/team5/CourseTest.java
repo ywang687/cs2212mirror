@@ -2,11 +2,11 @@ package ca.uwo.csd.cs2212.team5;
 
 import static org.junit.Assert.*;
 
+import org.junit.runner.JUnitCore; 
 import java.util.ArrayList;
 
 import org.junit.Test;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.Assert;
 
 import ca.uwo.csd.cs2212.team5.Course;
@@ -127,7 +127,7 @@ public class CourseTest {
 		course.order();
 		ArrayList<Deliverable> listD=course.getDeliverables();
 		ArrayList<Student> listS=course.getStudents();
-		Boolean test=( listD.get(0).getName().equals("X") && listS.get(0).getName().equals("A"));
+		Boolean test=( listD.get(0).getName().equals("X") && listS.get(0).getFirstName().equals("A"));
 		Assert.assertEquals(true,test);
 	
 	}
