@@ -7,19 +7,20 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
- 
+
 /**
  *Grade Window class represents a window with a spreadsheet for viewing and editing student grades
  *for the active course in a grade book application
  */
 public class GradeWindow extends JFrame {
- 
+
     private JButton btnGetSelection; //button to get selected student info
+    private JButton btnEmail; //button to send an email to the selected students
     private JTable tblStudents; //spreadsheet showing student grades
     private JTextArea txtOutput;//output box for viewing info of selected students
     private ArrayList < Student > studentList; //list of students
     private Course activeCourse; //active course
-  
+
  /*
   * Constructor
   */
@@ -29,7 +30,7 @@ public class GradeWindow extends JFrame {
     	initComponents();
         initTable();
     }
-    
+
     /**
      * Returns an iterator of the student list
      * @return an iterator of the list of students
@@ -37,59 +38,66 @@ public class GradeWindow extends JFrame {
     private Iterator<Student> getStudents(){
     	return this.studentList.iterator();
     }
-             
+
     /**
      * Initializes components in the window
      */
     private void initComponents() {
- 
+
         JPanel pnlOutput = new JPanel();
         JScrollPane scrOutput = new JScrollPane();
         JPanel pnlTable = new JPanel();
         JScrollPane scrTable = new JScrollPane();
         JToolBar toolBar = new JToolBar();
- 
+
         btnGetSelection = new JButton();
+        btnEmail = new JButton();
         tblStudents = new JTable();
         txtOutput = new JTextArea();
-        
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
- 
+
         pnlOutput.setBorder(BorderFactory.createTitledBorder("Output"));
         pnlOutput.setLayout(new BorderLayout());
- 
+
         txtOutput.setColumns(20);
         txtOutput.setRows(8);
         scrOutput.setViewportView(txtOutput);
- 
+
         pnlOutput.add(scrOutput, BorderLayout.CENTER);
- 
+
         getContentPane().add(pnlOutput, BorderLayout.SOUTH);
         pnlOutput.getAccessibleContext().setAccessibleDescription("");
- 
+
         pnlTable.setBorder(BorderFactory.createTitledBorder("Student Data"));
         pnlTable.setLayout(new BorderLayout());
- 
+
         scrTable.setViewportView(tblStudents);
- 
+
         pnlTable.add(scrTable, BorderLayout.CENTER);
- 
+
         getContentPane().add(pnlTable, BorderLayout.CENTER);
- 
+
         toolBar.setRollover(true);
- 
+
         btnGetSelection.setText("Get Selection");
         btnGetSelection.setFocusable(false);
         btnGetSelection.setHorizontalTextPosition(SwingConstants.CENTER);
         btnGetSelection.setVerticalTextPosition(SwingConstants.BOTTOM);
- 
+
+        btnEmail.setText("Send Email");
+        btnEmail.setFocusable(false);
+        btnEmail.setHorizontalTextPosition(SwingConstants.CENTER);
+        btnEmail.setVerticalTextPosition(SwingConstants.BOTTOM);
+
         toolBar.add(btnGetSelection);
- 
+        toolBar.add(btnEmail);
+
         getContentPane().add(toolBar, BorderLayout.NORTH);
- 
+
         pack();
-    }        
-   
+    }
+
     /**
      * Initializes the grade spreadsheet
      */
@@ -116,8 +124,41 @@ public class GradeWindow extends JFrame {
                         }
                       txtOutput.setText(txtOutput.getText() + "\n" + sb.toString()); }
         });
+
+         this.btnEmail.addActionListener(new ActionListener() {
+         	@Override
+            public void actionPerformed(ActionEvent e) {
+            	 StringBuilder sb = new StringBuilder();
+                    int[] selectedRows = tblStudents.getSelectedRows();
+
+                    sb.append("Selected students:\n");
+
+                    txtOutput.setText("Attemping to mail...");
+
+                    for (int row : selectedRows) {
+                         String number = tblStudents.getModel().getValueAt(row, 2).toString();
+
+                         //Get the student this number is associated with
+                         Student current = activeCourse.getStudent(number);
+
+                         //Generate the PDF report for this student
+
+                        //Send this student their email
+						String [] toEmail = {current.getEmailAddress()};
+						try{
+						GradeMail.sendEmail(toEmail);
+						txtOutput.setText("Mail sent to selected students");
+						}catch(Exception exception){
+							System.out.println("Mailing failed");
+							txtOutput.setText("Mailing failed");
+						}
+                    }
+
+            }
+         });
+
     }
-    
+
     /**
      * Initializes the student table model
      */
@@ -130,20 +171,20 @@ public class GradeWindow extends JFrame {
     	   System.out.println(s.getFirstName());
     	   model.addStudent(s);
        }
-    	
+
    tblStudents.setModel(model);
 }
 
   /**
-   * Sets column widths    
+   * Sets column widths
    */
    private void setColumnWidths(){
 	   while(tblStudents.getColumnModel().getColumnCount()<(this.activeCourse.getNumDeliverables()+2)){
-		  tblStudents.addColumn(new TableColumn()); 
+		  tblStudents.addColumn(new TableColumn());
 	   }
        tblStudents.getColumnModel().getColumn(0).setPreferredWidth(40);
        tblStudents.getColumnModel().getColumn(1).setPreferredWidth(40);
-       
+
        for(int i=2;i<(activeCourse.getNumDeliverables()+2);i++){
            tblStudents.getColumnModel().getColumn(i).setPreferredWidth(50);
         }

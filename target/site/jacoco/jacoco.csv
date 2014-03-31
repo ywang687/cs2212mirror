@@ -1,14 +1,18 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+team5-gradebook,ca.uwo.csd.cs2212.team5,GradeWindow.new ActionListener() {...},81,0,2,0,16,0,3,0,2,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow,3779,0,234,0,628,0,143,0,26,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,DoubleCellRenderer,29,0,2,0,7,0,4,0,3,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,GradeWindow.new ActionListener() {...},82,0,2,0,9,0,3,0,2,0
-team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow,3779,0,234,0,628,0,143,0,26,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,App,8,0,0,0,3,0,2,0,2,0
-team5-gradebook,ca.uwo.csd.cs2212.team5,App.new Runnable() {...},11,0,0,0,4,0,2,0,2,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,Student,0,210,0,4,0,40,0,18,0,16
+team5-gradebook,ca.uwo.csd.cs2212.team5,App.new Runnable() {...},11,0,0,0,4,0,2,0,2,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,OpenFile,215,0,8,0,43,0,7,0,3,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,Deliverable,0,104,0,0,0,23,0,10,0,10
 team5-gradebook,ca.uwo.csd.cs2212.team5,StudentTableModel,180,0,40,0,53,0,30,0,10,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow.new ActionListener() {...},9,0,0,0,3,0,2,0,2,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,GradeMail,177,0,4,0,44,0,8,0,6,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,Grade,7,0,0,0,3,0,2,0,2,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,GradeMail.new Authenticator() {...},22,0,0,0,4,0,2,0,2,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow.new Runnable() {...},17,0,0,0,7,0,2,0,2,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,Course,291,82,22,4,50,30,24,13,13,11
-team5-gradebook,ca.uwo.csd.cs2212.team5,GradeWindow,258,0,6,0,61,0,9,0,6,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,GradeWindow,291,0,6,0,68,0,9,0,6,0
