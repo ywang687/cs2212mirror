@@ -57,12 +57,16 @@ public class CourseTest {
 	
 	@Test
 	public void testHasStudentNumber(){
+		Student s=new Student("Jane","Doe","250555555","jdoe@uwo.ca");
+		course.addStudent(s);
 		Boolean b=course.hasStudentNumber("250555555");
 		Assert.assertEquals(true, b);
 	}
 	
 	@Test
 	public void testHasStudentEmail(){
+         Student s=new Student("Jane","Doe","250555555","jdoe@uwo.ca");	
+		course.addStudent(s);
 		Boolean b=course.hasStudentEmail("jdoe1@uwo.ca");
 		Assert.assertEquals(true, b);
 	}
