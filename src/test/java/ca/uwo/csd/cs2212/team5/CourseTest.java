@@ -141,6 +141,7 @@ public class CourseTest {
 		Assert.assertEquals(0, a);
 	}
 	
+	/*
 	@Test
 	public void testWeightedAverage(){
 		Student s=new Student("A","A","1","A@uwo.ca");
@@ -151,7 +152,7 @@ public class CourseTest {
 		Double d=course.getWeightedAverage(s);
 		Assert.assertEquals(60.0,d);
 	}
-	
+	*/
 	
 	
 }
