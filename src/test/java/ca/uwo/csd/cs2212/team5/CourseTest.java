@@ -143,7 +143,7 @@ public class CourseTest {
 	
 	@Test
 	public void testWeightedAverage(){
-		Student a=new Student("A","A","1","A@uwo.ca");
+		Student s=new Student("A","A","1","A@uwo.ca");
 		course.addStudent(s);
 		s.addGrade(30.0);
 		s.addGrade(60.0);
