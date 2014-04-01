@@ -146,6 +146,12 @@ public class CourseTest {
 	public void testWeightedAverage(){
 		Student s=new Student("A","A","1","A@uwo.ca");
 		course.addStudent(s);
+		Deliverable e=new Deliverable("X","exam", 0.1);
+		Deliverable f=new Deliverable("Y","exam", 0.1);
+		Deliverable g=new Deliverable("Z","exam", 0.1);
+		course.addDeliverable(e);
+		course.addDeliverable(f);
+		course.addDeliverable(g);
 		s.addGrade(30.0);
 		s.addGrade(60.0);
 		s.addGrade(90.0);
