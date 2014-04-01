@@ -65,6 +65,8 @@ public class CourseTest {
 		course.addStudent(s);
 		Boolean b=course.hasStudentNumber("250555555");
 		Assert.assertEquals(true, b);
+		Boolean c=course.hasStudentNumber("250555557");
+		Assert.assertEquals(false,c);
 	}
 	
 	@Test
@@ -73,6 +75,8 @@ public class CourseTest {
 		course.addStudent(s);
 		Boolean b=course.hasStudentEmail("jdoe1@uwo.ca");
 		Assert.assertEquals(true, b);
+		Boolean c=course.hasStudentEmail("jdoe2@uwo.ca");
+		Assert.assertEquals(false, c);
 	}
 	
 	@Test
@@ -149,6 +153,7 @@ public class CourseTest {
 		Deliverable e=new Deliverable("X","exam", 0.1);
 		Deliverable f=new Deliverable("Y","exam", 0.1);
 		Deliverable g=new Deliverable("Z","exam", 0.1);
+		Deliverable h=new Deliverable("W", "exam",0.1);
 		course.addDeliverable(e);
 		course.addDeliverable(f);
 		course.addDeliverable(g);
