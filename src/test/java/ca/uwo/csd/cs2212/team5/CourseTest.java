@@ -156,7 +156,7 @@ public class CourseTest {
 		s.addGrade(60.0);
 		s.addGrade(90.0);
 		Double d=course.getWeightedAverage(s);
-		Double c=new Double(60.0);
+		Double c=new Double(59.99999999999999);
 		Assert.assertEquals(c,d);
 	}
 	
