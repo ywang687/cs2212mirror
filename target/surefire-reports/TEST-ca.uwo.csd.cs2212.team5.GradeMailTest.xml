@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.01" errors="0" skipped="0" tests="17" name="ca.uwo.csd.cs2212.team5.StudentTest">
+<testsuite failures="0" time="4.846" errors="0" skipped="0" tests="3" name="ca.uwo.csd.cs2212.team5.GradeMailTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="c:\Program Files\Java\jdk1.7.0_45\jre\bin"/>
@@ -61,21 +61,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testTrueCompareTo"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testGetGrade"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testSetFirstName"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testEditGrade"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testFalseCompareTo"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testSetLasetName"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testGetLastName"/>
-  <testcase time="0.004" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testExpandGradeList"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testGetEmailAddress"/>
-  <testcase time="0.005" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testAddGradeWithExpanding"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testStringRepresentation"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testSetNumber"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testGetFirstName"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testSetEmailAddress"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testGetNumber"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testGetNumGrades"/>
-  <testcase time="0.001" classname="ca.uwo.csd.cs2212.team5.StudentTest" name="testAddGradeWithoutExpanding"/>
+  <testcase time="3.007" classname="ca.uwo.csd.cs2212.team5.GradeMailTest" name="oneEmailTest"/>
+  <testcase time="1.837" classname="ca.uwo.csd.cs2212.team5.GradeMailTest" name="severalEmailTest"/>
+  <testcase time="0.002" classname="ca.uwo.csd.cs2212.team5.GradeMailTest" name="emptyEmailTest"/>
 </testsuite>

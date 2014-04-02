@@ -80,15 +80,18 @@ public class GradeMail {
     Transport.send(msg);
   }
 
-  public static void sendEmail (String[] addresses) throws Exception {
+  public static boolean sendEmail (String[] addresses) throws Exception {
 
     if (addresses.length == 0) {
         System.out.println("Please specify a space-separated list of email addresses as arguments.");
-        System.exit(-1);
+        return false;
     }
-	Properties properties = loadProperties();
-    Session session = getSession(properties);
-    sendMessage(session, properties, addresses);
+    else{
+		Properties properties = loadProperties();
+		Session session = getSession(properties);
+		sendMessage(session, properties, addresses);
+		return true;
+    }
 
   }
 

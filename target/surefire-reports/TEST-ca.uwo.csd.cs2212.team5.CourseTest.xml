@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.017" errors="0" skipped="0" tests="14" name="ca.uwo.csd.cs2212.team5.CourseTest">
+<testsuite failures="0" time="0.036" errors="0" skipped="0" tests="14" name="ca.uwo.csd.cs2212.team5.CourseTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="c:\Program Files\Java\jdk1.7.0_45\jre\bin"/>
@@ -61,18 +61,18 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="0.007" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testAddDeliverable"/>
-  <testcase time="0.002" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testOrder"/>
+  <testcase time="0.009" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testAddDeliverable"/>
+  <testcase time="0.008" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testOrder"/>
   <testcase time="0" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testSetActiveCourse"/>
   <testcase time="0" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testHasStudentNumber"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testDeleteStudent"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testAddStudents"/>
+  <testcase time="0.001" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testDeleteStudent"/>
+  <testcase time="0.001" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testAddStudents"/>
   <testcase time="0" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testCompareObject"/>
-  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testStringRepresentation"/>
-  <testcase time="0.001" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testHasStudentEmail"/>
-  <testcase time="0.006" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testWeightedAverage"/>
+  <testcase time="0.001" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testStringRepresentation"/>
+  <testcase time="0.002" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testHasStudentEmail"/>
+  <testcase time="0.014" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testWeightedAverage"/>
   <testcase time="0" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testDeleteDeliverable"/>
-  <testcase time="0.001" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testModifyCourseCode"/>
+  <testcase time="0" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testModifyCourseCode"/>
   <testcase time="0" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testModifyCourseTerm"/>
   <testcase time="0" classname="ca.uwo.csd.cs2212.team5.CourseTest" name="testModifyCourseTitle"/>
 </testsuite>
