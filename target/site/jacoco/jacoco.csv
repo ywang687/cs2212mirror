@@ -1,5 +1,5 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-team5-gradebook,ca.uwo.csd.cs2212.team5,GradeWindow.new ActionListener() {...},82,0,2,0,16,0,3,0,2,0
+team5-gradebook,ca.uwo.csd.cs2212.team5,GradeWindow.new ActionListener() {...},81,0,2,0,16,0,3,0,2,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,MainWindow,3779,0,234,0,628,0,143,0,26,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,DoubleCellRenderer,29,0,2,0,7,0,4,0,3,0
 team5-gradebook,ca.uwo.csd.cs2212.team5,GradeWindow.new ActionListener() {...},82,0,2,0,9,0,3,0,2,0
