@@ -163,6 +163,10 @@ public class CourseTest {
 		Double d=course.getWeightedAverage(s);
 		Double c=new Double(59.99999999999999);
 		Assert.assertEquals(c,d);
+		course.addDeliverable(h);
+		s.addGrade(null);
+		d=course.getWeightedAverage(s);
+		Assert.assertEquals(c,d);
 	}
 	
 	
