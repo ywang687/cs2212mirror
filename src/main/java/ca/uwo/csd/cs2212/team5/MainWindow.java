@@ -263,7 +263,7 @@ public class MainWindow extends JFrame implements ActionListener {
         cmdDeleteCourse.addActionListener(this);
         cmdDeleteStudent.addActionListener(this);
         cmdDeleteDeliverable.addActionListener(this);
-	cmdImportGrade.addActionListener(this);	
+	cmdImportGrade.addActionListener(this);
 	cmdExportGrade.addActionListener(this);
 
 
@@ -389,7 +389,7 @@ public class MainWindow extends JFrame implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, lblGreeting2, 0, SpringLayout.NORTH, getContentPane());
 
         layout.putConstraint(SpringLayout.WEST, lblGreeting, 170, SpringLayout.WEST, getContentPane());
-        layout.putConstraint(SpringLayout.NORTH, lblGreeting, 490, SpringLayout.NORTH, getContentPane());
+        layout.putConstraint(SpringLayout.NORTH, lblGreeting, 540, SpringLayout.NORTH, getContentPane());
 
         layout.putConstraint(SpringLayout.WEST, lblSelect, 0, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, lblSelect, 0, SpringLayout.NORTH, getContentPane());
@@ -450,7 +450,7 @@ public class MainWindow extends JFrame implements ActionListener {
             txtCourseTerm.setText("");
             rebuildCourses();
         }
-        
+
 
       //print an error message if one or more of the fields are left empty
         else if(txtCourseName.getText().equals("")){
@@ -459,8 +459,8 @@ public class MainWindow extends JFrame implements ActionListener {
             lblGreeting.setText("Error: Invalid course code. Course code cannot be empty.");}
         else if(txtCourseTerm.getText().equals("")){
             lblGreeting.setText("Error: Invalid course term. Course term cannot be empty.");}
-        
-        
+
+
     }
 
     //Method to edit the active course's data
@@ -525,7 +525,7 @@ public class MainWindow extends JFrame implements ActionListener {
                 for(int x = 0; x < activeCourse.getDeliverables().size(); x++){
 					newStud.addGrade(null);
                 }
-                
+
                 rebuildStudents();
            }
            else if(activeCourse.hasStudentEmail(txtEmail.getText())){
@@ -616,7 +616,7 @@ public class MainWindow extends JFrame implements ActionListener {
                 for(int x = 0; x < activeCourse.getStudents().size(); x++){
                 	activeCourse.getStudents().get(x).addGrade(null);
                 }
-                
+
                 rebuildDeliverables();
             } else
                 lblGreeting.setText("Error: Please select a course before adding a deliverable.");
@@ -887,8 +887,8 @@ public class MainWindow extends JFrame implements ActionListener {
         //initialize a file chooser dialog
 	JFileChooser fc = new JFileChooser();
 	int returnVal = fc.showOpenDialog(this);
-	
-	//if a file has been selected 
+
+	//if a file has been selected
         if (returnVal == JFileChooser.APPROVE_OPTION) {
 	//get the file
 	File file = fc.getSelectedFile();
@@ -927,7 +927,7 @@ public class MainWindow extends JFrame implements ActionListener {
 					break;
 				}
 			  }
-				
+
 		        }
 		   }
 		}
@@ -945,7 +945,7 @@ public class MainWindow extends JFrame implements ActionListener {
             e.printStackTrace();
           }
         }
-	
+
     }
 
 
@@ -956,7 +956,7 @@ public class MainWindow extends JFrame implements ActionListener {
     private void exportGrade() {
 	//initialize a file chooser dialog
 	JFileChooser fc = new JFileChooser();
-	int returnVal = fc.showSaveDialog(this);	
+	int returnVal = fc.showSaveDialog(this);
 
 	//if a file has been selected
         if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -982,7 +982,7 @@ public class MainWindow extends JFrame implements ActionListener {
 		columns[0] = "First Name";
 		columns[1] = "Last Name";
 		columns[2] = "Student Number";
-		columns[3] = "Email";	
+		columns[3] = "Email";
 		int n = 4;
 		//store the name of each deliverable into the string array
 		for (Deliverable deliverable : deliverableArray) {
@@ -1006,8 +1006,8 @@ public class MainWindow extends JFrame implements ActionListener {
 					//if the grade is null, store the grade as zero
 					if (student.getGrade(deliverables.indexOf(deliverable)) == null) {
 						info[i] = "0";
-					} 
-					//else store the return grade in the string array 
+					}
+					//else store the return grade in the string array
 					else {
 						info[i] = student.getGrade(deliverables.indexOf(deliverable)).toString();
 					}
@@ -1019,7 +1019,7 @@ public class MainWindow extends JFrame implements ActionListener {
 			writer.writeNext(info);
 		}
 		//close the writer
-		writer.close();	
+		writer.close();
 		System.out.println("Grades have been successfully exported!");
 	  // if the file is not found, print an error message
 	  } catch (FileNotFoundException e) {
